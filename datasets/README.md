@@ -27,4 +27,18 @@ Step 2 tries cdc.gov first, then the Internet Archive copy of the same official 
 
 Step 3 writes `processed/brfss_variable_inspection_summary.json` and the report `docs/datasets/brfss_variable_availability.md`, and uses about 1 GB of RAM because it reads only the needed columns.
 
-Later steps (Task 3 onward) add preprocessing and training commands here.
+Then build the model datasets and train the models:
+
+```powershell
+# 4. Extract the needed columns (about 15 MB of Parquet in interim/)
+.venv\Scripts\python.exe -m ml.preprocessing.brfss_data_extraction
+
+# 5. Recode, exclude unusable answers, split 70/15/15 (writes processed/*.csv and *_summary.json)
+.venv\Scripts\python.exe -m ml.preprocessing.build_model_dataset
+
+# 6. Train, calibrate, evaluate and save each model (about 5 minutes each on a laptop CPU)
+.venv\Scripts\python.exe -m ml.training.heart_model_training
+.venv\Scripts\python.exe -m ml.training.respiratory_model_training
+```
+
+Step 6 writes `models/<model>/` (artifact and metadata) and `docs/model_evaluation/` (report, model card, figures). The same inputs always give the same split and the same model (fixed seed 42).

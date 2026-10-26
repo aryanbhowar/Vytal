@@ -1,0 +1,273 @@
+{
+  "generated": "2026-10-27",
+  "model_id": "heart",
+  "outcome_description": "Ever reported being told by a health professional that they had a heart attack (myocardial infarction) or coronary heart disease (BRFSS _MICHD).",
+  "survey_years": [
+    2022,
+    2023,
+    2024
+  ],
+  "features": [
+    "age_group",
+    "sex",
+    "bmi",
+    "smoking_status",
+    "physical_activity_past_30_days",
+    "diabetes_status",
+    "stroke_history",
+    "kidney_disease_history"
+  ],
+  "total_rows": 1130510,
+  "total_positives": 102951,
+  "unweighted_prevalence_percent": 9.107,
+  "weighted_prevalence_percent_complete_cases": 6.832,
+  "weighted_prevalence_percent_valid_target_pooled": 6.725,
+  "bmi": {
+    "count": 1130510.0,
+    "mean": 28.51,
+    "std": 6.44,
+    "min": 12.0,
+    "25%": 24.13,
+    "50%": 27.44,
+    "75%": 31.71,
+    "max": 70.0
+  },
+  "category_counts": {
+    "age_group": {
+      "18-24": 71368,
+      "25-29": 57098,
+      "30-34": 64968,
+      "35-39": 72334,
+      "40-44": 76832,
+      "45-49": 72846,
+      "50-54": 83322,
+      "55-59": 91909,
+      "60-64": 112645,
+      "65-69": 122808,
+      "70-74": 114946,
+      "75-79": 90143,
+      "80+": 99291
+    },
+    "sex": {
+      "female": 576742,
+      "male": 553768
+    },
+    "smoking_status": {
+      "current_daily": 93196,
+      "current_some_days": 37880,
+      "former": 318216,
+      "never": 681218
+    },
+    "physical_activity_past_30_days": {
+      "no": 261245,
+      "yes": 869265
+    },
+    "diabetes_status": {
+      "gestational_only": 8469,
+      "no": 937073,
+      "prediabetes": 27394,
+      "yes": 157574
+    },
+    "stroke_history": {
+      "no": 1081259,
+      "yes": 49251
+    },
+    "kidney_disease_history": {
+      "no": 1075501,
+      "yes": 55009
+    }
+  },
+  "splits": {
+    "train": {
+      "rows": 791357,
+      "positives": 72066,
+      "unweighted_prevalence_percent": 9.107
+    },
+    "validation": {
+      "rows": 169576,
+      "positives": 15442,
+      "unweighted_prevalence_percent": 9.106
+    },
+    "test": {
+      "rows": 169577,
+      "positives": 15443,
+      "unweighted_prevalence_percent": 9.107
+    }
+  },
+  "by_year": {
+    "2022": {
+      "drop_steps": [
+        {
+          "step": "records in file",
+          "remaining": 445132,
+          "removed": 0
+        },
+        {
+          "step": "unusable target answer",
+          "remaining": 440111,
+          "removed": 5021
+        },
+        {
+          "step": "unusable age_group",
+          "remaining": 431366,
+          "removed": 8745
+        },
+        {
+          "step": "unusable sex",
+          "remaining": 431366,
+          "removed": 0
+        },
+        {
+          "step": "unusable bmi",
+          "remaining": 387493,
+          "removed": 43873
+        },
+        {
+          "step": "unusable smoking_status",
+          "remaining": 373492,
+          "removed": 14001
+        },
+        {
+          "step": "unusable physical_activity_past_30_days",
+          "remaining": 372823,
+          "removed": 669
+        },
+        {
+          "step": "unusable diabetes_status",
+          "remaining": 372279,
+          "removed": 544
+        },
+        {
+          "step": "unusable stroke_history",
+          "remaining": 371454,
+          "removed": 825
+        },
+        {
+          "step": "unusable kidney_disease_history",
+          "remaining": 370312,
+          "removed": 1142
+        }
+      ],
+      "final_rows": 370312,
+      "positives": 34084,
+      "unweighted_prevalence_percent": 9.204,
+      "weighted_prevalence_percent_valid_target": 6.901
+    },
+    "2023": {
+      "drop_steps": [
+        {
+          "step": "records in file",
+          "remaining": 433323,
+          "removed": 0
+        },
+        {
+          "step": "unusable target answer",
+          "remaining": 428738,
+          "removed": 4585
+        },
+        {
+          "step": "unusable age_group",
+          "remaining": 421241,
+          "removed": 7497
+        },
+        {
+          "step": "unusable sex",
+          "remaining": 421241,
+          "removed": 0
+        },
+        {
+          "step": "unusable bmi",
+          "remaining": 384738,
+          "removed": 36503
+        },
+        {
+          "step": "unusable smoking_status",
+          "remaining": 375962,
+          "removed": 8776
+        },
+        {
+          "step": "unusable physical_activity_past_30_days",
+          "remaining": 375114,
+          "removed": 848
+        },
+        {
+          "step": "unusable diabetes_status",
+          "remaining": 374574,
+          "removed": 540
+        },
+        {
+          "step": "unusable stroke_history",
+          "remaining": 373733,
+          "removed": 841
+        },
+        {
+          "step": "unusable kidney_disease_history",
+          "remaining": 372543,
+          "removed": 1190
+        }
+      ],
+      "final_rows": 372543,
+      "positives": 31997,
+      "unweighted_prevalence_percent": 8.589,
+      "weighted_prevalence_percent_valid_target": 6.474
+    },
+    "2024": {
+      "drop_steps": [
+        {
+          "step": "records in file",
+          "remaining": 457670,
+          "removed": 0
+        },
+        {
+          "step": "unusable target answer",
+          "remaining": 452464,
+          "removed": 5206
+        },
+        {
+          "step": "unusable age_group",
+          "remaining": 444441,
+          "removed": 8023
+        },
+        {
+          "step": "unusable sex",
+          "remaining": 444441,
+          "removed": 0
+        },
+        {
+          "step": "unusable bmi",
+          "remaining": 405638,
+          "removed": 38803
+        },
+        {
+          "step": "unusable smoking_status",
+          "remaining": 391145,
+          "removed": 14493
+        },
+        {
+          "step": "unusable physical_activity_past_30_days",
+          "remaining": 390291,
+          "removed": 854
+        },
+        {
+          "step": "unusable diabetes_status",
+          "remaining": 389748,
+          "removed": 543
+        },
+        {
+          "step": "unusable stroke_history",
+          "remaining": 388951,
+          "removed": 797
+        },
+        {
+          "step": "unusable kidney_disease_history",
+          "remaining": 387655,
+          "removed": 1296
+        }
+      ],
+      "final_rows": 387655,
+      "positives": 36870,
+      "unweighted_prevalence_percent": 9.511,
+      "weighted_prevalence_percent_valid_target": 6.801
+    }
+  }
+}

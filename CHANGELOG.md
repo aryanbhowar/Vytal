@@ -2,6 +2,23 @@
 
 All meaningful changes, newest first. Dates are local (project day in brackets).
 
+## 2026-10-27 (Day 2): Phases 2 and 3, models and prediction API
+
+### Added
+- Feature schema `ml/feature_definitions/vytal_feature_schema.json` (v1.1.0) and `feature_schema.py`.
+- Preprocessing: `brfss_data_extraction.py`, `recode_functions.py`, `dataset_split.py`, `build_model_dataset.py` (step-by-step exclusion counts; summaries committed).
+- Training and evaluation: `model_training_config.py`, `train_binary_risk_model.py`, entry points for both models, `evaluation_metrics.py`, `evaluation_report_writer.py`; shared inference `ml/inference/risk_model.py`.
+- Models `models/heart/heart_logreg_v1.*` (test ROC-AUC 0.810, isotonic-calibrated) and `models/respiratory/respiratory_logreg_v1.*` (0.836), with SHA-256 integrity hashes.
+- Generated evaluation reports, model cards and figures in `docs/model_evaluation/`.
+- Backend: schemas, model registry, input preprocessing, interpretation, 12 WHO-sourced suggestion rules, assessment service, `/api/health/ready`, `/api/models/status`, `/api/assessment/predict`, security headers and CSP, body limit, rate limit, friendly errors.
+- Tests: suite grows from 15 to 118.
+- Docs: `ml/README.md`, `models/README.md`, `backend/README.md`, `.env.example` (all settings), Phase 2 and 3 reports, viva notes sections 6–8, decisions D-029–D-035.
+
+### Changed
+- Heavy drinking removed from the heart model (D-029: reverse-causation artefact). Schema 1.0.0 → 1.1.0.
+- `tests/integration/test_health_api.py` now runs the app's startup (model loading) through shared fixtures.
+- Backend version 0.1.0 → 0.2.0.
+
 ## 2026-10-27 (Day 2): Task 2, BRFSS acquisition and verification (Phase 1 complete)
 
 ### Added

@@ -92,10 +92,51 @@ So the models learn "people who answer like you more often *reported* this condi
 
 ---
 
+## 6. Preparing the data (Task 3)
+
+**What happens:** CDC's number codes are turned into readable answers (e.g. smoking code 3 → `former`), unusable answers are removed, and the data is split into three groups.
+
+**Why three groups?** *Training* is what the model learns from. *Validation* is where choices are made (how to use BMI, whether to calibrate, which threshold to report). *Test* is locked away and used once at the end, so the reported performance is honest. If you made choices using the test set you would be "marking your own homework".
+
+**Stratified and seeded:** each group has the same share of positive cases and the same mix of years, and the random split is identical every time (seed 42), so anyone can reproduce it.
+
+**The feature schema** (`vytal_feature_schema.json`) is the contract. Training, the API and the saved model all use the same answer values. Tests fail if they ever disagree.
+
+## 7. The models (Tasks 4–5)
+
+**Logistic regression in one sentence:** each answer adds or subtracts points; the total is turned into a probability with the S-shaped logistic function. Because it's a sum, you can say exactly how much each answer contributed.
+
+**Why not a fancier model?** Gradient boosting was tested; it was only 0.003–0.004 better in ROC-AUC. The simple model's explanations are exact, which matters more here.
+
+**Metrics to know:**
+- *ROC-AUC* (heart 0.81, COPD 0.84): chance the model ranks a person who reported the condition above one who didn't. 0.5 = guessing.
+- *PR-AUC*: precision averaged over thresholds; compare with the outcome rate (about 0.08–0.09).
+- *Sensitivity / specificity / precision*: at one threshold, how many real cases are caught, how many non-cases are correctly not flagged, and how many flags are right.
+- *Brier score*: average squared error of the percentages.
+- *Calibration*: does "20%" mean 20%? Heart needed a correction (isotonic calibration, fitted on validation); COPD did not.
+- *Accuracy is not used as the headline*: with 9% positives, always saying "no" is 91% accurate.
+
+**Bands:** Low/Moderate/Elevated/High = below the 50th percentile, 50–75th, 75–90th, top 10% of survey respondents. Checked on test data: in the heart High band 32% had reported heart disease vs 1.7% in Low. Not clinical categories.
+
+**Bias check:** results by sex, age group and year are reported; calibration stays within 1 point everywhere.
+
+**The heavy-drinking story (good viva example):** in the first heart model, heavy drinkers got *lower* estimates. That's because the survey asks about drinking *now* and about heart disease *ever*: people often cut down after a diagnosis. It's reverse causation in cross-sectional data. Showing "heavy drinking lowered your estimate" would be wrong, so the feature was removed (D-029). Accuracy hardly changed.
+
+## 8. The prediction API (Tasks 6–7)
+
+**What it does:** `POST /api/assessment/predict` takes 11 answers, checks them, computes age group and BMI, runs both models and returns estimates, bands, factors, limitations and suggestions.
+
+**Honest failure:** if height/weight is missing, the model says "insufficient input" instead of guessing; if a model file is missing or altered, it says "unavailable". It never invents a number.
+
+**Explanations:** each answer's contribution = its weight × (the person's value − the average respondent's value). Added to the average person's score, they give exactly the person's score (a test checks this). Shown as "raised" or "lowered", never as "% risk", and never as a cause.
+
+**Safety:** the model file's fingerprint (SHA-256) is checked before loading, because model files can run code. Answers are not stored or logged; responses tell browsers not to cache them; requests are size- and rate-limited; error messages never show internals.
+
+**Suggestions:** fixed rules (e.g. "smokes → support to stop smoking"), each with a WHO link. No medicines, doses, diets or supplements. An "urgent symptoms" notice always comes first.
+
+---
+
 ## Sections to be added
 
-- Cleaning and recoding (Task 3)
-- Training, metrics and calibration (Tasks 4–5)
-- Prediction API, categories and factor explanations (Task 6)
-- Suggestion rules (Task 7)
 - Frontend design system, questionnaire and dashboard (Tasks 8–11)
+- Production build, deployment and CI (Task 12)

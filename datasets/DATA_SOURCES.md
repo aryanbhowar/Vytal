@@ -64,7 +64,7 @@ Selected by the rules in the master plan: available in all three years with the 
 | Smoking status | `_SMOKER3` | every day, some days, former, never | ✓ | ✓ |
 | Current e-cigarette use | `_CURECI2` / `_CURECI2` / `_CURECI3` | yes, no | – | ✓ |
 | Exercise in past 30 days | `EXERANY2` | yes, no | ✓ | ✓ |
-| Heavy drinking | `_RFDRHV8` / `_RFDRHV8` / `_RFDRHV9` | yes, no (men >14, women >7 drinks/week) | ✓ | – |
+| Heavy drinking | `_RFDRHV8` / `_RFDRHV8` / `_RFDRHV9` | yes, no (men >14, women >7 drinks/week) | removed (D-029) | – |
 | Diabetes | `DIABETE4` | yes; yes, only during pregnancy; no; prediabetes/borderline | ✓ | ✓ |
 | Stroke ever | `CVDSTRK3` | yes, no | ✓ | – |
 | Kidney disease ever | `CHCKDNY2` | yes, no | ✓ | – |
@@ -80,19 +80,24 @@ Selected by the rules in the master plan: available in all three years with the 
 | General health, difficulty walking, unhealthy days | Partly measure the disease itself (D-005) |
 | Race, income, education | Fairness and scope (D-006) |
 | Survey weight, stratum, PSU | Survey design, not personal characteristics; used only for weighted prevalence |
+| Heavy drinking (heart model) | Compatible across years, but in the trained model heavy drinkers got *lower* heart estimates, a reverse-causation artefact of cross-sectional data (people cut down after diagnosis). Removed so users are never told drinking lowered their estimate (D-029). |
 
 ## 4. Missing and unusable answers
 
 Codes meaning "don't know", "refused", "not asked" or "missing" are listed per variable in `ml/feature_definitions/brfss_candidate_variables.py` (`INVALID_CODES`), taken from the codebooks. Rows with such a code in the target or any of the model's features are **excluded** (complete-case analysis). They are never recoded to "no".
 
-Sample sizes after exclusions (complete cases):
+BMI values outside 12–70 are treated as unusable (likely entry errors). CDC's values already start at 12.0; 729 of 1,203,747 BMI values (0.06%) are above 70.
 
-| Model | 2022 | 2023 | 2024 | Pooled | Prevalence in complete cases | Weighted US prevalence |
-|---|---|---|---|---|---|---|
-| Heart | 356,785 | 362,732 | 373,678 | 1,093,195 | 8.6–9.5% | 6.5–6.9% |
-| Respiratory | 369,476 | 371,689 | 386,690 | 1,127,855 | 7.7–8.1% | 6.2–6.8% |
+Final model datasets (from `build_model_dataset.py`; step-by-step counts in `datasets/processed/*_summary.json`):
 
-Exclusions remove 15–19% of rows with a valid target, mostly because BMI (about 9–11%), heavy drinking (8–11%, heart only) or smoking status (5–8%) is unusable. The excluded rows reported the condition slightly less often than the kept rows (heart: 7.7–8.6% vs 8.6–9.5%; respiratory: 7.4–7.9% vs 7.7–8.1%), so complete-case analysis shifts prevalence by under one percentage point. This is recorded as a limitation. Full per-variable tables: [`docs/datasets/brfss_variable_availability.md`](../docs/datasets/brfss_variable_availability.md).
+| Model | Pooled rows | Positive | Unweighted prevalence | Weighted US adult prevalence | Train / validation / test |
+|---|---|---|---|---|---|
+| Heart | 1,130,510 | 102,951 | 9.11% | 6.72% | 791,357 / 169,576 / 169,577 |
+| Respiratory | 1,127,220 | 89,998 | 7.98% | 6.42% | 789,054 / 169,083 / 169,083 |
+
+(The inspection-stage counts in the availability report were computed before heavy drinking was removed from the heart model, so they are about 37,000 lower for heart.)
+
+Exclusions remove roughly 12–17% of rows with a valid target, mostly because BMI (about 9–11%) or smoking status (5–8%) is unusable. The excluded rows reported the condition slightly less often than the kept rows (heart: 7.7–8.6% vs 8.6–9.5%; respiratory: 7.4–7.9% vs 7.7–8.1%), so complete-case analysis shifts prevalence by under one percentage point. This is recorded as a limitation. Full per-variable tables: [`docs/datasets/brfss_variable_availability.md`](../docs/datasets/brfss_variable_availability.md).
 
 ## 5. Survey design and weighting
 

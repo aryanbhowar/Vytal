@@ -15,7 +15,7 @@ A React dashboard shows each result as a category with the model's estimate, the
 
 Planned engineering features include strict input validation, security headers, no storage of answers, integrity-checked model files, model cards, automated unit, API and browser tests, CI, and a one-command production build.
 
-**Current status:** see [`PROJECT_STATUS.md`](PROJECT_STATUS.md). At the moment only the foundation (API health check and frontend connection) is built.
+**Current status:** see [`PROJECT_STATUS.md`](PROJECT_STATUS.md). The data pipeline, both trained models and the prediction API are built and tested; the user interface is next. Model results: [`docs/model_evaluation/`](docs/model_evaluation/).
 
 ## Requirements
 
@@ -36,7 +36,7 @@ From the project root:
 
 ```powershell
 python -m venv .venv
-.venv\Scripts\python.exe -m pip install -r backend\requirements.txt -r requirements-dev.txt
+.venv\Scripts\python.exe -m pip install -r backend\requirements.txt -r ml\requirements.txt -r requirements-dev.txt
 cd frontend
 npm install
 cd ..

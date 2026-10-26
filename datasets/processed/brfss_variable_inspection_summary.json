@@ -64,7 +64,6 @@
         "bmi",
         "smoking_status",
         "physical_activity_past_30_days",
-        "heavy_alcohol_use",
         "diabetes_status",
         "stroke_history",
         "kidney_disease_history"
@@ -81,7 +80,6 @@
             "bmi": 10.87,
             "smoking_status": 7.9,
             "physical_activity_past_30_days": 0.22,
-            "heavy_alcohol_use": 11.09,
             "diabetes_status": 0.18,
             "stroke_history": 0.23,
             "kidney_disease_history": 0.35
@@ -92,15 +90,14 @@
             "bmi": 6.8,
             "smoking_status": 8.07,
             "physical_activity_past_30_days": 14.26,
-            "heavy_alcohol_use": 8.21,
             "diabetes_status": 13.14,
             "stroke_history": 29.27,
             "kidney_disease_history": 22.35
           },
-          "complete_cases": 356785,
-          "complete_case_prevalence_percent": 9.22,
-          "excluded_for_feature_answers": 83326,
-          "prevalence_percent_among_excluded": 8.23,
+          "complete_cases": 370507,
+          "complete_case_prevalence_percent": 9.21,
+          "excluded_for_feature_answers": 69604,
+          "prevalence_percent_among_excluded": 8.1,
           "weighted_prevalence_percent_all_valid": 6.9
         },
         "2023": {
@@ -114,7 +111,6 @@
             "bmi": 9.27,
             "smoking_status": 5.26,
             "physical_activity_past_30_days": 0.27,
-            "heavy_alcohol_use": 7.51,
             "diabetes_status": 0.17,
             "stroke_history": 0.24,
             "kidney_disease_history": 0.36
@@ -125,14 +121,13 @@
             "bmi": 6.34,
             "smoking_status": 7.72,
             "physical_activity_past_30_days": 14.94,
-            "heavy_alcohol_use": 7.51,
             "diabetes_status": 12.71,
             "stroke_history": 26.44,
             "kidney_disease_history": 20.35
           },
-          "complete_cases": 362732,
-          "complete_case_prevalence_percent": 8.61,
-          "excluded_for_feature_answers": 66006,
+          "complete_cases": 372752,
+          "complete_case_prevalence_percent": 8.59,
+          "excluded_for_feature_answers": 55986,
           "prevalence_percent_among_excluded": 7.67,
           "weighted_prevalence_percent_all_valid": 6.47
         },
@@ -147,7 +142,6 @@
             "bmi": 9.32,
             "smoking_status": 6.94,
             "physical_activity_past_30_days": 0.26,
-            "heavy_alcohol_use": 10.14,
             "diabetes_status": 0.17,
             "stroke_history": 0.22,
             "kidney_disease_history": 0.37
@@ -158,20 +152,19 @@
             "bmi": 6.89,
             "smoking_status": 8.77,
             "physical_activity_past_30_days": 14.15,
-            "heavy_alcohol_use": 8.75,
             "diabetes_status": 10.89,
             "stroke_history": 27.64,
             "kidney_disease_history": 20.01
           },
-          "complete_cases": 373678,
+          "complete_cases": 387892,
           "complete_case_prevalence_percent": 9.52,
-          "excluded_for_feature_answers": 78786,
-          "prevalence_percent_among_excluded": 8.6,
+          "excluded_for_feature_answers": 64572,
+          "prevalence_percent_among_excluded": 8.41,
           "weighted_prevalence_percent_all_valid": 6.8
         }
       },
-      "pooled_complete_cases": 1093195,
-      "pooled_complete_case_positives_approx": 99701
+      "pooled_complete_cases": 1131151,
+      "pooled_complete_case_positives_approx": 103070
     },
     "respiratory": {
       "target": "copd_target",
@@ -180,7 +173,7 @@
         "sex",
         "bmi",
         "smoking_status",
-        "ecigarette_status",
+        "ecigarette_current_use",
         "physical_activity_past_30_days",
         "diabetes_status",
         "asthma_status"
@@ -196,7 +189,7 @@
             "sex": 0.0,
             "bmi": 10.9,
             "smoking_status": 7.92,
-            "ecigarette_status": 7.97,
+            "ecigarette_current_use": 7.97,
             "physical_activity_past_30_days": 0.22,
             "diabetes_status": 0.17,
             "asthma_status": 0.77
@@ -206,7 +199,7 @@
             "sex": null,
             "bmi": 6.6,
             "smoking_status": 7.26,
-            "ecigarette_status": 7.54,
+            "ecigarette_current_use": 7.54,
             "physical_activity_past_30_days": 12.13,
             "diabetes_status": 11.5,
             "asthma_status": 21.04
@@ -227,7 +220,7 @@
             "sex": 0.0,
             "bmi": 9.29,
             "smoking_status": 5.28,
-            "ecigarette_status": 5.33,
+            "ecigarette_current_use": 5.33,
             "physical_activity_past_30_days": 0.27,
             "diabetes_status": 0.16,
             "asthma_status": 0.75
@@ -237,7 +230,7 @@
             "sex": null,
             "bmi": 6.31,
             "smoking_status": 6.65,
-            "ecigarette_status": 6.72,
+            "ecigarette_current_use": 6.72,
             "physical_activity_past_30_days": 13.08,
             "diabetes_status": 11.9,
             "asthma_status": 20.95
@@ -258,7 +251,7 @@
             "sex": 0.0,
             "bmi": 9.36,
             "smoking_status": 6.96,
-            "ecigarette_status": 7.13,
+            "ecigarette_current_use": 7.13,
             "physical_activity_past_30_days": 0.27,
             "diabetes_status": 0.17,
             "asthma_status": 0.78
@@ -268,7 +261,7 @@
             "sex": null,
             "bmi": 6.45,
             "smoking_status": 7.52,
-            "ecigarette_status": 7.71,
+            "ecigarette_current_use": 7.71,
             "physical_activity_past_30_days": 13.57,
             "diabetes_status": 15.22,
             "asthma_status": 21.0
@@ -1094,7 +1087,7 @@
       }
     },
     {
-      "canonical_name": "ecigarette_status",
+      "canonical_name": "ecigarette_current_use",
       "role": "feature",
       "description": "Current e-cigarette user (calculated)",
       "available_years": [

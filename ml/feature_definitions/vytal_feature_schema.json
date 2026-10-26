@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.1.0",
+  "description": "Single source of truth for Vytal model features. Training maps BRFSS answer codes to the canonical values below; the API accepts exactly these canonical values; saved models are checked against this file. BRFSS source variable names per year are in brfss_candidate_variables.py.",
+  "bmi_range": {"min": 12.0, "max": 70.0, "reason": "Values outside this range are almost always height or weight entry errors; such rows are excluded from training and rejected by the API."},
+  "features": {
+    "age_group": {
+      "type": "categorical",
+      "question": "Age",
+      "modifiable": false,
+      "brfss_codes": {"1": "18-24", "2": "25-29", "3": "30-34", "4": "35-39", "5": "40-44", "6": "45-49", "7": "50-54", "8": "55-59", "9": "60-64", "10": "65-69", "11": "70-74", "12": "75-79", "13": "80+"},
+      "labels": {"18-24": "18 to 24", "25-29": "25 to 29", "30-34": "30 to 34", "35-39": "35 to 39", "40-44": "40 to 44", "45-49": "45 to 49", "50-54": "50 to 54", "55-59": "55 to 59", "60-64": "60 to 64", "65-69": "65 to 69", "70-74": "70 to 74", "75-79": "75 to 79", "80+": "80 or older"}
+    },
+    "sex": {
+      "type": "categorical",
+      "question": "Sex",
+      "modifiable": false,
+      "brfss_codes": {"1": "male", "2": "female"},
+      "labels": {"male": "Male", "female": "Female"}
+    },
+    "bmi": {
+      "type": "numeric",
+      "question": "Body mass index (from height and weight)",
+      "modifiable": true,
+      "brfss_scale_divisor": 100
+    },
+    "smoking_status": {
+      "type": "categorical",
+      "question": "Cigarette smoking",
+      "modifiable": true,
+      "brfss_codes": {"1": "current_daily", "2": "current_some_days", "3": "former", "4": "never"},
+      "labels": {"current_daily": "Smoke every day", "current_some_days": "Smoke some days", "former": "Former smoker", "never": "Never smoked (fewer than 100 cigarettes in lifetime)"}
+    },
+    "ecigarette_current_use": {
+      "type": "categorical",
+      "question": "Current e-cigarette or vape use",
+      "modifiable": true,
+      "brfss_codes": {"1": "no", "2": "yes"},
+      "labels": {"yes": "Yes, every day or some days", "no": "No"}
+    },
+    "physical_activity_past_30_days": {
+      "type": "categorical",
+      "question": "Any physical activity or exercise outside work in the past 30 days",
+      "modifiable": true,
+      "brfss_codes": {"1": "yes", "2": "no"},
+      "labels": {"yes": "Yes", "no": "No"}
+    },
+    "diabetes_status": {
+      "type": "categorical",
+      "question": "Ever told by a health professional that you have diabetes",
+      "modifiable": false,
+      "brfss_codes": {"1": "yes", "2": "gestational_only", "3": "no", "4": "prediabetes"},
+      "labels": {"yes": "Yes", "gestational_only": "Only during pregnancy", "no": "No", "prediabetes": "Prediabetes or borderline diabetes"}
+    },
+    "stroke_history": {
+      "type": "categorical",
+      "question": "Ever told you had a stroke",
+      "modifiable": false,
+      "brfss_codes": {"1": "yes", "2": "no"},
+      "labels": {"yes": "Yes", "no": "No"}
+    },
+    "kidney_disease_history": {
+      "type": "categorical",
+      "question": "Ever told you had kidney disease (not stones, bladder infection or incontinence)",
+      "modifiable": false,
+      "brfss_codes": {"1": "yes", "2": "no"},
+      "labels": {"yes": "Yes", "no": "No"}
+    },
+    "asthma_status": {
+      "type": "categorical",
+      "question": "Asthma",
+      "modifiable": false,
+      "brfss_codes": {"1": "current", "2": "former", "3": "never"},
+      "labels": {"current": "Have asthma now", "former": "Had asthma in the past, not now", "never": "Never told I had asthma"}
+    }
+  },
+  "models": {
+    "heart": {
+      "target": "heart_target",
+      "target_brfss_codes": {"1": 1, "2": 0},
+      "outcome_description": "Ever reported being told by a health professional that they had a heart attack (myocardial infarction) or coronary heart disease (BRFSS _MICHD).",
+      "features": ["age_group", "sex", "bmi", "smoking_status", "physical_activity_past_30_days", "diabetes_status", "stroke_history", "kidney_disease_history"]
+    },
+    "respiratory": {
+      "target": "copd_target",
+      "target_brfss_codes": {"1": 1, "2": 0},
+      "outcome_description": "Ever reported being told by a health professional that they had COPD, emphysema or chronic bronchitis (BRFSS CHCCOPD3).",
+      "features": ["age_group", "sex", "bmi", "smoking_status", "ecigarette_current_use", "physical_activity_past_30_days", "diabetes_status", "asthma_status"]
+    }
+  }
+}

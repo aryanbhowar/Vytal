@@ -1,0 +1,274 @@
+{
+  "generated": "2026-10-27",
+  "model_id": "respiratory",
+  "outcome_description": "Ever reported being told by a health professional that they had COPD, emphysema or chronic bronchitis (BRFSS CHCCOPD3).",
+  "survey_years": [
+    2022,
+    2023,
+    2024
+  ],
+  "features": [
+    "age_group",
+    "sex",
+    "bmi",
+    "smoking_status",
+    "ecigarette_current_use",
+    "physical_activity_past_30_days",
+    "diabetes_status",
+    "asthma_status"
+  ],
+  "total_rows": 1127220,
+  "total_positives": 89998,
+  "unweighted_prevalence_percent": 7.984,
+  "weighted_prevalence_percent_complete_cases": 6.49,
+  "weighted_prevalence_percent_valid_target_pooled": 6.416,
+  "bmi": {
+    "count": 1127220.0,
+    "mean": 28.51,
+    "std": 6.44,
+    "min": 12.0,
+    "25%": 24.13,
+    "50%": 27.44,
+    "75%": 31.74,
+    "max": 70.0
+  },
+  "category_counts": {
+    "age_group": {
+      "18-24": 70205,
+      "25-29": 56305,
+      "30-34": 64111,
+      "35-39": 71678,
+      "40-44": 76308,
+      "45-49": 72459,
+      "50-54": 83062,
+      "55-59": 91732,
+      "60-64": 112397,
+      "65-69": 122847,
+      "70-74": 115066,
+      "75-79": 90644,
+      "80+": 100406
+    },
+    "sex": {
+      "female": 575409,
+      "male": 551811
+    },
+    "smoking_status": {
+      "current_daily": 92723,
+      "current_some_days": 37663,
+      "former": 317976,
+      "never": 678858
+    },
+    "ecigarette_current_use": {
+      "no": 1063537,
+      "yes": 63683
+    },
+    "physical_activity_past_30_days": {
+      "no": 261503,
+      "yes": 865717
+    },
+    "diabetes_status": {
+      "gestational_only": 8440,
+      "no": 932865,
+      "prediabetes": 27455,
+      "yes": 158460
+    },
+    "asthma_status": {
+      "current": 118321,
+      "former": 50162,
+      "never": 958737
+    }
+  },
+  "splits": {
+    "train": {
+      "rows": 789054,
+      "positives": 62999,
+      "unweighted_prevalence_percent": 7.984
+    },
+    "validation": {
+      "rows": 169083,
+      "positives": 13499,
+      "unweighted_prevalence_percent": 7.984
+    },
+    "test": {
+      "rows": 169083,
+      "positives": 13500,
+      "unweighted_prevalence_percent": 7.984
+    }
+  },
+  "by_year": {
+    "2022": {
+      "drop_steps": [
+        {
+          "step": "records in file",
+          "remaining": 445132,
+          "removed": 0
+        },
+        {
+          "step": "unusable target answer",
+          "remaining": 442913,
+          "removed": 2219
+        },
+        {
+          "step": "unusable age_group",
+          "remaining": 434097,
+          "removed": 8816
+        },
+        {
+          "step": "unusable sex",
+          "remaining": 434097,
+          "removed": 0
+        },
+        {
+          "step": "unusable bmi",
+          "remaining": 389825,
+          "removed": 44272
+        },
+        {
+          "step": "unusable smoking_status",
+          "remaining": 375715,
+          "removed": 14110
+        },
+        {
+          "step": "unusable ecigarette_current_use",
+          "remaining": 373210,
+          "removed": 2505
+        },
+        {
+          "step": "unusable physical_activity_past_30_days",
+          "remaining": 372561,
+          "removed": 649
+        },
+        {
+          "step": "unusable diabetes_status",
+          "remaining": 372021,
+          "removed": 540
+        },
+        {
+          "step": "unusable asthma_status",
+          "remaining": 369281,
+          "removed": 2740
+        }
+      ],
+      "final_rows": 369281,
+      "positives": 29932,
+      "unweighted_prevalence_percent": 8.105,
+      "weighted_prevalence_percent_valid_target": 6.764
+    },
+    "2023": {
+      "drop_steps": [
+        {
+          "step": "records in file",
+          "remaining": 433323,
+          "removed": 0
+        },
+        {
+          "step": "unusable target answer",
+          "remaining": 431257,
+          "removed": 2066
+        },
+        {
+          "step": "unusable age_group",
+          "remaining": 423699,
+          "removed": 7558
+        },
+        {
+          "step": "unusable sex",
+          "remaining": 423699,
+          "removed": 0
+        },
+        {
+          "step": "unusable bmi",
+          "remaining": 386893,
+          "removed": 36806
+        },
+        {
+          "step": "unusable smoking_status",
+          "remaining": 378026,
+          "removed": 8867
+        },
+        {
+          "step": "unusable ecigarette_current_use",
+          "remaining": 375564,
+          "removed": 2462
+        },
+        {
+          "step": "unusable physical_activity_past_30_days",
+          "remaining": 374702,
+          "removed": 862
+        },
+        {
+          "step": "unusable diabetes_status",
+          "remaining": 374174,
+          "removed": 528
+        },
+        {
+          "step": "unusable asthma_status",
+          "remaining": 371480,
+          "removed": 2694
+        }
+      ],
+      "final_rows": 371480,
+      "positives": 28637,
+      "unweighted_prevalence_percent": 7.709,
+      "weighted_prevalence_percent_valid_target": 6.188
+    },
+    "2024": {
+      "drop_steps": [
+        {
+          "step": "records in file",
+          "remaining": 457670,
+          "removed": 0
+        },
+        {
+          "step": "unusable target answer",
+          "remaining": 455496,
+          "removed": 2174
+        },
+        {
+          "step": "unusable age_group",
+          "remaining": 447377,
+          "removed": 8119
+        },
+        {
+          "step": "unusable sex",
+          "remaining": 447377,
+          "removed": 0
+        },
+        {
+          "step": "unusable bmi",
+          "remaining": 408184,
+          "removed": 39193
+        },
+        {
+          "step": "unusable smoking_status",
+          "remaining": 393534,
+          "removed": 14650
+        },
+        {
+          "step": "unusable ecigarette_current_use",
+          "remaining": 390746,
+          "removed": 2788
+        },
+        {
+          "step": "unusable physical_activity_past_30_days",
+          "remaining": 389905,
+          "removed": 841
+        },
+        {
+          "step": "unusable diabetes_status",
+          "remaining": 389342,
+          "removed": 563
+        },
+        {
+          "step": "unusable asthma_status",
+          "remaining": 386459,
+          "removed": 2883
+        }
+      ],
+      "final_rows": 386459,
+      "positives": 31429,
+      "unweighted_prevalence_percent": 8.133,
+      "weighted_prevalence_percent_valid_target": 6.296
+    }
+  }
+}

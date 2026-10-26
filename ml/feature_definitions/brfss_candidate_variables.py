@@ -7,6 +7,8 @@ and recorded in docs/decisions/DECISION_LOG.md.
 
 from dataclasses import dataclass
 
+from ml.feature_definitions.feature_schema import model_definition, model_features
+
 SURVEY_YEARS = (2022, 2023, 2024)
 
 
@@ -41,7 +43,7 @@ CANDIDATE_VARIABLES: list[CandidateVariable] = [
     # Lifestyle
     CandidateVariable("smoking_status", "feature", "Four-level smoker status (calculated)", _same_name("_SMOKER3")),
     CandidateVariable(
-        "ecigarette_status", "feature", "Current e-cigarette user (calculated)",
+        "ecigarette_current_use", "feature", "Current e-cigarette user (calculated)",
         {2022: "_CURECI2", 2023: "_CURECI2", 2024: "_CURECI3"},
     ),
     CandidateVariable(
@@ -79,7 +81,7 @@ INVALID_CODES: dict[str, set[str]] = {
     "sex": set(),
     "bmi": {"BLANK"},
     "smoking_status": {"9"},
-    "ecigarette_status": {"9"},
+    "ecigarette_current_use": {"9"},
     "physical_activity_past_30_days": {"7", "9", "BLANK"},
     "heavy_alcohol_use": {"9"},
     "diabetes_status": {"7", "9", "BLANK"},
@@ -88,19 +90,11 @@ INVALID_CODES: dict[str, set[str]] = {
     "asthma_status": {"9"},
 }
 
-# Feature sets proposed for the pooled 2022-2024 models, evaluated by the
-# inspection script before being finalised in the decision log (D-022, D-023).
+# Final feature sets (D-023, D-024) live in vytal_feature_schema.json.
 PROPOSED_MODEL_FEATURES: dict[str, list[str]] = {
-    "heart": [
-        "age_group", "sex", "bmi", "smoking_status", "physical_activity_past_30_days",
-        "heavy_alcohol_use", "diabetes_status", "stroke_history", "kidney_disease_history",
-    ],
-    "respiratory": [
-        "age_group", "sex", "bmi", "smoking_status", "ecigarette_status",
-        "physical_activity_past_30_days", "diabetes_status", "asthma_status",
-    ],
+    model: model_features(model) for model in ("heart", "respiratory")
 }
-MODEL_TARGETS = {"heart": "heart_target", "respiratory": "copd_target"}
+MODEL_TARGETS = {model: model_definition(model)["target"] for model in ("heart", "respiratory")}
 POSITIVE_TARGET_CODE = "1"
 
 

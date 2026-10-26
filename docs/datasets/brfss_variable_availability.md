@@ -16,23 +16,23 @@ A file is treated as complete when its record count equals CDC's published count
 
 ### heart (target `heart_target`)
 
-Proposed features: `age_group`, `sex`, `bmi`, `smoking_status`, `physical_activity_past_30_days`, `heavy_alcohol_use`, `diabetes_status`, `stroke_history`, `kidney_disease_history`.
+Proposed features: `age_group`, `sex`, `bmi`, `smoking_status`, `physical_activity_past_30_days`, `diabetes_status`, `stroke_history`, `kidney_disease_history`.
 
 | Year | Positive | Negative | Target unusable | Complete cases | Prevalence in complete cases | Weighted prevalence (all valid targets) |
 |---|---|---|---|---|---|---|
-| 2022 | 39,751 | 400,360 | 5,021 | 356,785 | 9.22% | 6.9% |
-| 2023 | 36,311 | 392,427 | 4,585 | 362,732 | 8.61% | 6.47% |
-| 2024 | 42,338 | 410,126 | 5,206 | 373,678 | 9.52% | 6.8% |
+| 2022 | 39,751 | 400,360 | 5,021 | 370,507 | 9.21% | 6.9% |
+| 2023 | 36,311 | 392,427 | 4,585 | 372,752 | 8.59% | 6.47% |
+| 2024 | 42,338 | 410,126 | 5,206 | 387,892 | 9.52% | 6.8% |
 
-Pooled complete cases: 1,093,195 (about 99,701 positive).
+Pooled complete cases: 1,131,151 (about 103,070 positive).
 
 Rows excluded because of an unusable feature answer, and how often they reported the condition (compare with the complete-case prevalence above):
 
 | Year | Excluded rows | Prevalence among excluded |
 |---|---|---|
-| 2022 | 83,326 | 8.23% |
-| 2023 | 66,006 | 7.67% |
-| 2024 | 78,786 | 8.6% |
+| 2022 | 69,604 | 8.1% |
+| 2023 | 55,986 | 7.67% |
+| 2024 | 64,572 | 8.41% |
 
 Unusable answers (don't know, refused, missing) as % of rows with a valid target, and the condition's prevalence among those rows:
 
@@ -43,14 +43,13 @@ Unusable answers (don't know, refused, missing) as % of rows with a valid target
 | `bmi` | 10.87% | 6.8% | 9.27% | 6.34% | 9.32% | 6.89% |
 | `smoking_status` | 7.9% | 8.07% | 5.26% | 7.72% | 6.94% | 8.77% |
 | `physical_activity_past_30_days` | 0.22% | 14.26% | 0.27% | 14.94% | 0.26% | 14.15% |
-| `heavy_alcohol_use` | 11.09% | 8.21% | 7.51% | 7.51% | 10.14% | 8.75% |
 | `diabetes_status` | 0.18% | 13.14% | 0.17% | 12.71% | 0.17% | 10.89% |
 | `stroke_history` | 0.23% | 29.27% | 0.24% | 26.44% | 0.22% | 27.64% |
 | `kidney_disease_history` | 0.35% | 22.35% | 0.36% | 20.35% | 0.37% | 20.01% |
 
 ### respiratory (target `copd_target`)
 
-Proposed features: `age_group`, `sex`, `bmi`, `smoking_status`, `ecigarette_status`, `physical_activity_past_30_days`, `diabetes_status`, `asthma_status`.
+Proposed features: `age_group`, `sex`, `bmi`, `smoking_status`, `ecigarette_current_use`, `physical_activity_past_30_days`, `diabetes_status`, `asthma_status`.
 
 | Year | Positive | Negative | Target unusable | Complete cases | Prevalence in complete cases | Weighted prevalence (all valid targets) |
 |---|---|---|---|---|---|---|
@@ -76,7 +75,7 @@ Unusable answers (don't know, refused, missing) as % of rows with a valid target
 | `sex` | 0.0% | — | 0.0% | — | 0.0% | — |
 | `bmi` | 10.9% | 6.6% | 9.29% | 6.31% | 9.36% | 6.45% |
 | `smoking_status` | 7.92% | 7.26% | 5.28% | 6.65% | 6.96% | 7.52% |
-| `ecigarette_status` | 7.97% | 7.54% | 5.33% | 6.72% | 7.13% | 7.71% |
+| `ecigarette_current_use` | 7.97% | 7.54% | 5.33% | 6.72% | 7.13% | 7.71% |
 | `physical_activity_past_30_days` | 0.22% | 12.13% | 0.27% | 13.08% | 0.27% | 13.57% |
 | `diabetes_status` | 0.17% | 11.5% | 0.16% | 11.9% | 0.17% | 15.22% |
 | `asthma_status` | 0.77% | 21.04% | 0.75% | 20.95% | 0.78% | 21.0% |
@@ -98,7 +97,7 @@ Unusable answers (don't know, refused, missing) as % of rows with a valid target
 | `height_m` | measurement | HTM4 / HTM4 / HTM4 | yes | yes | yes | yes |
 | `weight_kg` | measurement | WTKG3 / WTKG3 / WTKG3 | yes | yes | yes | yes |
 | `smoking_status` | feature | _SMOKER3 / _SMOKER3 / _SMOKER3 | yes | yes | yes | yes |
-| `ecigarette_status` | feature | _CURECI2 / _CURECI2 / _CURECI3 | yes | yes | yes | yes |
+| `ecigarette_current_use` | feature | _CURECI2 / _CURECI2 / _CURECI3 | yes | yes | yes | yes |
 | `ecigarette_use_now` | feature | ECIGNOW2 / ECIGNOW2 / ECIGNOW3 | yes | yes | **NO** | yes |
 | `physical_activity_past_30_days` | feature | EXERANY2 / EXERANY2 / EXERANY2 | yes | yes | yes | yes |
 | `heavy_alcohol_use` | feature | _RFDRHV8 / _RFDRHV8 / _RFDRHV9 | yes | yes | yes | yes |
@@ -302,7 +301,7 @@ Unusable answers (don't know, refused, missing) as % of rows with a valid target
   - `4` Never smoked: 258956
   - `9` Donï¿½t know/Refused/Missing: 32022
 
-### `ecigarette_status`: Current e-cigarette user (calculated)
+### `ecigarette_current_use`: Current e-cigarette user (calculated)
 
 - **2022** (`_CURECI2`): Adults who are current e-cigarette users
   - `1` Not currently using E-cigarettes: 387356
