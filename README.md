@@ -23,7 +23,7 @@ Engineering: strict input validation, security headers, rate and size limits, no
 
 - Windows 10/11 (other systems should work with adjusted commands)
 - Python 3.10 or newer (developed on 3.13)
-- Node.js 18 or newer (developed on 26)
+- Node.js 20.19 or newer (required by Vite 8; tested on 24 in CI and 26 locally)
 - Git
 
 Check them with:

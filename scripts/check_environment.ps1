@@ -24,7 +24,7 @@ function Test-Tool {
 }
 
 $allOk = (Test-Tool 'Python' { python --version } ([version]'3.10')) -and $allOk
-$allOk = (Test-Tool 'Node.js' { node --version } ([version]'18.0')) -and $allOk
+$allOk = (Test-Tool 'Node.js' { node --version } ([version]'20.19')) -and $allOk
 $allOk = (Test-Tool 'npm' { npm --version } $null) -and $allOk
 $allOk = (Test-Tool 'Git' { git --version } $null) -and $allOk
 
