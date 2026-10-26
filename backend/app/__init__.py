@@ -1,0 +1,1 @@
+"""Vytal backend application package."""

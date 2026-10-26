@@ -1,0 +1,11 @@
+# Vytal backend runtime dependencies.
+# Versions are pinned to what was installed and tested on the development machine
+# (Python 3.13, Windows 11). scikit-learn must match the version used to train the
+# saved models, because joblib artifacts are only reliably loadable by that version.
+fastapi==0.162.0
+uvicorn[standard]==0.54.0
+pydantic==2.14.1
+scikit-learn==1.9.1
+pandas==3.1.0
+numpy==2.5.4
+joblib==1.6.0

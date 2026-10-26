@@ -1,0 +1,5 @@
+# Store text files with LF line endings in the repository and working copy,
+# so files look the same on every machine and Git does not warn about CRLF.
+* text=auto eol=lf
+*.png binary
+*.joblib binary
