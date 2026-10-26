@@ -99,6 +99,17 @@ Both servers were started and requests were sent to them. Both requests returned
 **Step 8: Set up Git and GitHub.**
 The folder became a Git repository on branch `main`, linked to `https://github.com/aryanbhowar/Vytal.git`. The link was tested and GitHub responded (the repository was empty, as expected). Before committing, the list of files was checked to make sure nothing private or huge was included. The commit and push results are in section 9.
 
+### Direction update after Task 1 (Revision 1)
+
+After Task 1, the project goal changed. Vytal is no longer described as an "educational prototype". It is now meant to become **production-ready software**: reliable, tested, secure, private and deployable. It is still **not** a medical device and must never be described as clinically validated.
+
+What changed as a result:
+
+- The master plan gained a "Revision 1" section. It adds work to later tasks: security protections on the API, privacy rules (no names collected, nothing stored), checking that model files haven't been tampered with, fairness checks across age and sex groups, model cards, a one-command production build, automated tests on GitHub (CI) and real-browser tests.
+- Five new decisions were recorded (D-017 to D-021). One question is open for you (D-022, about which survey years the heart model uses).
+- The wording on the page, in the API description and in the README now says "personalized health-risk assessment" and "not a diagnosis, not clinically validated".
+- Before changing anything, the tests and the frontend build were run again on the current files. They still pass, so the Task 1 results in this report still hold.
+
 ### Task 2: Dataset download and checks (not started)
 
 This begins next. See section 10.

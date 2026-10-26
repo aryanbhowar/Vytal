@@ -1,8 +1,8 @@
 # Vytal
 
-Personalized Health Risk Assessment Model and Web Application. Final-year undergraduate project.
+Personalized health-risk assessment web application, built as a final-year undergraduate project and engineered to be maintainable and deployment-ready.
 
-> **Educational prototype only.** Vytal is not a diagnostic tool and has not been clinically validated. Its results describe patterns in US survey data and must not replace advice from a qualified healthcare professional. If you have chest pain, severe breathlessness or other urgent symptoms, seek medical care immediately.
+> **Not a diagnosis.** Vytal has not been clinically validated and is not suitable for clinical decisions. Its results describe patterns in US adult survey data and must not replace advice from a qualified healthcare professional. If you have chest pain, severe breathlessness or other urgent symptoms, seek medical care immediately.
 
 ## What it does (planned)
 
@@ -12,6 +12,8 @@ A user completes a health and lifestyle questionnaire. A local FastAPI backend v
 - **Respiratory model:** reported COPD, emphysema or chronic bronchitis (BRFSS 2022–2024).
 
 A React dashboard shows each result as a category with the model's estimate, the factors behind it, and general health-awareness suggestions.
+
+Planned engineering features include strict input validation, security headers, no storage of answers, integrity-checked model files, model cards, automated unit, API and browser tests, CI, and a one-command production build.
 
 **Current status:** see [`PROJECT_STATUS.md`](PROJECT_STATUS.md). At the moment only the foundation (API health check and frontend connection) is built.
 

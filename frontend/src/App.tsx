@@ -21,7 +21,7 @@ function App() {
   return (
     <main className="status-page">
       <h1>Vytal</h1>
-      <p className="tagline">Educational health-risk-awareness prototype</p>
+      <p className="tagline">Personalized health-risk assessment</p>
       <p className={`status status-${connection.kind}`} role="status">
         {connection.kind === 'checking' && 'Checking API connection…'}
         {connection.kind === 'connected' &&

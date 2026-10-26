@@ -1,41 +1,42 @@
 # Vytal: project status
 
-_Last updated: 2026-10-26 (Day 1), end of Task 1._
+_Last updated: 2026-10-26 (Day 1), after Task 1 and the Revision 1 direction update._
 
 ## Objective
 
-A locally runnable, educational health-risk-awareness web app. A questionnaire feeds a FastAPI backend that runs two trained scikit-learn models (reported heart disease from BRFSS 2023; reported COPD from BRFSS 2022–2024) and shows results with explanations, suggestions and limitations. Full plan: [`docs/implementation/MASTER_IMPLEMENTATION_PLAN.md`](docs/implementation/MASTER_IMPLEMENTATION_PLAN.md).
+A maintainable, deployment-ready personalized health-risk assessment web application. A questionnaire feeds a FastAPI backend that runs two trained scikit-learn models (reported coronary heart disease or heart attack; reported COPD, emphysema or chronic bronchitis, both from CDC BRFSS survey data) and shows results with explanations, suggestions and limitations. It runs without paid services and is **not** clinically validated or suitable for clinical decisions. Full plan: [`docs/implementation/MASTER_IMPLEMENTATION_PLAN.md`](docs/implementation/MASTER_IMPLEMENTATION_PLAN.md) (Revision 1).
 
 ## Current phase
 
-**Phase 1 (Day 1): Foundation and dataset decisions.** Task 1 is done; Task 2 (BRFSS download and variable verification) is next.
+**Phase 1 (Day 1): Foundation and dataset decisions.** Task 1 is done. Task 2 (BRFSS download and variable verification) is next and **paused at the user's request** until the full direction update has been received.
 
-## Overall completion estimate: about 6%
+## Overall completion estimate: about 5%
 
-Method: the 13 planned tasks are weighted by expected effort (Tasks 3–6 and 9–10 count double, giving 19 units). Task 1 is about 1 unit of 19 ≈ 5%, rounded up slightly for the tracking files that later tasks reuse. This is an estimate of planned work done, not of features working.
+Method: the 13 tasks weighted by expected effort. Revision 1 added production-readiness work (mostly to Tasks 6, 11, 12), raising the total from 19 to about 21 units. Task 1 is about 1 unit ≈ 5%. This estimates planned work done, not features working.
 
 ## Deliverables
 
 | Status | Deliverable |
 |---|---|
-| Done (tested) | Python environment with pinned packages; `GET /api/health`; frontend connects to backend via Vite proxy; environment check script; Git repo with remote and identity configured |
-| Done | Master plan, decision log, README, changelog, viva notes (Task 1 sections), phase report standard, detailed Phase 1 report (Task 1 part) |
-| Not started | Tasks 2–13: dataset download and verification, preprocessing, both models, prediction API, suggestions, design system, questionnaire, dashboard, methodology page, demo scripts, final docs |
+| Done (tested, re-verified after Revision 1) | Python environment with pinned packages; `GET /api/health`; frontend connects to backend via Vite proxy (user confirmed in browser); environment check script; Git repo with remote and identity |
+| Done | Master plan (Revision 1), decision log (D-001 to D-022), README, changelog, viva notes (Task 1 sections), phase report standard, Phase 1 report (Task 1 part) |
+| Not started | Tasks 2–13, including the Revision 1 additions: security headers and limits, privacy controls, model artifact hashing, subgroup evaluation, model cards, data dictionary, production build, Dockerfile, CI, Playwright tests, dependency audit, deployment guide |
 
 ## Known blockers
 
-None. (Git identity was set on 2026-10-26 for this repository: `aryanbhowar` / `aryanbhowar45.sphs@gmail.com`.)
+None technical. Waiting on the user for: the rest of the direction update message (it ended mid-sentence in section 7), and D-022 (heart model training years).
 
 ## Component status
 
 | Area | Status |
 |---|---|
-| Frontend | Vite 8 + React 19 + TypeScript skeleton; shows API connection state. `npm run build` passes. No design system or pages yet. |
+| Frontend | Vite 8 + React 19 + TypeScript skeleton; connection-status page (to be replaced by the full application in Tasks 8–11). `npm run build` and lint pass. |
 | Backend | FastAPI app with `GET /api/health` only. 2 tests pass. |
 | Datasets | Not downloaded. Zenodo cleaned dataset rejected (D-002). BRFSS variable availability not yet verified. |
-| Heart model | Not started. |
+| Heart model | Not started. Training years open (D-022). |
 | Respiratory model | Not started. |
-| Tests | pytest: 2 passed (health endpoint, 404 without leak). Frontend: build passes; Vitest not yet set up (Task 8). |
+| Tests | pytest: 2 passed (re-run 2026-10-26 after Revision 1). Frontend: build and lint pass; Vitest (Task 8) and Playwright (Tasks 11–12) not yet set up. |
+| Deployment | Not started (Task 12). No public deployment without explicit approval. |
 
 ## Latest working commands (from project root)
 
@@ -49,19 +50,22 @@ cd frontend; npm run build
 
 ## Latest known-good commit
 
-`e77e07f` (chore: initialize Vytal project structure), pushed to GitHub.
+See the Git table below.
 
 ## Next three actions
 
-1. Task 2: add `ml/requirements.txt` and the BRFSS download script; download 2022, 2023, 2024 (scripted, or manual fallback).
-2. Task 2: inspect candidate variables; confirm 2023 has blood pressure and cholesterol questions.
-3. Task 2: finalize feature lists in the decision log; write `datasets/DATA_SOURCES.md`; complete the Phase 1 report.
+1. Receive the remainder of the direction update and the D-022 answer; fold both into the plan.
+2. Task 2: add `ml/requirements.txt` and the BRFSS download script; download 2022, 2023, 2024 (scripted, or manual fallback).
+3. Task 2: inspect candidate heart and respiratory variables in all three years; settle feature lists; write `datasets/DATA_SOURCES.md`.
 
 ## Decisions needing user input
 
-None right now. Task 2 may need one (if 2023 lacks blood pressure or cholesterol).
+- **D-022:** heart model on 2023 only with blood pressure and cholesterol (current decision), or pooled 2022–2024 with only shared inputs?
+- The rest of the direction update (from section 7 onward).
 
-## Final success criteria (from the brief)
+## Success criteria
+
+Criteria 1–24 come from the original brief; 25–32 were added by Revision 1.
 
 | # | Criterion | Status |
 |---|---|---|
@@ -81,17 +85,28 @@ None right now. Task 2 may need one (if 2023 lacks blood pressure or cholesterol
 | 14 | Unsupported predictions produce honest error states | Not started |
 | 15 | Factor explanations technically defensible | Not started (method decided: D-011) |
 | 16 | Suggestions follow documented rules | Not started |
-| 17 | Glassmorphism styling consistent and responsive | Not started |
+| 17 | Design system consistent and responsive | Not started |
 | 18 | Important functionality has tests | Partial: health endpoint only |
 | 19 | End-to-end workflow demonstrated | Not started |
 | 20 | Project starts with documented commands | Done for skeleton (README) |
-| 21 | Git history and status maintained | Partial: first commit made (see Git section) |
+| 21 | Git history and status maintained | Partial: commits pushed (see Git table) |
 | 22 | Phase reports allow resuming work | Partial: Phase 1 report covers Task 1 |
 | 23 | Viva notes explain implementation | Partial: Task 1 sections written |
-| 24 | Medical limitations visible and accurate | Partial: README disclaimer only |
+| 24 | Medical limitations visible and accurate | Partial: README statement only |
+| 25 | Security controls (strict schemas, size limit, headers, generic errors) tested | Not started |
+| 26 | Privacy controls (no identifiers, no storage, no body logging, no-store) tested | Not started |
+| 27 | Model artifacts integrity-checked before loading | Not started |
+| 28 | Model cards and data dictionary published | Not started |
+| 29 | Subgroup performance reported | Not started |
+| 30 | Production build runs from documented commands | Not started |
+| 31 | CI runs tests and build on GitHub | Not started |
+| 32 | Browser end-to-end tests pass against real models | Not started |
 
 ## Git
 
 | Commit | Message | Pushed |
 |---|---|---|
-| `e77e07f` | chore: initialize Vytal project structure | Yes, to `origin/main` on 2026-10-26 (verified with `git ls-remote`) |
+| `e77e07f` | chore: initialize Vytal project structure | Yes, verified with `git ls-remote` |
+| `a242a78` | docs: record Task 1 commit and push status | Yes |
+| `550b834` | docs: record browser confirmation of API connection | Yes (last known-good before Revision 1) |
+| Revision 1 commit | docs: adopt Revision 1 production-readiness direction | See `git log` (a file cannot contain its own commit ID) |

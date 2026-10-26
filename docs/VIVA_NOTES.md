@@ -6,7 +6,9 @@ Plain-language explanations of how Vytal works, written as each part is built. E
 
 ## 1. The big picture (Task 1)
 
-**What Vytal is:** a website where someone answers health and lifestyle questions and gets two estimates: one about heart disease and one about COPD. The estimates come from machine-learning models trained on a large US health survey (BRFSS).
+**What Vytal is:** a website where someone answers health and lifestyle questions and gets two estimates: one about heart disease and one about COPD. The estimates come from machine-learning models trained on a large US health survey (BRFSS). It is built like real production software: validated inputs, tests, security and privacy controls, and a repeatable way to deploy it.
+
+**Production-ready vs clinically validated:** these are different things. "Production-ready" is about the software: it runs reliably, is tested, secure and maintainable. "Clinically validated" would mean doctors and regulators have tested it on real patients and approved it for medical use. Vytal aims for the first. It has not had the second, and no amount of code or documentation can provide it.
 
 **What Vytal is not:** a diagnosis. The survey asks people whether a doctor has *ever told them* they have a condition. So the models learn "people with these answers more often reported this condition". They do not predict whether you will get the disease in future.
 

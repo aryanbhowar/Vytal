@@ -15,7 +15,10 @@ def create_app() -> FastAPI:
     application = FastAPI(
         title=f"{settings.app_name} API",
         version=settings.app_version,
-        description="Educational health-risk-awareness prototype. Not a diagnostic tool.",
+        description=(
+            "Personalized health-risk assessment API. Not a diagnostic tool and "
+            "not clinically validated."
+        ),
     )
     application.add_middleware(
         CORSMiddleware,

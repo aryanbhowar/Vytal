@@ -2,6 +2,17 @@
 
 All meaningful changes, newest first. Dates are local (project day in brackets).
 
+## 2026-10-26 (Day 1): Revision 1, direction update
+
+### Changed
+- Master plan Revision 1: Vytal is now a maintainable, deployment-ready application (D-017), with engineering autonomy rules and production-readiness additions to Tasks 2, 4–6, 9–13 (security, privacy, artifact hashing, subgroup metrics, weighted prevalence, model cards, production build, Dockerfile, CI, Playwright tests, dependency audit).
+- New decisions D-017 to D-021; D-022 (heart model training years) opened for user confirmation.
+- `PROJECT_STATUS.md`: new objective, success criteria 25–32, Task 2 paused at user request.
+- User-facing wording no longer says "educational prototype"; it still says the app is not a diagnosis and not clinically validated (README, API description, frontend tagline, page meta description, viva notes).
+
+### Verified
+- Re-ran `pytest` (2 passed), `npm run build` and `npm run lint` (both passed) on the current files.
+
 ## 2026-10-26 (Day 1): Task 1, foundation
 
 ### Added

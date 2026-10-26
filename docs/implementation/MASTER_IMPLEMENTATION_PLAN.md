@@ -1,8 +1,48 @@
-# VYTAL — MASTER IMPLEMENTATION PLAN (approved)
+# VYTAL — MASTER IMPLEMENTATION PLAN (approved, Revision 1)
 
-## EXECUTION INSTRUCTIONS FOR THIS SESSION
-- Execute **Task 1 only**, then stop and report results to the user. The user will prompt each subsequent task ("Continue with Task N ...").
-- First action of Task 1: save this entire plan verbatim as `docs/implementation/MASTER_IMPLEMENTATION_PLAN.md`.
+| Revision | Date | Change |
+|---|---|---|
+| 0 | 2026-10-26 | Original plan approved in Plan Mode (Tasks 1–13). Task 1 completed under it. |
+| 1 | 2026-10-26 | User direction update: Vytal is a maintainable, deployment-ready application, not an educational prototype. Adds engineering autonomy rules, production-readiness work (security, privacy, production build, CI, model cards, end-to-end browser tests). Clinical-validation claims remain prohibited. Details in "Revision 1" below; affected task sections are marked **[R1]**. |
+
+## REVISION 1: DIRECTION UPDATE (2026-10-26)
+
+### R1.1 Product vision
+Vytal is a personalized health-risk assessment web application intended to become a complete, maintainable, deployment-ready software system: polished frontend, working backend, real data processing, genuine model inference, meaningful evaluation, documented limitations, privacy and security controls, automated tests, and a repeatable deployment process. It is not a static demo, mock dashboard or set of disconnected components; each task must leave more of the system genuinely working.
+
+Vytal must **never** be described as clinically validated, medically certified or suitable for clinical decision-making. No such evidence or approval exists. "Production-oriented engineering" describes software quality, not clinical status. User-facing copy drops the "educational prototype" label but keeps a clear "not a diagnosis, not clinically validated" statement.
+
+The 7-day schedule stands. If time runs short, a smaller genuinely working system beats a larger superficial one.
+
+### R1.2 Engineering autonomy (applies to all remaining tasks)
+Authorized without per-step approval: reading/creating/editing/moving project files; maintaining the directory structure; installing/updating project-local dependencies; running scripts, data inspection, preprocessing, training, evaluation, builds, linting and tests; starting/stopping processes the agent created; downloading the official public BRFSS files and public dependencies; fixing errors; meaningful Git commits; pushing verified commits to `origin/main` after checking for secrets, private data and large artifacts; maintaining all tracking documents; reasonable implementation decisions and justified refactors.
+
+Not allowed without explicit approval: deleting unrelated files or touching other projects; broad system or global configuration changes; exposing credentials or personal data; committing raw data, `.env`, virtual environments or build folders; force-push, branch deletion or history rewriting; anything that costs money; public deployment, DNS, production infrastructure or account-permission changes. Never claim an install, test, download, training run, push or deployment succeeded unless the result was observed.
+
+Ask the user only for decisions that materially affect privacy, security, cost, irreversibility, external publication, legal obligations, or a genuine product trade-off that evidence cannot settle. When asking: state the exact action, why, the risk, and the safest alternative, and continue independent work meanwhile.
+
+### R1.3 Production-readiness additions (folded into the tasks below)
+| Area | Addition | Task |
+|---|---|---|
+| Security | Strict request schemas (`extra="forbid"`), request body size limit, security headers (CSP, `X-Content-Type-Options`, `Referrer-Policy`, `frame-ancestors`), CORS from environment config, generic error bodies, OpenAPI docs switchable off in production | 6, 12 |
+| Privacy | No name or identifying fields collected; no storage of responses; no request-body logging; `Cache-Control: no-store` on assessment responses; in-app privacy notice; "Start over" clears session storage | 6, 9, 10 |
+| Model integrity | SHA-256 of each `.joblib` recorded in its metadata and verified before loading (joblib uses pickle, so only verified repository artifacts are loaded) | 4–6 |
+| Evaluation | Subgroup metrics by sex and age band (bias check); survey-weighted prevalence (`_LLCPWT`, divided by number of pooled years per CDC guidance) reported beside unweighted prevalence | 3–5 |
+| Documentation | Model card per model; data dictionary; deployment guide; privacy and limitations page | 4–5, 11, 13 |
+| Production build | One-process production mode: FastAPI serves the built frontend from `frontend/dist` on the same origin; `scripts/build_release.ps1`, `scripts/start_production.ps1`; configuration through environment variables | 12 |
+| Deployment | `Dockerfile` provided; marked verified only if Docker is available on the machine and the image is actually built and run. **No public deployment without explicit approval.** | 12 |
+| CI | GitHub Actions workflow: Python tests (data-dependent tests skip without data), frontend lint, unit tests and build. Uses GitHub's free allowance; no payment method involved | 12 |
+| End-to-end tests | Playwright driving the already-installed Microsoft Edge (`channel: "msedge"`), so no browser download; replaces the earlier "no Playwright" decision | 11–12 |
+| Dependency hygiene | `pip-audit` and `npm audit` run and results recorded | 12 |
+
+### R1.4 Open question raised by Revision 1
+The update text says the heart model should use "common, verified risk-factor and health-history inputs across combined years if compatible". The recorded decision D-003 (user choice 1b) is heart model on **2023 only** so blood pressure and cholesterol can be used. D-003 stays in force until the user confirms. Task 2 inspects heart candidate variables in all three years, so evidence for both options is gathered either way. Tracked as D-022 in the decision log.
+
+---
+
+## EXECUTION INSTRUCTIONS
+- Work proceeds task by task under the autonomy rules in R1.2. The agent continues to the next task without waiting for per-step approval, except at the permission boundary, at a documented stop condition (e.g. Task 2's blood-pressure/cholesterol check), or when the user has asked to pause.
+- Task 1 is complete (commit `e77e07f` and follow-ups). Task 1 originally saved this plan verbatim.
 - Workspace root is `c:\vytal_ty` (Windows 11, PowerShell, 8 GB RAM, CPU only). It was empty at planning time. Project files go directly in the root (no nested `vytal/` folder).
 - Use `.venv\Scripts\python.exe` directly (avoids PowerShell execution-policy issues).
 - User has Python, Node and Git installed; the agent may install project packages itself. Verify versions (Python >=3.10, Node >=18). If `git config user.name/email` are unset, ask the user for values.
@@ -15,12 +55,12 @@
 ---
 
 ## Problem Statement
-Build, in 7 days, a locally runnable educational health-risk-awareness prototype. A user completes a questionnaire; a FastAPI backend validates it, maps it to model features, and runs two separately trained, honestly evaluated scikit-learn models for **self-reported coronary heart disease / heart attack** and **self-reported COPD**. A glassmorphism dashboard shows categories, contributing factors, rule-based suggestions, and limitations. Results are framed as associations with a reported condition in survey data, never as diagnosis or future-onset prediction.
+**[R1]** Build, in 7 days, a maintainable, deployment-ready personalized health-risk assessment application that runs locally without paid services (original wording: "a locally runnable educational health-risk-awareness prototype"). A user completes a questionnaire; a FastAPI backend validates it, maps it to model features, and runs two separately trained, honestly evaluated scikit-learn models for **self-reported coronary heart disease / heart attack** and **self-reported COPD**. A glassmorphism dashboard shows categories, contributing factors, rule-based suggestions, and limitations. Results are framed as associations with a reported condition in survey data, never as diagnosis or future-onset prediction.
 
 ## Requirements (agreed with user)
 | Topic | Decision |
 |---|---|
-| Heart model data | BRFSS **2023 only** (keeps blood pressure + cholesterol) |
+| Heart model data | BRFSS **2023 only** (keeps blood pressure + cholesterol). **[R1]** Confirmation requested from the user (see R1.4, D-022) |
 | Respiratory model data | BRFSS **2024 baseline + 2023 + 2022**, harmonized per year |
 | Model inputs | Risk factors and health history only (no general health, difficulty walking, physical/mental unhealthy days) |
 | Result display | Category + model estimate + survey average; probabilities shown only after calibration check |
@@ -145,7 +185,7 @@ Per feature contribution = Σ coefᵢ × (xᵢ − training mean of xᵢ) over t
 ### 9. Testing
 - pytest `tests/unit` (recode maps, BMI, age grouping, interpretation, contributions sum, suggestion rules), `tests/data` (processed columns, 0/1 target, no NaN features, no target-derived columns, split separation), `tests/integration` (TestClient valid/invalid/unavailable, schema, no stack-trace leakage, backend-vs-pipeline consistency).
 - Vitest + Testing Library: validation utils, step navigation persistence, results rendering from fixtures clearly labelled TEST FIXTURE.
-- E2E: `scripts/run_demo_profiles.py` posts 4 documented profiles to live backend; manual checklist in `docs/DEMO_SCRIPT.md`. No Playwright (heavy downloads).
+- E2E: `scripts/run_demo_profiles.py` posts 4 documented profiles to live backend; manual checklist in `docs/DEMO_SCRIPT.md`. **[R1]** Plus Playwright browser tests (`frontend/e2e/`) using the installed Microsoft Edge (`channel: "msedge"`, no browser download): full questionnaire → results flow against the real backend and models, error state with backend stopped, keyboard-only navigation, and widths 1440/768/375.
 
 ### 10. Git and tracking
 Tracking files: `PROJECT_STATUS.md` (objective, phase, completion estimate + method, completed/partial/not-started, blockers, frontend/backend/dataset/heart/respiratory/test status, latest working commands, last known-good commit, next three actions, decisions needing user input; never mark complete because a file exists), `CHANGELOG.md`, `docs/phase_reports/PHASE_1..7_REPORT.md`, `docs/VIVA_NOTES.md`, `README.md`, `docs/decisions/DECISION_LOG.md`. Track the brief's 24 final success criteria in PROJECT_STATUS.md with honest status. Commit message examples: `chore: initialize Vytal project structure`, `data: add verified BRFSS variable inspection`, `ml: train and evaluate heart baseline model`, `backend: implement assessment prediction API`, `frontend: build health assessment interface`, `integration: connect assessment workflow`, `docs: complete project implementation notes`.
@@ -162,6 +202,7 @@ Demo: `.venv\Scripts\python -m uvicorn app.main:app --app-dir backend --reload` 
 
 **Task 2: BRFSS acquisition and variable verification (Day 1)**
 Objective: confirm targets and features in 2022/2023/2024 files from the actual data.
+**[R1]** Also: inspect heart candidate variables (including `BPHIGH6`, `TOLDHI3`, `CHOLCHK3`) in 2022, 2023 and 2024, record usage terms, refusal/don't-know codes, survey-design variables (`_LLCPWT`, `_STSTR`, `_PSU`) and their implications, and produce the evidence needed to settle D-022.
 Guidance: `ml/requirements.txt` (pyreadstat, pyarrow, matplotlib); `ml/preprocessing/download_brfss_data.py` (browser UA, size check, unzip to datasets/raw/, print manual instructions on failure); `inspect_brfss_variables.py` (column metadata + value counts of candidate vars only, low memory); `docs/datasets/brfss_variable_availability.md` (variable × year matrix with codebook code tables); finalize feature lists in decision log — **if 2023 lacks BP or cholesterol, stop and ask the user**; first `datasets/DATA_SOURCES.md` + `datasets/README.md` including Zenodo rejection rationale. Complete PHASE_1_REPORT.
 Tests: data test that required targets exist in each needed year.
 Demo: inspection script prints availability table.
@@ -177,6 +218,7 @@ Objective: evaluated, saved heart pipeline + metadata.
 Guidance: `ml/training/model_training_config.py`, generic `train_binary_risk_model.py` (fit, validation threshold, calibration check, single test evaluation, HGB comparison), `heart_model_training.py`; `ml/evaluation/evaluation_metrics.py`, `evaluation_report_writer.py`.
 Tests: artifact loads; schema-valid row → predict_proba shape (1,2) in [0,1]; metadata categories = schema; metrics computed from test split only.
 Demo: `python -m ml.training.heart_model_training` writes model, metadata, and report with real numbers.
+**[R1]** Also: subgroup metrics (sex, age band); weighted and unweighted prevalence; SHA-256 of the artifact in metadata; `docs/model_evaluation/heart_model_card.md` (intended use, out-of-scope uses, data, metrics, subgroup results, limitations, "not clinically validated"). Task 5 does the same for respiratory.
 
 **Task 5: Respiratory model training and evaluation (Day 2–3)**
 Objective: same for COPD on pooled 2022–2024.
@@ -188,6 +230,7 @@ Objective: `POST /api/assessment/predict` returns real model output with categor
 Guidance: request/response schemas; input preprocessing (age→group, BMI with range checks); model registry at startup + `GET /api/models/status`; prediction, interpretation, factor services; error handlers.
 Tests: BMI/age-group/band unit tests; contributions sum to log-odds; integration: valid, out-of-range (422), bad enum (422), missing height (insufficient_input), missing artifact (monkeypatched → unavailable / 503), no stack trace in 500; backend-vs-pipeline consistency.
 Demo: Swagger at localhost:8000/docs returns both results for a sample profile.
+**[R1]** Also: `extra="forbid"` on request models; body size limit; security-header middleware; `Cache-Control: no-store` on predict; artifact hash verified before load (mismatch → model `unavailable`, logged without paths to the user); tests for each.
 
 **Task 7: Health suggestion rules (Day 3)**
 Objective: deterministic, sourced suggestions in the predict response.
@@ -219,11 +262,11 @@ Guidance: `/methodology` (data, targets, features, metrics from metadata via `/a
 Tests: demo script asserts schema and finite outputs.
 Demo: examiner can follow full flow. Complete PHASE_5_REPORT.
 
-**Task 12: Stability and demo preparation (Day 6)**
-Objective: repeatable demo.
-Guidance: run full pytest + Vitest, fix failures; `scripts/start_dev.ps1` launches both servers; determinism check; `docs/DEMO_SCRIPT.md`; freeze architecture.
-Tests: all pass from fresh terminal.
-Demo: one command starts app; scripted demo runs twice identically. Complete PHASE_6_REPORT.
+**Task 12: Stability, production build and deployment readiness (Day 6)** **[R1]**
+Objective: repeatable demo and a repeatable production build.
+Guidance: run full pytest + Vitest + Playwright, fix failures; `scripts/start_dev.ps1` launches both servers; determinism check; `docs/DEMO_SCRIPT.md`; **[R1]** production mode where FastAPI serves `frontend/dist` (`scripts/build_release.ps1`, `scripts/start_production.ps1`, env-driven config, docs toggle); `Dockerfile` (verified only if Docker present); `.github/workflows/ci.yml`; `pip-audit` + `npm audit` recorded; `docs/deployment/DEPLOYMENT.md` (local production run, container, hosting options that would need approval). Freeze architecture.
+Tests: all pass from fresh terminal; production mode serves the app and API on one port; CI run result observed on GitHub (or recorded as not observed).
+Demo: one command starts app; scripted demo runs twice identically; production build runs locally. Complete PHASE_6_REPORT.
 
 **Task 13: Documentation and handover (Day 7)**
 Objective: state recoverable from repo; viva-ready.
@@ -244,9 +287,12 @@ Demo: fresh clone runs following README alone. Complete PHASE_7_REPORT.
 | Schedule slip | Priority: runnable app → questionnaire → one real model → honest second-model status → integration → dashboard → docs → optional |
 | Blur performance | Reduce blurred layers |
 
+| **[R1]** Docker not installed | Ship the Dockerfile marked "not verified"; local production mode is the verified path |
+| **[R1]** Edge/Playwright unavailable | Fall back to the scripted API demo plus a manual browser checklist; record it |
+
 ## Decisions made / open
 Made: all Requirements table items; LR deployed, HGB comparison only; percentile bands 50/75/90; log-odds contributions; no DB/auth; unweighted training; models committed, data not; single generic prediction service; project at workspace root.
-Open (resolved in Task 2): final per-model feature lists, exact per-year variable names, sparse-category merges.
+Open (resolved in Task 2): final per-model feature lists, exact per-year variable names, sparse-category merges. **[R1]** Heart model training years (D-022, needs user confirmation).
 
 ## Definition of done
 A feature is done when its tests pass, its demo works, and documentation is updated. The brief's 24 success criteria are tracked in PROJECT_STATUS.md with actual status.

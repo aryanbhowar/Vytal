@@ -20,9 +20,16 @@ Decisions that affect later work. Each entry: what was decided, why, and its sta
 | D-014 | 2026-10-26 | Single root `.venv` for backend and ML, called as `.venv\Scripts\python.exe`. | One environment to install; avoids PowerShell execution-policy problems with `Activate.ps1`. | Accepted |
 | D-015 | 2026-10-26 | Pin Python packages to the versions installed on the development machine (e.g. scikit-learn 1.9.1). | Saved joblib models reliably load only with the scikit-learn version that created them. | Accepted |
 | D-016 | 2026-10-26 | Use the Vite dev-server proxy for `/api` instead of relying on CORS. | The browser talks to one origin; simpler and fewer failure modes. CORS for the dev origin is still allowed as a fallback. | Accepted |
+| D-017 | 2026-10-26 | Product direction: Vytal is a maintainable, deployment-ready application, not an educational prototype. It is never described as clinically validated or suitable for clinical decisions. | User direction update (master plan Revision 1). Software quality can be engineered; clinical validation needs evidence and approvals that do not exist. | Accepted |
+| D-018 | 2026-10-26 | Production mode: FastAPI serves the built frontend (`frontend/dist`) and the API from one process and port. | Simplest repeatable deployment with no extra web server; same-origin, so no CORS in production. Dev mode keeps the Vite proxy (D-016). | Accepted (implemented in Task 12) |
+| D-019 | 2026-10-26 | Add Playwright end-to-end tests driving the installed Microsoft Edge (`channel: "msedge"`). Supersedes the original "no Playwright" choice. | Production readiness needs a real browser test of the full flow. Using the installed Edge avoids the heavy browser download that was the original objection. | Accepted (Tasks 11–12) |
+| D-020 | 2026-10-26 | Record a SHA-256 hash of each model artifact in its metadata and verify it before loading; on mismatch the model is reported unavailable. | joblib files are pickles and can run code when loaded; only verified repository artifacts should be loaded. | Accepted (Tasks 4–6) |
+| D-021 | 2026-10-26 | Report both unweighted and survey-weighted prevalence (`_LLCPWT`; pooled years divide the weight by the number of years). The interface shows the weighted figure, labelled as a US adult survey estimate. | The unweighted sample over- or under-represents some groups; weighted prevalence is the correct population figure. Training stays unweighted (D-009). | Accepted (Tasks 3–5) |
+| D-022 | 2026-10-26 | **Open:** heart model training years. Recorded choice is 2023 only (D-003). The Revision 1 text describes "common, verified inputs across combined years if compatible", which matches the alternative of pooling 2022–2024 without blood pressure and cholesterol. | Needs user confirmation; D-003 stays in force until then. Task 2 inspects heart variables in all three years so either option can be evidenced. | **Open, awaiting user** |
 
 ## Open decisions (resolve in Task 2)
 
 - Final feature list for each model and exact variable names per year.
 - Whether sparse categories (e.g. diabetes only during pregnancy) are merged.
 - What to do if the 2023 file lacks blood pressure or cholesterol questions (ask the user).
+- Heart model training years (D-022).
