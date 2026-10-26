@@ -50,6 +50,10 @@ User decision (2026-10-26), superseding D-003: **pool BRFSS 2022, 2023 and 2024 
 
 ---
 
+## IMPLEMENTATION STATUS (2026-10-27)
+
+All 13 tasks are complete; see `PROJECT_STATUS.md` and `docs/phase_reports/`. Deviations from this plan, each recorded in the decision log: heart model pooled 2022–2024 (D-022), heavy drinking removed (D-029), one generic preprocessing script and trainer (D-030), BMI spline (D-031), Dockerfile unverified (Docker not installed).
+
 ## EXECUTION INSTRUCTIONS
 - Work proceeds task by task under the autonomy rules in R1.2. The agent continues to the next task without waiting for per-step approval, except at the permission boundary, at a documented stop condition (e.g. Task 2's blood-pressure/cholesterol check), or when the user has asked to pause.
 - Task 1 is complete (commit `e77e07f` and follow-ups). Task 1 originally saved this plan verbatim.

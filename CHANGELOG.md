@@ -2,6 +2,19 @@
 
 All meaningful changes, newest first. Dates are local (project day in brackets).
 
+## 2026-10-27 (Day 2): Phases 6 and 7, production readiness and handover (release v0.2.0)
+
+### Added
+- Production mode (backend serves `frontend/dist`), `scripts/start_production.ps1`, `scripts/build_release.ps1`, `scripts/start_dev.ps1`.
+- GitHub Actions CI (Python tests; frontend lint, tests, build); first run passed.
+- `Dockerfile` and `.dockerignore` (**not verified**: Docker not installed).
+- `docs/deployment/DEPLOYMENT.md`, `docs/architecture/ARCHITECTURE.md`, `docs/DEMO_SCRIPT.md`, `docs/PROJECT_DOCUMENTATION.md`, Phase 6 and 7 reports, viva notes section 10 and quick answers.
+- Production-serving tests (6); Playwright can target any server via `VYTAL_E2E_BASE_URL`.
+- `pip-audit` in dev requirements; audits found no known vulnerabilities.
+
+### Verified
+- Fresh clone set up from the README: 114 passed / 10 skipped (no data), frontend 25 passed, production server gives identical results.
+
 ## 2026-10-27 (Day 2): Phases 4 and 5, user interface and end-to-end verification
 
 ### Added

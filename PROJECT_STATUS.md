@@ -1,6 +1,6 @@
 # Vytal: project status
 
-_Last updated: 2026-10-27 (Day 2 of 7), end of Phase 3 (Tasks 1–7 complete)._
+_Last updated: 2026-10-27 (Day 2 of 7). All 13 planned tasks complete; see "Known limitations" for what remains._
 
 ## Objective
 
@@ -8,19 +8,20 @@ A maintainable, deployment-ready personalized health-risk assessment web applica
 
 ## Current phase
 
-**Phases 1–3 complete.** Next: **Phase 4** (Task 8 design system and landing page, Task 9 questionnaire).
+**All 7 phases complete.** Remaining work is optional (see "Next actions").
 
-## Overall completion estimate: about 50%
+## Overall completion estimate: about 95%
 
-Method: 13 tasks weighted by effort, about 21 units in total (Revision 1). Done: Tasks 1, 2 (1 unit each), 3, 4, 5, 6 (2 each), 7 (1) ≈ 11 units ≈ 52%, rounded down because the user-facing frontend (the most visible part) has not started. This estimates planned work done, not features working.
+Method: all 13 tasks (about 21 effort units) are done and tested. The missing 5% is the one deliverable that exists but is unverified (Dockerfile) and the untested browsers. This estimates planned work done, not clinical readiness, which is out of scope.
 
 ## Deliverables
 
 | Status | Deliverable |
 |---|---|
-| Done (tested) | BRFSS 2022–2024 verified; reproducible preprocessing; heart model (test ROC-AUC 0.810) and COPD model (0.836), calibrated, evaluated, saved with integrity hashes; prediction API with honest failure states, security and privacy controls; 12 sourced suggestion rules; 118 automated tests |
-| Done | Data sources, model evaluation reports, model cards, decision log D-001–D-035, Phase 1–3 reports, viva notes for Tasks 1–7 |
-| Not started | Tasks 8–13: frontend design system, landing page, questionnaire, results dashboard, methodology page, browser end-to-end tests, production build, Dockerfile, CI, deployment guide, final documentation |
+| Done (tested) | Verified BRFSS 2022–2024 data pipeline; heart and COPD models trained, calibrated, evaluated (incl. subgroups), hash-protected; prediction API with validation, honest failure states, security and privacy controls; 12 WHO-sourced suggestion rules; landing page, questionnaire, results dashboard, methodology page; production mode; CI; fresh-clone reproduction |
+| Done | Data sources, evaluation reports, model cards, architecture, demo script, deployment guide, viva notes, decision log D-001–D-037, Phase 1–7 reports |
+| Written, **not verified** | `Dockerfile` (Docker not installed) |
+| Not done (out of scope without approval) | Public deployment |
 
 ## Known blockers
 
@@ -30,74 +31,93 @@ None.
 
 | Area | Status |
 |---|---|
-| Frontend | Still the Task 1 connection page. Build and lint pass. |
-| Backend | `GET /api/health`, `GET /api/health/ready`, `GET /api/models/status`, `POST /api/assessment/predict`. Verified on a live server. |
-| Datasets | Verified; processed tables built (not in Git). Heart 1,130,510 rows; COPD 1,127,220 rows. |
-| Heart model | v1.0.0. Test: ROC-AUC 0.810, PR-AUC 0.299, Brier 0.0723, calibration error 0.22 points (isotonic calibration). Inputs: age group, sex, BMI, smoking, exercise, diabetes, stroke, kidney disease. |
-| Respiratory model | v1.0.0. Test: ROC-AUC 0.836, PR-AUC 0.363, Brier 0.0609, calibration error 0.47 points (no calibration needed). Inputs: age group, sex, BMI, smoking, e-cigarettes, exercise, diabetes, asthma status. |
-| Tests | **118 passed** (pytest): API, security, error paths, missing/tampered models, data checks, model artifacts, schema consistency, suggestion rules. Frontend tests not yet set up. |
-| Deployment | Not started. No public deployment without explicit approval. |
+| Frontend | Landing, 5-step questionnaire, results, methodology, 404. Lint and build clean. Tested in Edge at 1440/1024/768/375 px. |
+| Backend | `/api/health`, `/api/health/ready`, `/api/models/status`, `/api/assessment/predict`; production mode serves the website. |
+| Datasets | Verified; processed tables reproducible (not in Git). |
+| Heart model | v1.0.0. Test ROC-AUC 0.810, PR-AUC 0.299, Brier 0.0723, calibration gap 0.22 points (isotonic). |
+| Respiratory model | v1.0.0. Test ROC-AUC 0.836, PR-AUC 0.363, Brier 0.0609, calibration gap 0.47 points (no recalibration needed). |
+| Tests | pytest **124 passed**; Vitest **25 passed**; Playwright **11 passed** (dev and production servers); demo profiles 4/4; CI passed on GitHub. |
+| Security audit | pip-audit and npm audit: no known vulnerabilities (2026-10-27). |
+| Deployment | Local production mode verified, including from a fresh clone. Not deployed publicly. |
 
 ## Latest working commands (from project root)
 
 ```powershell
+# Setup (first time)
+python -m venv .venv
 .venv\Scripts\python.exe -m pip install -r backend\requirements.txt -r ml\requirements.txt -r requirements-dev.txt
+cd frontend; npm install; cd ..
+
+# Develop
+powershell -ExecutionPolicy Bypass -File scripts\start_dev.ps1          # http://localhost:5173
+
+# Check and run in production mode
+powershell -ExecutionPolicy Bypass -File scripts\build_release.ps1
+powershell -ExecutionPolicy Bypass -File scripts\start_production.ps1   # http://127.0.0.1:8000
+
+# Tests
 .venv\Scripts\python.exe -m pytest
-.venv\Scripts\python.exe -m uvicorn app.main:app --app-dir backend --reload     # API + docs at :8000/docs
-cd frontend; npm run dev
-# Data and models (only to regenerate): see datasets/README.md steps 1-6
+cd frontend; npm test; npm run test:e2e
 ```
 
 ## Latest known-good commit
 
-See the Git table.
+See the Git table (the tag `v0.2.0` marks the final verified release).
 
-## Next three actions
+## Next three actions (optional)
 
-1. Task 8: design tokens, glass components, routing, landing page; Vitest setup.
-2. Task 9: five-step questionnaire with validation and session persistence, submitting to the real API.
-3. Task 10: results dashboard rendering real API responses.
+1. Install Docker and verify the image.
+2. Test in Firefox and Safari.
+3. Rehearse the demo using `docs/DEMO_SCRIPT.md`.
 
 ## Decisions needing user input
 
-None.
+None. A public deployment would need approval (host, account, HTTPS).
+
+## Known limitations
+
+- Not clinically validated; estimates are associations with *reported* conditions in US survey data, not diagnoses or future risk.
+- No blood pressure or cholesterol (asked only in 2023); heavy drinking removed from the heart model (D-029).
+- Heart explanations describe the score before calibration (stated in the UI).
+- In-memory per-process rate limiter; public use needs HTTPS and proxy limits.
+- Dockerfile unverified; only Microsoft Edge tested.
 
 ## Success criteria
 
 | # | Criterion | Status |
 |---|---|---|
-| 1 | Frontend runs locally | Done (skeleton) |
-| 2 | Backend runs locally | **Done** (full API) |
-| 3 | Frontend can communicate with backend | Done (health check); assessment flow pending Task 9 |
-| 4 | Questionnaire validates inputs | Partial: backend validation done and tested; frontend form pending |
-| 5 | BMI calculated correctly where possible | **Done** in backend (tested); frontend preview pending |
+| 1 | Frontend runs locally | **Done** |
+| 2 | Backend runs locally | **Done** |
+| 3 | Frontend can communicate with backend | **Done** (browser tests) |
+| 4 | Questionnaire validates inputs | **Done** (frontend and backend, tested) |
+| 5 | BMI calculated correctly where possible | **Done** (same formula both sides, tested; never guessed) |
 | 6 | Dataset provenance documented | **Done** |
-| 7 | Heart model training reproducible | **Done** (scripted, seeded) |
+| 7 | Heart model training reproducible | **Done** |
 | 8 | Respiratory model training reproducible | **Done** |
-| 9 | Model artifacts load successfully | **Done** (tested, hash-checked) |
-| 10 | Both prediction paths use correct preprocessing | **Done** (API output equals direct model output, tested) |
-| 11 | Model evaluation documented honestly | **Done** (generated reports and model cards) |
+| 9 | Model artifacts load successfully | **Done** (also from a fresh clone) |
+| 10 | Both prediction paths use correct preprocessing | **Done** (API output equals direct model output) |
+| 11 | Model evaluation documented honestly | **Done** |
 | 12 | Prediction endpoints return validated structured results | **Done** |
-| 13 | Dashboard uses actual model outputs | Not started |
-| 14 | Unsupported predictions produce honest error states | **Done** in API (tested); UI pending |
-| 15 | Factor explanations technically defensible | **Done** (exact contributions, tested) |
+| 13 | Dashboard uses actual model outputs | **Done** (browser test compares screen to API) |
+| 14 | Unsupported predictions produce honest error states | **Done** (API and UI) |
+| 15 | Factor explanations technically defensible | **Done** |
 | 16 | Suggestions follow documented rules | **Done** |
-| 17 | Design system consistent and responsive | Not started |
-| 18 | Important functionality has tests | Partial: backend and ML complete; frontend pending |
-| 19 | End-to-end workflow demonstrated | Partial: API end to end on a live server; browser flow pending |
-| 20 | Project starts with documented commands | Done for current scope |
-| 21 | Git history and status maintained | Ongoing |
-| 22 | Phase reports allow resuming work | Phases 1–3 done |
-| 23 | Viva notes explain implementation | Partial: Tasks 1–7 |
-| 24 | Medical limitations visible and accurate | Partial: API responses and docs; UI pending |
-| 25 | Security controls tested | **Done** for the API; HTTPS/proxy for public deployment pending (Task 12) |
-| 26 | Privacy controls tested | **Done** for the API |
+| 17 | Design system consistent and responsive | **Done** (4 widths tested) |
+| 18 | Important functionality has tests | **Done** (160 automated tests in total) |
+| 19 | End-to-end workflow demonstrated | **Done** (Playwright, dev and production) |
+| 20 | Project starts with documented commands | **Done** (fresh-clone verified) |
+| 21 | Git history and status maintained | **Done** |
+| 22 | Phase reports allow resuming work | **Done** (Phases 1–7) |
+| 23 | Viva notes explain implementation | **Done** |
+| 24 | Medical limitations visible and accurate | **Done** (landing, results, methodology, footer, docs) |
+| 25 | Security controls tested | **Done** for the app; HTTPS/proxy needed for public use |
+| 26 | Privacy controls tested | **Done** |
 | 27 | Model artifacts integrity-checked before loading | **Done** |
-| 28 | Model cards and data dictionary published | **Done** (model cards, DATA_SOURCES, feature schema) |
+| 28 | Model cards and data dictionary published | **Done** |
 | 29 | Subgroup performance reported | **Done** |
-| 30 | Production build runs from documented commands | Not started |
-| 31 | CI runs tests and build on GitHub | Not started |
-| 32 | Browser end-to-end tests pass against real models | Not started |
+| 30 | Production build runs from documented commands | **Done** |
+| 31 | CI runs tests and build on GitHub | **Done** (first run passed) |
+| 32 | Browser end-to-end tests pass against real models | **Done** |
 
 ## Git
 
@@ -107,4 +127,7 @@ None.
 | `a242a78`, `550b834` | Task 1 status records | Yes |
 | `5369140` | docs: adopt Revision 1 production-readiness direction | Yes |
 | `aede5e7` | data: acquire and verify BRFSS 2022-2024 variables | Yes |
-| (next) | ml + backend: Phases 2–3 | See `git log` |
+| `5973c8d` | ml, backend: train and evaluate both models and implement prediction API | Yes |
+| `a24e894` | frontend: build assessment, results and methodology UI with browser tests | Yes |
+| `d83c41c` | deploy: add production mode scripts, Dockerfile, CI and deployment guide | Yes; CI passed |
+| (final) | docs: complete handover documentation (tag `v0.2.0`) | See `git log` |

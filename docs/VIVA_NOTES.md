@@ -154,6 +154,32 @@ So the models learn "people who answer like you more often *reported* this condi
 
 ---
 
-## Sections to be added
+## 10. Production, deployment and CI (Tasks 12–13)
 
-- Production build, deployment and CI (Task 12)
+**Production mode:** one command (`scripts\start_production.ps1`) starts one Python process that serves both the built website and the API. Simpler than two servers, and no cross-origin setup.
+
+**Release build:** `scripts\build_release.ps1` runs every check (Python tests, lint, frontend tests, build, browser tests) and stops at the first failure.
+
+**CI (continuous integration):** GitHub runs the Python tests and the frontend lint/tests/build on every push (`.github/workflows/ci.yml`). The first run passed.
+
+**Fresh-clone check:** the repository was cloned into an empty folder and set up using only the README; tests passed and the production server gave the same results as the development copy. This proves the project can be rebuilt from GitHub.
+
+**Dependency audit:** `pip-audit` and `npm audit` found no known vulnerabilities.
+
+**Dockerfile:** provided, but **not verified** because Docker isn't installed on this laptop. Say so if asked.
+
+**Why not deployed publicly?** It would need HTTPS, proxy-level limits, a hosting decision, a privacy review and the owner's approval. Clinical use would need clinical validation and possibly regulatory approval, which code cannot provide.
+
+## Quick answers for common viva questions
+
+| Question | Short answer |
+|---|---|
+| Does it predict whether I'll get heart disease? | No. It estimates how often people with similar survey answers *reported* the condition. |
+| Why logistic regression? | Exact, explainable contributions; gradient boosting was only 0.003–0.004 better in ROC-AUC. |
+| How do you know the percentages are right? | Calibration on held-out data: average gap 0.22 (heart) and 0.47 (COPD) percentage points. |
+| Why no blood pressure? | Only asked in 2023; the models pool 2022–2024. |
+| Why was drinking removed? | Reverse causation made heavy drinking look protective. |
+| Is it biased? | Results reported by sex, age and year; calibration within 1 point in every group; race/income/education not used. |
+| Is my data stored? | No. It stays in the browser tab and is sent once; the server neither stores nor logs it. |
+| What if a model file is tampered with? | Its SHA-256 fingerprint won't match, so it isn't loaded and the result says "unavailable". |
+

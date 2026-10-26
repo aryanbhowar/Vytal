@@ -4,18 +4,20 @@ Personalized health-risk assessment web application, built as a final-year under
 
 > **Not a diagnosis.** Vytal has not been clinically validated and is not suitable for clinical decisions. Its results describe patterns in US adult survey data and must not replace advice from a qualified healthcare professional. If you have chest pain, severe breathlessness or other urgent symptoms, seek medical care immediately.
 
-## What it does (planned)
+## What it does
 
-A user completes a health and lifestyle questionnaire. A local FastAPI backend validates the answers and runs two scikit-learn models trained on the CDC Behavioral Risk Factor Surveillance System (BRFSS):
+A user answers 11 health and lifestyle questions (no name or contact details). A FastAPI backend validates the answers and runs two logistic-regression models trained on about 1.1 million responses to the CDC Behavioral Risk Factor Surveillance System (BRFSS) 2022–2024:
 
-- **Heart model:** reported coronary heart disease or heart attack (BRFSS 2023).
-- **Respiratory model:** reported COPD, emphysema or chronic bronchitis (BRFSS 2022–2024).
+| Model | Estimates how often people with similar answers had reported… | Test ROC-AUC |
+|---|---|---|
+| Heart | coronary heart disease or a heart attack | 0.810 |
+| Respiratory | COPD, emphysema or chronic bronchitis | 0.836 |
 
-A React dashboard shows each result as a category with the model's estimate, the factors behind it, and general health-awareness suggestions.
+The results page shows each model's estimate next to the US survey average, a band (Low/Moderate/Elevated/High, positions among survey respondents, not clinical categories), the answers that moved the estimate, limitations, and general suggestions linked to WHO guidance.
 
-Planned engineering features include strict input validation, security headers, no storage of answers, integrity-checked model files, model cards, automated unit, API and browser tests, CI, and a one-command production build.
+Engineering: strict input validation, security headers, rate and size limits, no storage or logging of answers, hash-checked model files, model cards, 160 automated tests (unit, API, data, browser), CI on GitHub, and a one-command production mode.
 
-**Current status:** see [`PROJECT_STATUS.md`](PROJECT_STATUS.md). The full workflow (questionnaire → API → both trained models → results dashboard) works and is tested in a real browser. Production build, CI and deployment documentation are next. Model results: [`docs/model_evaluation/`](docs/model_evaluation/).
+**Status:** all planned tasks complete; see [`PROJECT_STATUS.md`](PROJECT_STATUS.md). Model results: [`docs/model_evaluation/`](docs/model_evaluation/).
 
 ## Requirements
 
@@ -74,12 +76,25 @@ cd ..
 
 ## Project layout
 
+## Production mode
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\build_release.ps1      # all checks + frontend build
+powershell -ExecutionPolicy Bypass -File scripts\start_production.ps1   # website + API at http://127.0.0.1:8000
+```
+
+Configuration, health checks, troubleshooting, rollback and what is needed before any public deployment: [`docs/deployment/DEPLOYMENT.md`](docs/deployment/DEPLOYMENT.md). Demo walkthrough: [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md). All documentation: [`docs/PROJECT_DOCUMENTATION.md`](docs/PROJECT_DOCUMENTATION.md).
+
 | Path | Purpose |
 |---|---|
 | `backend/` | FastAPI application |
-| `frontend/` | React + Vite + TypeScript application |
-| `tests/` | Python tests (`integration/`, later `unit/` and `data/`) |
-| `scripts/` | Helper scripts (environment check; later start and demo scripts) |
+| `frontend/` | React + Vite + TypeScript application (Vitest unit tests, Playwright browser tests in `e2e/`) |
+| `ml/` | Data download, verification, preprocessing, training, evaluation, shared inference |
+| `models/` | Trained model files and metadata (committed) |
+| `datasets/` | Data documentation; raw and processed data are recreated by script (not committed) |
+| `tests/` | Python tests (`unit/`, `integration/`, `data/`) |
+| `scripts/` | Environment check, dev/production start, release build, demo profiles |
+| `.github/workflows/ci.yml` | Continuous integration |
 | `docs/implementation/MASTER_IMPLEMENTATION_PLAN.md` | The approved plan for all 13 tasks |
 | `docs/decisions/DECISION_LOG.md` | Important technical and data decisions |
 | `docs/phase_reports/` | One report per phase |
@@ -87,7 +102,6 @@ cd ..
 | `PROJECT_STATUS.md` | Current progress (single source of truth) |
 | `CHANGELOG.md` | Chronological list of changes |
 
-Planned folders (`ml/`, `datasets/`, `models/`) are created when the tasks that use them start.
 
 ## Data
 
