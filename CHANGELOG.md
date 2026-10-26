@@ -2,6 +2,24 @@
 
 All meaningful changes, newest first. Dates are local (project day in brackets).
 
+## 2026-10-27 (Day 2): Phases 4 and 5, user interface and end-to-end verification
+
+### Added
+- Design system (`frontend/src/styles/`: tokens, global, glass components, layout), reusable components, routing.
+- Pages: landing (live model figures), five-step questionnaire (validation, unit switch, BMI preview, session persistence, review/edit), results dashboard (estimates, survey average, band scale with tested outcome rates, contribution chart, suggestions, profile, revise/print/start over), methodology (live metrics), 404.
+- Frontend tests: Vitest (25) with labelled TEST FIXTURE responses; Playwright in installed Edge against the real backend (11), including responsive overflow checks and screenshots.
+- `scripts/run_demo_profiles.py` (4 documented profiles, all checks pass).
+- Decisions D-036, D-037; Phase 4 and 5 reports; viva notes section 9.
+
+### Changed
+- Removed the Task 1 connection page and `index.css`.
+- `frontend/package.json` renamed to `vytal-frontend` 0.2.0; scripts `test` and `test:e2e`.
+- `.gitignore` excludes Playwright output.
+
+### Fixed
+- "Start over" redirected to the questionnaire instead of the home page (found by a page test).
+- Contrast figures in the design tokens corrected to computed WCAG values.
+
 ## 2026-10-27 (Day 2): Phases 2 and 3, models and prediction API
 
 ### Added

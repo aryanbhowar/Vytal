@@ -41,6 +41,9 @@ Decisions that affect later work. Each entry: what was decided, why, and its sta
 | D-034 | 2026-10-27 | Suggestion rules cite WHO fact sheets (all links checked: HTTP 200 on 2026-10-27); two always-on notices (urgent symptoms; know your blood pressure and cholesterol). | Reputable, non-US-specific public guidance; the second notice tells users what the model cannot include. | Accepted |
 | D-035 | 2026-10-27 | API protections: `extra="forbid"` request schema, 16 KB body limit (411 without Content-Length), security headers and CSP, `Cache-Control: no-store` on assessments, in-memory per-IP rate limit (30/min, configurable), docs switchable off, generic 500 bodies, no request-body logging. Readiness at `/api/health/ready` (503 unless both models load). | R1.5 security review items, at a level suitable for a single server; a public deployment additionally needs HTTPS and proxy-level limits (Task 12). | Accepted |
 
+| D-036 | 2026-10-27 | Frontend keeps answers and the latest result in `sessionStorage` only (this tab; cleared on close and by Start over). | Answers survive a reload without any server-side storage of health data. | Accepted |
+| D-037 | 2026-10-27 | Results wording: "about N in 100 respondents with answers like yours had reported…", percentile shown as "more than 99%" at the extremes, factors described as associations, no yes/no outcome. | Plain-language, non-diagnostic presentation; avoids implying certainty ("100th percentile") or causation. | Accepted |
+
 ## Open decisions
 
 None.

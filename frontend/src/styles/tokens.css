@@ -1,0 +1,93 @@
+/* Vytal design tokens: the only place colours, spacing, radii, shadows,
+   typography and motion are defined. Components use these variables. */
+:root {
+  /* Foundation: deep navy to charcoal */
+  --color-bg: #070b16;
+  --color-bg-raised: #0c1222;
+  --color-bg-elevated: #111a2e;
+
+  /* Glass surfaces (kept fairly opaque so text stays readable) */
+  --glass-fill: rgba(17, 26, 46, 0.72);
+  --glass-fill-strong: rgba(20, 30, 52, 0.9);
+  --glass-fill-subtle: rgba(255, 255, 255, 0.035);
+  --glass-border: rgba(148, 178, 222, 0.14);
+  --glass-border-strong: rgba(148, 178, 222, 0.26);
+  --glass-blur: 14px;
+
+  /* Text. WCAG contrast, computed on 2026-10-27, against --color-bg / a typical card
+     surface: primary 17.2 / 15.5, secondary 11.0 / 9.9, muted 6.8 / 6.1 (minimum 4.5). */
+  --color-text: #eaf0fb;
+  --color-text-secondary: #b6c2d9;
+  --color-text-muted: #8b98b3;
+
+  /* Accents: teal/cyan primary, violet sparingly */
+  --color-accent: #2dd4bf;
+  --color-accent-strong: #5eead4;
+  --color-accent-cyan: #22d3ee;
+  --color-accent-soft: rgba(45, 212, 191, 0.12);
+  --color-accent-violet: #a78bfa;
+  --color-on-accent: #04201c;
+
+  /* Band colours (not alarm red: these are relative positions, not diagnoses) */
+  --band-low: #2dd4bf;
+  --band-moderate: #60a5fa;
+  --band-elevated: #fbbf24;
+  --band-high: #fb7185;
+
+  --color-raised: #fda4af;
+  --color-lowered: #5eead4;
+  --color-warning: #fbbf24;
+  --color-warning-soft: rgba(251, 191, 36, 0.1);
+  --color-danger: #fb7185;
+  --color-danger-soft: rgba(251, 113, 133, 0.1);
+
+  --gradient-accent: linear-gradient(135deg, #2dd4bf 0%, #22d3ee 55%, #60a5fa 100%);
+
+  /* Spacing: 4 px scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 12px 32px rgba(0, 0, 0, 0.32);
+  --shadow-focus: 0 0 0 3px rgba(45, 212, 191, 0.45);
+
+  --font-sans: 'Inter Variable', 'Inter', system-ui, 'Segoe UI', sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: clamp(2.25rem, 4.5vw + 1rem, 3.75rem);
+
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --content-width: 1120px;
+  --reading-width: 720px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+  }
+}

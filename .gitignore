@@ -25,6 +25,11 @@ datasets/processed/*.csv
 *.XPT
 *.xpt
 
+# Playwright output (screenshots, traces)
+frontend/e2e/.results/
+frontend/playwright-report/
+frontend/test-results/
+
 # Editors / OS
 .vscode/*
 !.vscode/extensions.json

@@ -1,35 +1,52 @@
-import { useEffect, useState } from 'react'
-import { fetchApiHealth, type ApiHealth } from './services/apiClient'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import { AppFooter } from './components/layout/AppFooter'
+import { AppNavigation } from './components/layout/AppNavigation'
+import { AssessmentPage } from './pages/assessment/AssessmentPage'
+import { LandingPage } from './pages/LandingPage'
+import { MethodologyPage } from './pages/MethodologyPage'
+import { NotFoundPage } from './pages/NotFoundPage'
+import { ResultsPage } from './pages/ResultsPage'
 
-// Task 1 skeleton: confirms the frontend can reach the backend.
-// The landing page and design system replace this screen in Task 8.
+const TITLES: Record<string, string> = {
+  '/': 'Vytal: personalized health-risk assessment',
+  '/assessment': 'Assessment · Vytal',
+  '/results': 'Your results · Vytal',
+  '/methodology': 'How it works · Vytal',
+}
 
-type ConnectionState =
-  | { kind: 'checking' }
-  | { kind: 'connected'; health: ApiHealth }
-  | { kind: 'failed'; message: string }
-
-function App() {
-  const [connection, setConnection] = useState<ConnectionState>({ kind: 'checking' })
-
+function DocumentTitle() {
+  const { pathname } = useLocation()
   useEffect(() => {
-    fetchApiHealth()
-      .then((health) => setConnection({ kind: 'connected', health }))
-      .catch((error: Error) => setConnection({ kind: 'failed', message: error.message }))
-  }, [])
+    document.title = TITLES[pathname] ?? 'Vytal'
+  }, [pathname])
+  return null
+}
 
+export function AppRoutes() {
   return (
-    <main className="status-page">
-      <h1>Vytal</h1>
-      <p className="tagline">Personalized health-risk assessment</p>
-      <p className={`status status-${connection.kind}`} role="status">
-        {connection.kind === 'checking' && 'Checking API connection…'}
-        {connection.kind === 'connected' &&
-          `API connected (${connection.health.app} v${connection.health.version})`}
-        {connection.kind === 'failed' && connection.message}
-      </p>
-    </main>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/assessment" element={<AssessmentPage />} />
+      <Route path="/results" element={<ResultsPage />} />
+      <Route path="/methodology" element={<MethodologyPage />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <>
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
+      <DocumentTitle />
+      <AppNavigation />
+      <main id="main" className="app-main">
+        <AppRoutes />
+      </main>
+      <AppFooter />
+    </>
+  )
+}

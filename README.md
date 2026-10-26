@@ -15,7 +15,7 @@ A React dashboard shows each result as a category with the model's estimate, the
 
 Planned engineering features include strict input validation, security headers, no storage of answers, integrity-checked model files, model cards, automated unit, API and browser tests, CI, and a one-command production build.
 
-**Current status:** see [`PROJECT_STATUS.md`](PROJECT_STATUS.md). The data pipeline, both trained models and the prediction API are built and tested; the user interface is next. Model results: [`docs/model_evaluation/`](docs/model_evaluation/).
+**Current status:** see [`PROJECT_STATUS.md`](PROJECT_STATUS.md). The full workflow (questionnaire → API → both trained models → results dashboard) works and is tested in a real browser. Production build, CI and deployment documentation are next. Model results: [`docs/model_evaluation/`](docs/model_evaluation/).
 
 ## Requirements
 
@@ -59,13 +59,17 @@ cd frontend
 npm run dev
 ```
 
-Open http://localhost:5173. The page should say **API connected**.
+Open http://localhost:5173. The header shows **Models online** when the backend has loaded both models; click **Start the assessment**.
 
 ## Test
 
 ```powershell
-.venv\Scripts\python.exe -m pytest
-cd frontend; npm run build
+.venv\Scripts\python.exe -m pytest                 # backend, ML and data (118 tests)
+cd frontend
+npm run lint; npm run build; npm test              # frontend (25 tests)
+npm run test:e2e                                   # browser tests in Edge against the real models (11 tests)
+cd ..
+.venv\Scripts\python.exe scripts\run_demo_profiles.py   # with the backend running
 ```
 
 ## Project layout

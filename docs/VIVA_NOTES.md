@@ -136,7 +136,24 @@ So the models learn "people who answer like you more often *reported* this condi
 
 ---
 
+## 9. The website (Tasks 8–11)
+
+**Pages:** landing (`/`), questionnaire (`/assessment`, five steps), results (`/results`), methodology (`/methodology`).
+
+**How a click becomes a result:** the questionnaire stores answers in React state (also saved to `sessionStorage` for this tab). On "See my results", `apiClient.ts` sends them as JSON to `/api/assessment/predict`. The response is saved in the same state and the results page draws it. No numbers are made up in the browser: every estimate, band and factor comes from the server.
+
+**Why validate twice?** The browser checks answers so people get instant feedback; the server checks again because anyone could send a request without using the website.
+
+**Design system:** colours, spacing and fonts are defined once in `tokens.css` and reused, so every page looks consistent. Glass effects are restrained so text stays readable; animation is turned off for people who ask their computer to reduce motion.
+
+**Accessibility:** every input has a label, radio buttons are grouped with their question, errors are announced and placed beside the field, focus moves to each new step's heading, and the whole form works with a keyboard (tested).
+
+**Honest states:** if a model is missing, or height/weight is unknown, its card says "Estimate unavailable" or "Not enough information" and shows no number.
+
+**Testing the website:** Vitest tests components with labelled fake responses (test fixtures). Playwright tests open the real site in Microsoft Edge, fill in the form, and check that the numbers on screen are exactly those the real API returned.
+
+---
+
 ## Sections to be added
 
-- Frontend design system, questionnaire and dashboard (Tasks 8–11)
 - Production build, deployment and CI (Task 12)
