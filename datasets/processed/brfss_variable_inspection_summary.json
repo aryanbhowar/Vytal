@@ -1,0 +1,2182 @@
+{
+  "generated": "2026-10-27",
+  "files": {
+    "2022": {
+      "records": 445132,
+      "expected_records": 445132,
+      "variables_in_file": 328,
+      "variables_on_cdc_page": 326,
+      "variables_in_codebook": 324,
+      "codebook_variables_missing_from_file": [],
+      "file_variables_not_in_codebook": [
+        "CPDEMO1C",
+        "DIABAGE4",
+        "NUMPHON4",
+        "USEMRJN4"
+      ],
+      "complete": true
+    },
+    "2023": {
+      "records": 433323,
+      "expected_records": 433323,
+      "variables_in_file": 350,
+      "variables_on_cdc_page": 345,
+      "variables_in_codebook": 344,
+      "codebook_variables_missing_from_file": [
+        "RCSBORG1"
+      ],
+      "file_variables_not_in_codebook": [
+        "BIRTHSEX",
+        "CELSXBRT",
+        "LNDSXBRT",
+        "RCSGEND1",
+        "RCSXBRTH",
+        "TRNSGNDR",
+        "USEMRJN4"
+      ],
+      "complete": true
+    },
+    "2024": {
+      "records": 457670,
+      "expected_records": 457670,
+      "variables_in_file": 301,
+      "variables_on_cdc_page": 345,
+      "variables_in_codebook": 297,
+      "codebook_variables_missing_from_file": [
+        "RCSBORG1"
+      ],
+      "file_variables_not_in_codebook": [
+        "HPVDSHT",
+        "ICFQSTVR",
+        "RCSGEND1",
+        "RCSXBRTH",
+        "USEMRJN4"
+      ],
+      "complete": true
+    }
+  },
+  "model_samples": {
+    "heart": {
+      "target": "heart_target",
+      "features": [
+        "age_group",
+        "sex",
+        "bmi",
+        "smoking_status",
+        "physical_activity_past_30_days",
+        "heavy_alcohol_use",
+        "diabetes_status",
+        "stroke_history",
+        "kidney_disease_history"
+      ],
+      "by_year": {
+        "2022": {
+          "records": 445132,
+          "target_positive": 39751,
+          "target_negative": 400360,
+          "target_unusable": 5021,
+          "unusable_answer_percent_by_feature": {
+            "age_group": 1.99,
+            "sex": 0.0,
+            "bmi": 10.87,
+            "smoking_status": 7.9,
+            "physical_activity_past_30_days": 0.22,
+            "heavy_alcohol_use": 11.09,
+            "diabetes_status": 0.18,
+            "stroke_history": 0.23,
+            "kidney_disease_history": 0.35
+          },
+          "prevalence_percent_among_unusable_by_feature": {
+            "age_group": 6.69,
+            "sex": null,
+            "bmi": 6.8,
+            "smoking_status": 8.07,
+            "physical_activity_past_30_days": 14.26,
+            "heavy_alcohol_use": 8.21,
+            "diabetes_status": 13.14,
+            "stroke_history": 29.27,
+            "kidney_disease_history": 22.35
+          },
+          "complete_cases": 356785,
+          "complete_case_prevalence_percent": 9.22,
+          "excluded_for_feature_answers": 83326,
+          "prevalence_percent_among_excluded": 8.23,
+          "weighted_prevalence_percent_all_valid": 6.9
+        },
+        "2023": {
+          "records": 433323,
+          "target_positive": 36311,
+          "target_negative": 392427,
+          "target_unusable": 4585,
+          "unusable_answer_percent_by_feature": {
+            "age_group": 1.75,
+            "sex": 0.0,
+            "bmi": 9.27,
+            "smoking_status": 5.26,
+            "physical_activity_past_30_days": 0.27,
+            "heavy_alcohol_use": 7.51,
+            "diabetes_status": 0.17,
+            "stroke_history": 0.24,
+            "kidney_disease_history": 0.36
+          },
+          "prevalence_percent_among_unusable_by_feature": {
+            "age_group": 6.36,
+            "sex": null,
+            "bmi": 6.34,
+            "smoking_status": 7.72,
+            "physical_activity_past_30_days": 14.94,
+            "heavy_alcohol_use": 7.51,
+            "diabetes_status": 12.71,
+            "stroke_history": 26.44,
+            "kidney_disease_history": 20.35
+          },
+          "complete_cases": 362732,
+          "complete_case_prevalence_percent": 8.61,
+          "excluded_for_feature_answers": 66006,
+          "prevalence_percent_among_excluded": 7.67,
+          "weighted_prevalence_percent_all_valid": 6.47
+        },
+        "2024": {
+          "records": 457670,
+          "target_positive": 42338,
+          "target_negative": 410126,
+          "target_unusable": 5206,
+          "unusable_answer_percent_by_feature": {
+            "age_group": 1.77,
+            "sex": 0.0,
+            "bmi": 9.32,
+            "smoking_status": 6.94,
+            "physical_activity_past_30_days": 0.26,
+            "heavy_alcohol_use": 10.14,
+            "diabetes_status": 0.17,
+            "stroke_history": 0.22,
+            "kidney_disease_history": 0.37
+          },
+          "prevalence_percent_among_unusable_by_feature": {
+            "age_group": 7.24,
+            "sex": null,
+            "bmi": 6.89,
+            "smoking_status": 8.77,
+            "physical_activity_past_30_days": 14.15,
+            "heavy_alcohol_use": 8.75,
+            "diabetes_status": 10.89,
+            "stroke_history": 27.64,
+            "kidney_disease_history": 20.01
+          },
+          "complete_cases": 373678,
+          "complete_case_prevalence_percent": 9.52,
+          "excluded_for_feature_answers": 78786,
+          "prevalence_percent_among_excluded": 8.6,
+          "weighted_prevalence_percent_all_valid": 6.8
+        }
+      },
+      "pooled_complete_cases": 1093195,
+      "pooled_complete_case_positives_approx": 99701
+    },
+    "respiratory": {
+      "target": "copd_target",
+      "features": [
+        "age_group",
+        "sex",
+        "bmi",
+        "smoking_status",
+        "ecigarette_status",
+        "physical_activity_past_30_days",
+        "diabetes_status",
+        "asthma_status"
+      ],
+      "by_year": {
+        "2022": {
+          "records": 445132,
+          "target_positive": 35656,
+          "target_negative": 407257,
+          "target_unusable": 2219,
+          "unusable_answer_percent_by_feature": {
+            "age_group": 1.99,
+            "sex": 0.0,
+            "bmi": 10.9,
+            "smoking_status": 7.92,
+            "ecigarette_status": 7.97,
+            "physical_activity_past_30_days": 0.22,
+            "diabetes_status": 0.17,
+            "asthma_status": 0.77
+          },
+          "prevalence_percent_among_unusable_by_feature": {
+            "age_group": 6.31,
+            "sex": null,
+            "bmi": 6.6,
+            "smoking_status": 7.26,
+            "ecigarette_status": 7.54,
+            "physical_activity_past_30_days": 12.13,
+            "diabetes_status": 11.5,
+            "asthma_status": 21.04
+          },
+          "complete_cases": 369476,
+          "complete_case_prevalence_percent": 8.11,
+          "excluded_for_feature_answers": 73437,
+          "prevalence_percent_among_excluded": 7.74,
+          "weighted_prevalence_percent_all_valid": 6.76
+        },
+        "2023": {
+          "records": 433323,
+          "target_positive": 33097,
+          "target_negative": 398160,
+          "target_unusable": 2066,
+          "unusable_answer_percent_by_feature": {
+            "age_group": 1.75,
+            "sex": 0.0,
+            "bmi": 9.29,
+            "smoking_status": 5.28,
+            "ecigarette_status": 5.33,
+            "physical_activity_past_30_days": 0.27,
+            "diabetes_status": 0.16,
+            "asthma_status": 0.75
+          },
+          "prevalence_percent_among_unusable_by_feature": {
+            "age_group": 5.72,
+            "sex": null,
+            "bmi": 6.31,
+            "smoking_status": 6.65,
+            "ecigarette_status": 6.72,
+            "physical_activity_past_30_days": 13.08,
+            "diabetes_status": 11.9,
+            "asthma_status": 20.95
+          },
+          "complete_cases": 371689,
+          "complete_case_prevalence_percent": 7.72,
+          "excluded_for_feature_answers": 59568,
+          "prevalence_percent_among_excluded": 7.42,
+          "weighted_prevalence_percent_all_valid": 6.19
+        },
+        "2024": {
+          "records": 457670,
+          "target_positive": 36921,
+          "target_negative": 418575,
+          "target_unusable": 2174,
+          "unusable_answer_percent_by_feature": {
+            "age_group": 1.78,
+            "sex": 0.0,
+            "bmi": 9.36,
+            "smoking_status": 6.96,
+            "ecigarette_status": 7.13,
+            "physical_activity_past_30_days": 0.27,
+            "diabetes_status": 0.17,
+            "asthma_status": 0.78
+          },
+          "prevalence_percent_among_unusable_by_feature": {
+            "age_group": 6.5,
+            "sex": null,
+            "bmi": 6.45,
+            "smoking_status": 7.52,
+            "ecigarette_status": 7.71,
+            "physical_activity_past_30_days": 13.57,
+            "diabetes_status": 15.22,
+            "asthma_status": 21.0
+          },
+          "complete_cases": 386690,
+          "complete_case_prevalence_percent": 8.14,
+          "excluded_for_feature_answers": 68806,
+          "prevalence_percent_among_excluded": 7.93,
+          "weighted_prevalence_percent_all_valid": 6.3
+        }
+      },
+      "pooled_complete_cases": 1127855,
+      "pooled_complete_case_positives_approx": 90136
+    }
+  },
+  "variables": [
+    {
+      "canonical_name": "heart_target",
+      "role": "target",
+      "description": "Ever reported CHD or heart attack (calculated)",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "_MICHD",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Respondents that have ever reported having coronary heart disease (CHD) or myocardial infarction (MI)",
+          "label": "Ever had CHD or MI",
+          "codes": {
+            "1": "Reported having MI or CHD",
+            "2": "Did not report having MI or CHD",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 400360,
+            "1": 39751,
+            "BLANK": 5021
+          },
+          "codebook_mismatches": []
+        },
+        "2023": {
+          "source_variable": "_MICHD",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Respondents that have ever reported having coronary heart disease (CHD) or myocardial infarction (MI)",
+          "label": "Ever had CHD or MI",
+          "codes": {
+            "1": "Reported having MI or CHD",
+            "2": "Did not report having MI or CHD",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 392427,
+            "1": 36311,
+            "BLANK": 4585
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "_MICHD",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Respondents that have ever reported having coronary heart disease (CHD) or myocardial infarction (MI)",
+          "label": "Ever had CHD or MI",
+          "codes": {
+            "1": "Reported having MI or CHD",
+            "2": "Did not report having MI or CHD",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 410126,
+            "1": 42338,
+            "BLANK": 5206
+          },
+          "codebook_mismatches": []
+        }
+      }
+    },
+    {
+      "canonical_name": "heart_attack_ever",
+      "role": "target_component",
+      "description": "Ever told had a heart attack",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "CVDINFR4",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) you had a heart attack, also called a myocardial infarction?",
+          "label": "Ever Diagnosed with Heart Attack",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don\u2019t know/Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 416959,
+            "1": 25108,
+            "7": 2731,
+            "9": 330,
+            "BLANK": 4
+          },
+          "codebook_mismatches": []
+        },
+        "2023": {
+          "source_variable": "CVDINFR4",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) you had a heart attack, also called a myocardial infarction?",
+          "label": "Ever Diagnosed with Heart Attack",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don't know/Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 407304,
+            "1": 23451,
+            "7": 2314,
+            "9": 251,
+            "BLANK": 3
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "CVDINFR4",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) you had a heart attack, also called a myocardial infarction?",
+          "label": "Ever Diagnosed with Heart Attack",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don\u00ef\u00bf\u00bdt know/Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 427883,
+            "1": 26672,
+            "7": 2857,
+            "9": 256,
+            "BLANK": 2
+          },
+          "codebook_mismatches": []
+        }
+      }
+    },
+    {
+      "canonical_name": "coronary_heart_disease_ever",
+      "role": "target_component",
+      "description": "Ever told had angina or CHD",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "CVDCRHD4",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) (you had) angina or coronary heart disease?",
+          "label": "Ever Diagnosed with Angina or Coronary Heart Disease",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don\u2019t know/Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 414176,
+            "1": 26551,
+            "7": 4044,
+            "9": 359,
+            "BLANK": 2
+          },
+          "codebook_mismatches": []
+        },
+        "2023": {
+          "source_variable": "CVDCRHD4",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) (you had) angina or coronary heart disease?",
+          "label": "Ever Diagnosed with Angina or Coronary Heart Disease",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don't know/Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 405638,
+            "1": 23454,
+            "7": 3936,
+            "9": 292,
+            "BLANK": 3
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "CVDCRHD4",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) (you had) angina or coronary heart disease?",
+          "label": "Ever Diagnosed with Angina or Coronary Heart Disease",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don\u00ef\u00bf\u00bdt know/Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 424581,
+            "1": 28511,
+            "7": 4297,
+            "9": 278,
+            "BLANK": 3
+          },
+          "codebook_mismatches": []
+        }
+      }
+    },
+    {
+      "canonical_name": "copd_target",
+      "role": "target",
+      "description": "Ever told had COPD, emphysema or chronic bronchitis",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "CHCCOPD3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) (you had) C.O.P.D. (chronic obstructive pulmonary disease), emphysema or chronic bronchitis?",
+          "label": "Ever told you had C.O.P.D. emphysema or chronic bronchitis?",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don\u2019t know / Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 407257,
+            "1": 35656,
+            "7": 1885,
+            "9": 332,
+            "BLANK": 2
+          },
+          "codebook_mismatches": []
+        },
+        "2023": {
+          "source_variable": "CHCCOPD3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) (you had) C.O.P.D. (chronic obstructive pulmonary disease), emphysema or chronic bronchitis?",
+          "label": "Ever told you had C.O.P.D. emphysema or chronic bronchitis?",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don't know / Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 398160,
+            "1": 33097,
+            "7": 1794,
+            "9": 269,
+            "BLANK": 3
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "CHCCOPD3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) (you had) C.O.P.D. (chronic obstructive pulmonary disease), emphysema or chronic bronchitis?",
+          "label": "Ever told you had C.O.P.D. emphysema or chronic bronchitis?",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don\u00ef\u00bf\u00bdt know / Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 418575,
+            "1": 36921,
+            "7": 1921,
+            "9": 246,
+            "BLANK": 7
+          },
+          "codebook_mismatches": []
+        }
+      }
+    },
+    {
+      "canonical_name": "age_group",
+      "role": "feature",
+      "description": "Five-year age group (calculated)",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "_AGEG5YR",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Fourteen-level age category",
+          "label": "Reported age in five-year age categories calculated variable",
+          "codes": {
+            "1": "Age 18 to 24",
+            "2": "Age 25 to 29",
+            "3": "Age 30 to 34",
+            "4": "Age 35 to 39",
+            "5": "Age 40 to 44",
+            "6": "Age 45 to 49",
+            "7": "Age 50 to 54",
+            "8": "Age 55 to 59",
+            "9": "Age 60 to 64",
+            "10": "Age 65 to 69",
+            "11": "Age 70 to 74",
+            "12": "Age 75 to 79",
+            "13": "Age 80 or older",
+            "14": "Don\u2019t know/Refused/Missing"
+          },
+          "observed_counts": {
+            "10": 47099,
+            "9": 44511,
+            "11": 43472,
+            "8": 36821,
+            "13": 36251,
+            "7": 33644,
+            "12": 32518,
+            "5": 29942,
+            "6": 28531,
+            "4": 28526,
+            "1": 26941,
+            "3": 25807,
+            "2": 21990,
+            "14": 9079
+          },
+          "codebook_mismatches": []
+        },
+        "2023": {
+          "source_variable": "_AGEG5YR",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Fourteen-level age category",
+          "label": "Reported age in five-year age categories calculated variable",
+          "codes": {
+            "1": "Age 18 to 24",
+            "2": "Age 25 to 29",
+            "3": "Age 30 to 34",
+            "4": "Age 35 to 39",
+            "5": "Age 40 to 44",
+            "6": "Age 45 to 49",
+            "7": "Age 50 to 54",
+            "8": "Age 55 to 59",
+            "9": "Age 60 to 64",
+            "10": "Age 65 to 69",
+            "11": "Age 70 to 74",
+            "12": "Age 75 to 79",
+            "13": "Age 80 or older",
+            "14": "Don't know/Refused/Missing"
+          },
+          "observed_counts": {
+            "10": 46099,
+            "11": 43533,
+            "9": 41974,
+            "13": 38869,
+            "12": 34543,
+            "8": 34219,
+            "7": 31291,
+            "5": 28463,
+            "4": 27153,
+            "6": 27070,
+            "1": 26280,
+            "3": 24803,
+            "2": 21247,
+            "14": 7779
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "_AGEG5YR",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Fourteen-level age category",
+          "label": "Reported age in five-year age categories calculated variable",
+          "codes": {
+            "1": "Age 18 to 24",
+            "2": "Age 25 to 29",
+            "3": "Age 30 to 34",
+            "4": "Age 35 to 39",
+            "5": "Age 40 to 44",
+            "6": "Age 45 to 49",
+            "7": "Age 50 to 54",
+            "8": "Age 55 to 59",
+            "9": "Age 60 to 64",
+            "10": "Age 65 to 69",
+            "11": "Age 70 to 74",
+            "12": "Age 75 to 79",
+            "13": "Age 80 or older",
+            "14": "Don\u00ef\u00bf\u00bdt know/Refused/Missing"
+          },
+          "observed_counts": {
+            "10": 47701,
+            "11": 44774,
+            "9": 43387,
+            "13": 41756,
+            "12": 36803,
+            "8": 34936,
+            "7": 31698,
+            "5": 30899,
+            "1": 29692,
+            "6": 28968,
+            "4": 28804,
+            "3": 26237,
+            "2": 23705,
+            "14": 8310
+          },
+          "codebook_mismatches": []
+        }
+      }
+    },
+    {
+      "canonical_name": "sex",
+      "role": "feature",
+      "description": "Sex of respondent",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "SEXVAR",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Sex of Respondent",
+          "label": "Sex of Respondent",
+          "codes": {
+            "1": "Male\u2014Code=1 if LANDSEX1=1 or CELLSEX1=1 or COLGSEX1=1",
+            "2": "Female\u2014Code=2 if LANDSEX1=2 or CELLSEX1=2 or COLGSEX1=2"
+          },
+          "observed_counts": {
+            "2": 235893,
+            "1": 209239
+          },
+          "codebook_mismatches": []
+        },
+        "2023": {
+          "source_variable": "SEXVAR",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Sex of Respondent",
+          "label": "Sex of Respondent",
+          "codes": {
+            "1": "Male - Code=1 if LANDSEX2=1 or CELLSEX2=1",
+            "2": "Female - Code=2 if LANDSEX2=2 or CELLSEX2=2"
+          },
+          "observed_counts": {
+            "2": 229541,
+            "1": 203782
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "SEXVAR",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Sex of Respondent",
+          "label": "Sex of Respondent",
+          "codes": {
+            "1": "Male\u00ef\u00bf\u00bdCode=1 if LANDSEX3=1 or CELLSEX3=1",
+            "2": "Female\u00ef\u00bf\u00bdCode=2 if LANDSEX3=2 or CELLSEX3=2"
+          },
+          "observed_counts": {
+            "2": 240183,
+            "1": 217487
+          },
+          "codebook_mismatches": []
+        }
+      }
+    },
+    {
+      "canonical_name": "bmi",
+      "role": "feature",
+      "description": "Body mass index x 100 (calculated)",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "_BMI5",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Body Mass Index (BMI)",
+          "label": "Computed body mass index",
+          "codes": {
+            "1 - 9999": "1 or greater",
+            "BLANK": "Don\u2019t know/Refused/Missing"
+          },
+          "summary": {
+            "non_missing": 396326,
+            "missing": 48806,
+            "min": 1202.0,
+            "max": 9964.0,
+            "median": 2744.0
+          }
+        },
+        "2023": {
+          "source_variable": "_BMI5",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Body Mass Index (BMI)",
+          "label": "Computed body mass index",
+          "codes": {
+            "1 - 9999": "1 or greater",
+            "BLANK": "Don't know/Refused/Missing"
+          },
+          "summary": {
+            "non_missing": 392788,
+            "missing": 40535,
+            "min": 1202.0,
+            "max": 9984.0,
+            "median": 2740.0
+          }
+        },
+        "2024": {
+          "source_variable": "_BMI5",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Body Mass Index (BMI)",
+          "label": "Computed body mass index",
+          "codes": {
+            "1 - 9999": "1 or greater",
+            "BLANK": "Don\u00ef\u00bf\u00bdt know/Refused/Missing"
+          },
+          "summary": {
+            "non_missing": 414633,
+            "missing": 43037,
+            "min": 1200.0,
+            "max": 9984.0,
+            "median": 2744.0
+          }
+        }
+      }
+    },
+    {
+      "canonical_name": "height_m",
+      "role": "measurement",
+      "description": "Height in metres x 100 (calculated)",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "HTM4",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Reported height in meters",
+          "label": "Computed Height in Meters",
+          "codes": {
+            "91 - 244": "Height in meters [2 implied decimal places]",
+            "BLANK": "Don\u2019t know/Refused/Not asked or Missing"
+          },
+          "summary": {
+            "non_missing": 416480,
+            "missing": 28652,
+            "min": 91.0,
+            "max": 241.0,
+            "median": 170.0
+          }
+        },
+        "2023": {
+          "source_variable": "HTM4",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Reported height in meters",
+          "label": "Computed Height in Meters",
+          "codes": {
+            "91 - 244": "Height in meters [2 implied decimal places]",
+            "BLANK": "Don't know/Refused/Not asked or Missing"
+          },
+          "summary": {
+            "non_missing": 411182,
+            "missing": 22141,
+            "min": 91.0,
+            "max": 241.0,
+            "median": 170.0
+          }
+        },
+        "2024": {
+          "source_variable": "HTM4",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Reported height in meters",
+          "label": "Computed Height in Meters",
+          "codes": {
+            "91 - 244": "Height in meters [2 implied decimal places]",
+            "BLANK": "Don\u00ef\u00bf\u00bdt know/Refused/Not asked or Missing"
+          },
+          "summary": {
+            "non_missing": 433610,
+            "missing": 24060,
+            "min": 91.0,
+            "max": 241.0,
+            "median": 170.0
+          }
+        }
+      }
+    },
+    {
+      "canonical_name": "weight_kg",
+      "role": "measurement",
+      "description": "Weight in kg x 100 (calculated)",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "WTKG3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Reported weight in kilograms",
+          "label": "Computed Weight in Kilograms",
+          "codes": {
+            "2300 - 29500": "Weight in kilograms [2 implied decimal places]",
+            "BLANK": "Don\u2019t know/Refused/Not asked or Missing"
+          },
+          "summary": {
+            "non_missing": 403054,
+            "missing": 42078,
+            "min": 2268.0,
+            "max": 29257.0,
+            "median": 8074.0
+          }
+        },
+        "2023": {
+          "source_variable": "WTKG3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Reported weight in kilograms",
+          "label": "Computed Weight in Kilograms",
+          "codes": {
+            "2300 - 29500": "Weight in kilograms [2 implied decimal places]",
+            "BLANK": "Don't know/Refused/Not asked or Missing"
+          },
+          "summary": {
+            "non_missing": 399172,
+            "missing": 34151,
+            "min": 2268.0,
+            "max": 28400.0,
+            "median": 8029.0
+          }
+        },
+        "2024": {
+          "source_variable": "WTKG3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Reported weight in kilograms",
+          "label": "Computed Weight in Kilograms",
+          "codes": {
+            "2300 - 29500": "Weight in kilograms [2 implied decimal places]",
+            "BLANK": "Don\u00ef\u00bf\u00bdt know/Refused/Not asked or Missing"
+          },
+          "summary": {
+            "non_missing": 421278,
+            "missing": 36392,
+            "min": 2268.0,
+            "max": 29030.0,
+            "median": 8074.0
+          }
+        }
+      }
+    },
+    {
+      "canonical_name": "smoking_status",
+      "role": "feature",
+      "description": "Four-level smoker status (calculated)",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "_SMOKER3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Four-level smoker status: Everyday smoker, Someday smoker, Former smoker, Non-smoker",
+          "label": "Computed Smoking Status",
+          "codes": {
+            "1": "Current smoker - now smokes every day",
+            "2": "Current smoker - now smokes some days",
+            "3": "Former smoker",
+            "4": "Never smoked",
+            "9": "Don\u2019t know/Refused/Missing"
+          },
+          "observed_counts": {
+            "4": 245955,
+            "3": 113774,
+            "1": 36003,
+            "9": 35462,
+            "2": 13938
+          },
+          "codebook_mismatches": []
+        },
+        "2023": {
+          "source_variable": "_SMOKER3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Four-level smoker status: Everyday smoker, Someday smoker, Former smoker, Non-smoker",
+          "label": "Computed Smoking Status",
+          "codes": {
+            "1": "Current smoker - now smokes every day",
+            "2": "Current smoker - now smokes some days",
+            "3": "Former smoker",
+            "4": "Never smoked",
+            "9": "Don't know/Refused/Missing"
+          },
+          "observed_counts": {
+            "4": 251981,
+            "3": 113134,
+            "1": 31770,
+            "9": 23062,
+            "2": 13376
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "_SMOKER3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Four-level smoker status: Everyday smoker, Someday smoker, Former smoker, Non-smoker",
+          "label": "Computed Smoking Status",
+          "codes": {
+            "1": "Current smoker - now smokes every day",
+            "2": "Current smoker - now smokes some days",
+            "3": "Former smoker",
+            "4": "Never smoked",
+            "9": "Don\u00ef\u00bf\u00bdt know/Refused/Missing"
+          },
+          "observed_counts": {
+            "4": 258956,
+            "3": 119598,
+            "1": 33118,
+            "9": 32022,
+            "2": 13976
+          },
+          "codebook_mismatches": []
+        }
+      }
+    },
+    {
+      "canonical_name": "ecigarette_status",
+      "role": "feature",
+      "description": "Current e-cigarette user (calculated)",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "_CURECI2",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Adults who are current e-cigarette users",
+          "label": "Current E-cigarette User Calculated Variable",
+          "codes": {
+            "1": "Not currently using E-cigarettes",
+            "2": "Current E-cigarette user",
+            "9": "Don\u2019t know/Refused/Missing"
+          },
+          "observed_counts": {
+            "1": 387356,
+            "9": 35660,
+            "2": 22116
+          },
+          "codebook_mismatches": []
+        },
+        "2023": {
+          "source_variable": "_CURECI2",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Adults who are current e-cigarette users",
+          "label": "Current E-cigarette User Calculated Variable",
+          "codes": {
+            "1": "Not currently using E-cigarettes",
+            "2": "Current E-cigarette user",
+            "9": "Don't know/Refused/Missing"
+          },
+          "observed_counts": {
+            "1": 387806,
+            "9": 23251,
+            "2": 22266
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "_CURECI3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Adults who are current e-cigarette users",
+          "label": "Current E-cigarette User Calculated Variable",
+          "codes": {
+            "1": "Not currently using E-cigarettes",
+            "2": "Current E-cigarette user",
+            "9": "Don\u00ef\u00bf\u00bdt know/Refused/Missing"
+          },
+          "observed_counts": {
+            "1": 400413,
+            "9": 32751,
+            "2": 24506
+          },
+          "codebook_mismatches": []
+        }
+      }
+    },
+    {
+      "canonical_name": "ecigarette_use_now",
+      "role": "feature",
+      "description": "Now use e-cigarettes (question)",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": false,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "ECIGNOW2",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Would you say you have never used e-cigarettes or other electronic vaping products in your entire life or now use them every day, use them some days, or used them in the past but do not currently use them at all?",
+          "label": "Do you now use e-cigarettes, or vaping products every day, some days, or not at all?",
+          "codes": {
+            "1": "Never used e-cigarettes in your entire life",
+            "2": "Use them every day",
+            "3": "Use them some days",
+            "4": "Not at all (right now)",
+            "7": "Don\u2019t know / Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "1": 311988,
+            "4": 75368,
+            "BLANK": 33579,
+            "3": 11734,
+            "2": 10382,
+            "9": 1176,
+            "7": 905
+          },
+          "codebook_mismatches": []
+        },
+        "2023": {
+          "source_variable": "ECIGNOW2",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Would you say you have never used e-cigarettes or other electronic vaping products in your entire life or now use them every day, use them some days, or used them in the past but do not currently use them at all?",
+          "label": "Do you now use e-cigarettes, or vaping products every day, some days, or not at all?",
+          "codes": {
+            "1": "Never used e-cigarettes in your entire life",
+            "2": "Use them every day",
+            "3": "Use them some days",
+            "4": "Not at all (right now)",
+            "7": "Don't know / Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "1": 318696,
+            "4": 69110,
+            "BLANK": 21467,
+            "3": 11164,
+            "2": 11102,
+            "9": 911,
+            "7": 873
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "ECIGNOW3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Would you say you have never used e-cigarettes or other electronic vaping products in your entire life or now use them every day, use them some days, or used them in the past but do not currently use them at all?",
+          "label": "Do you now use e-cigarettes, or vaping products every day, some days, or not at all?",
+          "codes": {
+            "1": "Never used e-cigarettes in your entire life",
+            "2": "Use them every day",
+            "3": "Use them some days",
+            "4": "Used them in the past but do not currently use them at all",
+            "7": "Don\u00ef\u00bf\u00bdt know / Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "1": 343250,
+            "4": 57163,
+            "BLANK": 30676,
+            "2": 13123,
+            "3": 11383,
+            "7": 1168,
+            "9": 907
+          },
+          "codebook_mismatches": []
+        }
+      }
+    },
+    {
+      "canonical_name": "physical_activity_past_30_days",
+      "role": "feature",
+      "description": "Any exercise in past 30 days",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "EXERANY2",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "During the past month, other than your regular job, did you participate in any physical activities or exercises such as running, calisthenics, golf, gardening, or walking for exercise?",
+          "label": "Exercise in Past 30 Days",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don\u2019t know/Not Sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "1": 337559,
+            "2": 106480,
+            "7": 724,
+            "9": 367,
+            "BLANK": 2
+          },
+          "codebook_mismatches": []
+        },
+        "2023": {
+          "source_variable": "EXERANY2",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "During the past month, other than your regular job, did you participate in any physical activities or exercises such as running, calisthenics, golf, gardening, or walking for exercise?",
+          "label": "Exercise in Past 30 Days",
+          "codes": {
+            "1": "Yes",
+            "2": "No - Go to Section 04.08 STRENGTH",
+            "7": "Don't know/Not Sure - Go to Section 04.08 STRENGTH",
+            "9": "Refused - Go to Section 04.08 STRENGTH",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "1": 325227,
+            "2": 106845,
+            "7": 927,
+            "9": 322,
+            "BLANK": 2
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "EXERANY2",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "During the past month, other than your regular job, did you participate in any physical activities or exercises such as running, calisthenics, golf, gardening, or walking for exercise?",
+          "label": "Exercise in Past 30 Days",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don\u00ef\u00bf\u00bdt know/Not Sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "1": 350061,
+            "2": 106294,
+            "7": 860,
+            "9": 452,
+            "BLANK": 3
+          },
+          "codebook_mismatches": []
+        }
+      }
+    },
+    {
+      "canonical_name": "heavy_alcohol_use",
+      "role": "feature",
+      "description": "Heavy drinker (calculated)",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "_RFDRHV8",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Heavy drinkers (adult men having more than 14 drinks per week and adult women having more than 7 drinks per week)",
+          "label": "Heavy Alcohol Consumption Calculated Variable",
+          "codes": {
+            "1": "No",
+            "2": "Yes",
+            "9": "Don\u2019t know/Refused/Missing"
+          },
+          "observed_counts": {
+            "1": 369122,
+            "9": 49705,
+            "2": 26305
+          },
+          "codebook_mismatches": []
+        },
+        "2023": {
+          "source_variable": "_RFDRHV8",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Heavy drinkers (adult men having more than 14 drinks per week and adult women having more than 7 drinks per week)",
+          "label": "Heavy Alcohol Consumption Calculated Variable",
+          "codes": {
+            "1": "No",
+            "2": "Yes",
+            "9": "Don't know/Refused/Missing"
+          },
+          "observed_counts": {
+            "1": 376780,
+            "9": 32825,
+            "2": 23718
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "_RFDRHV9",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Heavy drinkers (adult men having more than 14 drinks per week and adult women having more than 7 drinks per week)",
+          "label": "Heavy Alcohol Consumption Calculated Variable",
+          "codes": {
+            "1": "No",
+            "2": "Yes",
+            "9": "Don\u00ef\u00bf\u00bdt know/Refused/Missing"
+          },
+          "observed_counts": {
+            "1": 386812,
+            "9": 46698,
+            "2": 24160
+          },
+          "codebook_mismatches": []
+        }
+      }
+    },
+    {
+      "canonical_name": "diabetes_status",
+      "role": "feature",
+      "description": "Ever told had diabetes",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "DIABETE4",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) (you had) diabetes? (If \u00b4Yes\u00b4 and respondent is female, ask \u00b4Was this only when you were pregnant?\u00b4. If Respondent says pre-diabetes or borderline diabetes, use response code 4.)",
+          "label": "(Ever told) you had diabetes",
+          "codes": {
+            "1": "Yes",
+            "2": "Yes, but female told only during pregnancy\u2014Go to Section 08.01 AGE",
+            "3": "No\u2014Go to Section 08.01 AGE",
+            "4": "No, pre-diabetes or borderline diabetes\u2014Go to Section 08.01 AGE",
+            "7": "Don\u2019t know/Not Sure\u2014Go to Section 08.01 AGE",
+            "9": "Refused\u2014Go to Section 08.01 AGE",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "3": 368722,
+            "1": 61158,
+            "4": 10329,
+            "2": 3836,
+            "7": 763,
+            "9": 321,
+            "BLANK": 3
+          },
+          "codebook_mismatches": []
+        },
+        "2023": {
+          "source_variable": "DIABETE4",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) (you had) diabetes? (If Yes - and respondent is female, ask Was this only when you were pregnant? If Respondent says pre-diabetes or borderline diabetes, use response code 4.)",
+          "label": "(Ever told) you had diabetes",
+          "codes": {
+            "1": "Yes",
+            "2": "Yes, but female told only during pregnancy - Go to Section 08.01 AGE",
+            "3": "No - Go to Section 08.01 AGE",
+            "4": "No, pre-diabetes or borderline diabetes - Go to Section 08.01 AGE",
+            "7": "Don't know/Not Sure - Go to Section 08.01 AGE",
+            "9": "Refused - Go to Section 08.01 AGE",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "3": 358706,
+            "1": 59786,
+            "4": 10594,
+            "2": 3253,
+            "7": 683,
+            "9": 296,
+            "BLANK": 5
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "DIABETE4",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) (you had) diabetes? (If \u00ef\u00bf\u00bdYes\u00ef\u00bf\u00bd and respondent is female, ask \u00ef\u00bf\u00bdWas this only when you were pregnant?\u00ef\u00bf\u00bd. If Respondent says pre-diabetes or borderline diabetes, use response code 4.)",
+          "label": "(Ever told) you had diabetes",
+          "codes": {
+            "1": "Yes",
+            "2": "Yes, but female told only during pregnancy\u00ef\u00bf\u00bdGo to Section 07.01 AGE",
+            "3": "No\u00ef\u00bf\u00bdGo to Section 07.01 AGE",
+            "4": "No, pre-diabetes or borderline diabetes\u00ef\u00bf\u00bdGo to Section 07.01 AGE",
+            "7": "Don\u00ef\u00bf\u00bdt know/Not Sure\u00ef\u00bf\u00bdGo to Section 07.01 AGE",
+            "9": "Refused\u00ef\u00bf\u00bdGo to Section 07.01 AGE",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "3": 376125,
+            "1": 65809,
+            "4": 11307,
+            "2": 3395,
+            "7": 798,
+            "9": 232,
+            "BLANK": 4
+          },
+          "codebook_mismatches": []
+        }
+      }
+    },
+    {
+      "canonical_name": "stroke_history",
+      "role": "feature",
+      "description": "Ever told had a stroke",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "CVDSTRK3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) (you had) a stroke.",
+          "label": "Ever Diagnosed with a Stroke",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don\u2019t know/Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 424336,
+            "1": 19239,
+            "7": 1274,
+            "9": 281,
+            "BLANK": 2
+          },
+          "codebook_mismatches": []
+        },
+        "2023": {
+          "source_variable": "CVDSTRK3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) (you had) a stroke.",
+          "label": "Ever Diagnosed with a Stroke",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don't know/Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 413499,
+            "1": 18350,
+            "7": 1212,
+            "9": 258,
+            "BLANK": 4
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "CVDSTRK3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) (you had) a stroke.",
+          "label": "Ever Diagnosed with a Stroke",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don\u00ef\u00bf\u00bdt know/Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 435557,
+            "1": 20661,
+            "7": 1244,
+            "9": 205,
+            "BLANK": 3
+          },
+          "codebook_mismatches": []
+        }
+      }
+    },
+    {
+      "canonical_name": "kidney_disease_history",
+      "role": "feature",
+      "description": "Ever told had kidney disease",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "CHCKDNY2",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Not including kidney stones, bladder infection or incontinence, were you ever told you had kidney disease?",
+          "label": "Ever told you have kidney disease?",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don\u2019t know / Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 422891,
+            "1": 20315,
+            "7": 1581,
+            "9": 343,
+            "BLANK": 2
+          },
+          "codebook_mismatches": []
+        },
+        "2023": {
+          "source_variable": "CHCKDNY2",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Not including kidney stones, bladder infection or incontinence, were you ever told you had kidney disease?",
+          "label": "Ever told you have kidney disease?",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don't know / Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 410876,
+            "1": 20555,
+            "7": 1622,
+            "9": 267,
+            "BLANK": 3
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "CHCKDNY2",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Not including kidney stones, bladder infection or incontinence, were you ever told you had kidney disease?",
+          "label": "Ever told you have kidney disease?",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don\u00ef\u00bf\u00bdt know / Not sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 431939,
+            "1": 23752,
+            "7": 1715,
+            "9": 258,
+            "BLANK": 6
+          },
+          "codebook_mismatches": []
+        }
+      }
+    },
+    {
+      "canonical_name": "asthma_ever",
+      "role": "feature",
+      "description": "Ever told had asthma",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "ASTHMA3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) (you had) asthma?",
+          "label": "Ever Told Had Asthma",
+          "codes": {
+            "1": "Yes",
+            "2": "No\u2014Go to Section 07.06 CHCSCNC1",
+            "7": "Don\u2019t know/Not Sure\u2014Go to Section 07.06 CHCSCNC1",
+            "9": "Refused\u2014Go to Section 07.06 CHCSCNC1",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 376665,
+            "1": 66694,
+            "7": 1494,
+            "9": 277,
+            "BLANK": 2
+          },
+          "codebook_mismatches": []
+        },
+        "2023": {
+          "source_variable": "ASTHMA3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) (you had) asthma?",
+          "label": "Ever Told Had Asthma",
+          "codes": {
+            "1": "Yes",
+            "2": "No - Go to Section 07.06 CHCSCNC1",
+            "7": "Don't know/Not Sure - Go to Section 07.06 CHCSCNC1",
+            "9": "Refused - Go to Section 07.06 CHCSCNC1",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 367256,
+            "1": 64366,
+            "7": 1444,
+            "9": 254,
+            "BLANK": 3
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "ASTHMA3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "(Ever told) (you had) asthma?",
+          "label": "Ever Told Had Asthma",
+          "codes": {
+            "1": "Yes",
+            "2": "No\u00ef\u00bf\u00bdGo to Section 06.06 CHCSCNC1",
+            "7": "Don\u00ef\u00bf\u00bdt know/Not Sure\u00ef\u00bf\u00bdGo to Section 06.06 CHCSCNC1",
+            "9": "Refused\u00ef\u00bf\u00bdGo to Section 06.06 CHCSCNC1",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 383772,
+            "1": 72037,
+            "7": 1650,
+            "9": 208,
+            "BLANK": 3
+          },
+          "codebook_mismatches": []
+        }
+      }
+    },
+    {
+      "canonical_name": "asthma_status",
+      "role": "feature",
+      "description": "Asthma status: current/former/never (calculated)",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "_ASTHMS1",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Computed asthma status",
+          "label": "Computed Asthma Status",
+          "codes": {
+            "1": "Current",
+            "2": "Former",
+            "3": "Never",
+            "9": "Don\u2019t know/Not Sure Or Refused/Missing"
+          },
+          "observed_counts": {
+            "3": 376665,
+            "1": 45659,
+            "2": 18948,
+            "9": 3860
+          },
+          "codebook_mismatches": []
+        },
+        "2023": {
+          "source_variable": "_ASTHMS1",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Computed asthma status",
+          "label": "Computed Asthma Status",
+          "codes": {
+            "1": "Current",
+            "2": "Former",
+            "3": "Never",
+            "9": "Don't know/Not Sure Or Refused/Missing"
+          },
+          "observed_counts": {
+            "3": 367256,
+            "1": 43949,
+            "2": 18476,
+            "9": 3642
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "_ASTHMS1",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Computed asthma status",
+          "label": "Computed Asthma Status",
+          "codes": {
+            "1": "Current",
+            "2": "Former",
+            "3": "Never",
+            "9": "Don\u00ef\u00bf\u00bdt know/Not Sure Or Refused/Missing"
+          },
+          "observed_counts": {
+            "3": 383772,
+            "1": 49694,
+            "2": 20267,
+            "9": 3937
+          },
+          "codebook_mismatches": []
+        }
+      }
+    },
+    {
+      "canonical_name": "high_blood_pressure",
+      "role": "feature",
+      "description": "Ever told blood pressure high",
+      "available_years": [
+        2023
+      ],
+      "in_all_years": false,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "BPHIGH6",
+          "in_codebook": false,
+          "in_file": false
+        },
+        "2023": {
+          "source_variable": "BPHIGH6",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Have you ever been told by a doctor, nurse or other health professional that you have high blood pressure? (If Yes - and respondent is female, ask Was this only when you were pregnant?.)",
+          "label": "Ever Told Blood Pressure High",
+          "codes": {
+            "1": "Yes",
+            "2": "Yes, but female told only during pregnancy - Go to Section 06.01 CHOLCHK3",
+            "3": "No - Go to Section 06.01 CHOLCHK3",
+            "4": "Told borderline high or pre-hypertensive or elevated blood pressure - Go to Section 06.01 CHOLCHK3",
+            "7": "Don't know/Not Sure - Go to Section 06.01 CHOLCHK3",
+            "9": "Refused - Go to Section 06.01 CHOLCHK3",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "3": 247855,
+            "1": 176222,
+            "4": 4047,
+            "2": 3280,
+            "7": 1312,
+            "9": 604,
+            "BLANK": 3
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "BPHIGH6",
+          "in_codebook": false,
+          "in_file": false
+        }
+      }
+    },
+    {
+      "canonical_name": "cholesterol_checked",
+      "role": "feature",
+      "description": "Time since cholesterol checked",
+      "available_years": [
+        2023
+      ],
+      "in_all_years": false,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "CHOLCHK3",
+          "in_codebook": false,
+          "in_file": false
+        },
+        "2023": {
+          "source_variable": "CHOLCHK3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "About how long has it been since you last had your cholesterol checked?",
+          "label": "How Long since Cholesterol Checked",
+          "codes": {
+            "1": "Never - Go to Section 07.01 CVDINFR4",
+            "2": "Within the past year (anytime less than one year ago)",
+            "3": "Within the past 2 years (1 year but less than 2 years ago)",
+            "4": "Within the past 3 years (2 years but less than 3 years ago)",
+            "5": "Within the past 4 years (3 years but less than 4 years ago)",
+            "6": "Within the past 5 years (4 years but less than 5 years ago)",
+            "7": "Don't know/Not Sure - Go to Section 07.01 CVDINFR4",
+            "8": "5 or more years ago",
+            "9": "Refused - Go to Section 07.01 CVDINFR4",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 307737,
+            "3": 38772,
+            "7": 25705,
+            "1": 25362,
+            "8": 12890,
+            "4": 12240,
+            "5": 5495,
+            "6": 4378,
+            "9": 741,
+            "BLANK": 3
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "CHOLCHK3",
+          "in_codebook": false,
+          "in_file": false
+        }
+      }
+    },
+    {
+      "canonical_name": "high_cholesterol",
+      "role": "feature",
+      "description": "Ever told cholesterol high",
+      "available_years": [
+        2023
+      ],
+      "in_all_years": false,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "TOLDHI3",
+          "in_codebook": false,
+          "in_file": false
+        },
+        "2023": {
+          "source_variable": "TOLDHI3",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Have you ever been told by a doctor, nurse or other health professional that your cholesterol is high?",
+          "label": "Ever Told Cholesterol Is High",
+          "codes": {
+            "1": "Yes",
+            "2": "No",
+            "7": "Don't know/Not Sure",
+            "9": "Refused",
+            "BLANK": "Not asked or Missing"
+          },
+          "observed_counts": {
+            "2": 219333,
+            "1": 158906,
+            "BLANK": 51812,
+            "7": 2868,
+            "9": 404
+          },
+          "codebook_mismatches": []
+        },
+        "2024": {
+          "source_variable": "TOLDHI3",
+          "in_codebook": false,
+          "in_file": false
+        }
+      }
+    },
+    {
+      "canonical_name": "survey_weight",
+      "role": "survey_design",
+      "description": "Final combined landline/cell weight",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "_LLCPWT",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Final weight assigned to each respondent: Land-line and cell-phone data (Raking derived weight)",
+          "label": "Final weight: Land-line and cell-phone data",
+          "codes": {
+            "HIDDEN": "Data not displayed"
+          },
+          "summary": {
+            "non_missing": 445132,
+            "missing": 0,
+            "min": 0.020463858599966044,
+            "max": 54390.52092567251,
+            "median": 274.6323884952442
+          }
+        },
+        "2023": {
+          "source_variable": "_LLCPWT",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Final weight assigned to each respondent: Land-line and cell-phone data (Raking derived weight)",
+          "label": "Final weight: Land-line and cell-phone data",
+          "codes": {
+            "HIDDEN": "Data not displayed"
+          },
+          "summary": {
+            "non_missing": 433323,
+            "missing": 0,
+            "min": 0.15910409943757337,
+            "max": 69785.8209118426,
+            "median": 258.2719148710302
+          }
+        },
+        "2024": {
+          "source_variable": "_LLCPWT",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Final weight assigned to each respondent: Land-line and cell-phone data (Raking derived weight)",
+          "label": "Final weight: Land-line and cell-phone data",
+          "codes": {
+            "HIDDEN": "Data not displayed"
+          },
+          "summary": {
+            "non_missing": 457670,
+            "missing": 0,
+            "min": 0.012285801278519939,
+            "max": 49582.1910406439,
+            "median": 263.739622041232
+          }
+        }
+      }
+    },
+    {
+      "canonical_name": "sampling_stratum",
+      "role": "survey_design",
+      "description": "Sample design stratum",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "_STSTR",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Sample Design Stratification Variable (Prior to 2011: _STSTR is a five digit number that combines the values for _STATE (first two characters), _GEOSTR (third and fourth character), and _DENSTR2 (final character).)",
+          "label": "Sample Design Stratification Variable",
+          "codes": {
+            "HIDDEN": "Data not displayed"
+          },
+          "summary": {
+            "non_missing": 445132,
+            "missing": 0,
+            "min": 11011.0,
+            "max": 782029.0,
+            "median": 301061.0
+          }
+        },
+        "2023": {
+          "source_variable": "_STSTR",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Sample Design Stratification Variable (Prior to 2011: _STSTR is a five digit number that combines the values for _STATE (first two characters), _GEOSTR (third and fourth character), and _DENSTR2 (final character).)",
+          "label": "Sample Design Stratification Variable",
+          "codes": {
+            "HIDDEN": "Data not displayed"
+          },
+          "summary": {
+            "non_missing": 433323,
+            "missing": 0,
+            "min": 11011.0,
+            "max": 782029.0,
+            "median": 292081.0
+          }
+        },
+        "2024": {
+          "source_variable": "_STSTR",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Sample Design Stratification Variable (Prior to 2011: _STSTR is a five digit number that combines the values for _STATE (first two characters), _GEOSTR (third and fourth character), and _DENSTR2 (final character).)",
+          "label": "Sample Design Stratification Variable",
+          "codes": {
+            "HIDDEN": "Data not displayed"
+          },
+          "summary": {
+            "non_missing": 457670,
+            "missing": 0,
+            "min": 11011.0,
+            "max": 782022.0,
+            "median": 311181.0
+          }
+        }
+      }
+    },
+    {
+      "canonical_name": "primary_sampling_unit",
+      "role": "survey_design",
+      "description": "Primary sampling unit",
+      "available_years": [
+        2022,
+        2023,
+        2024
+      ],
+      "in_all_years": true,
+      "question_identical_across_years": true,
+      "codes_identical_across_years": true,
+      "codebook_counts_match_file": true,
+      "by_year": {
+        "2022": {
+          "source_variable": "_PSU",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Primary Sampling Unit (Equal to Annual Sequence Number)",
+          "label": "Primary Sampling Unit",
+          "codes": {
+            "HIDDEN": "Data not displayed"
+          },
+          "summary": {
+            "non_missing": 445132,
+            "missing": 0,
+            "min": 2022000001.0,
+            "max": 2022026152.0,
+            "median": 2022004268.0
+          }
+        },
+        "2023": {
+          "source_variable": "_PSU",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Primary Sampling Unit (Equal to Annual Sequence Number)",
+          "label": "Primary Sampling Unit",
+          "codes": {
+            "HIDDEN": "Data not displayed"
+          },
+          "summary": {
+            "non_missing": 433323,
+            "missing": 0,
+            "min": 2023000001.0,
+            "max": 2023026444.0,
+            "median": 2023004354.0
+          }
+        },
+        "2024": {
+          "source_variable": "_PSU",
+          "in_codebook": true,
+          "in_file": true,
+          "question": "Primary Sampling Unit (Equal to Annual Sequence Number)",
+          "label": "Primary Sampling Unit",
+          "codes": {
+            "HIDDEN": "Data not displayed"
+          },
+          "summary": {
+            "non_missing": 457670,
+            "missing": 0,
+            "min": 2024000001.0,
+            "max": 2024043913.0,
+            "median": 2024004590.0
+          }
+        }
+      }
+    }
+  ]
+}

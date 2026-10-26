@@ -17,7 +17,7 @@ There is one report per phase (`PHASE_1_REPORT.md` to `PHASE_7_REPORT.md`). Each
 
 ## Required structure
 
-Each report starts with a header table (phase, tasks, status, date) and a **Summary in plain words**, then has these ten sections:
+Each report starts with a header table (phase, tasks, status, date) and a **Summary in plain words**, then has these eleven sections:
 
 1. **Phase objective**: what the phase is for and why it comes at this point.
 2. **Work completed**: step by step, per task.
@@ -29,6 +29,7 @@ Each report starts with a header table (phase, tasks, status, date) and a **Summ
 8. **Dataset and model status**.
 9. **Git commit and push status**.
 10. **Exact next steps**, including anything the user will need to do.
+11. **Decisions requiring your approval** (write "None" if there are none).
 
 Phases that involve data or models also explain the numbers (row counts, metrics) in plain language: what each number means and whether it is good or modest.
 

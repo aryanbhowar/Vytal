@@ -1,0 +1,6 @@
+# Offline ML pipeline dependencies (data reading, interim storage, plots).
+# Install together with the backend requirements:
+#   .venv\Scripts\python.exe -m pip install -r backend\requirements.txt -r ml\requirements.txt
+pyreadstat==1.3.7
+pyarrow==26.0.0
+matplotlib==3.11.2

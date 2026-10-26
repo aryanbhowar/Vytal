@@ -67,9 +67,33 @@ Plain-language explanations of how Vytal works, written as each part is built. E
 
 ---
 
+## 5. The data: BRFSS 2022–2024 (Task 2)
+
+**What BRFSS is:** the Behavioral Risk Factor Surveillance System, a yearly CDC telephone survey of about 430,000–460,000 US adults about their health and habits. It is the largest continuous health survey in the world.
+
+**Why it was chosen:** it is official, free, public-domain US government data with a codebook explaining every answer; both of Vytal's outcomes (heart disease and COPD) are in the same files; and the sample is huge.
+
+**What the outcomes really mean (be precise in the viva):**
+- Heart: `_MICHD` = the person said a health professional had *ever* told them they had a heart attack or coronary heart disease.
+- COPD: `CHCCOPD3` = *ever* told they had COPD, emphysema or chronic bronchitis.
+So the models learn "people who answer like you more often *reported* this condition". That is an association, not a prediction of the future and not a diagnosis.
+
+**Why pooling three years is allowed:** each year interviews different people, so there are no repeated people. The questions used were checked to be worded and coded the same way every year. If they weren't, combining them would mix different meanings.
+
+**How the files were checked:** CDC blocks automated downloads from this PC, so the files came from the Internet Archive's copy of CDC's own links. The script proved they are genuine by matching CDC's published numbers: the number of interviews per year, and the number of people giving each answer to every checked question. A damaged or altered file could not match hundreds of counts.
+
+**Why blood pressure and cholesterol are missing:** CDC only asked them in 2023 (odd years). A model pooled across 2022–2024 can only use questions asked every year.
+
+**Missing answers:** "don't know" or "refused" is never treated as "no". Those interviews are left out (about 15–19%). The people left out reported the conditions at almost the same rate as everyone else (under 1 percentage point different), so this hardly changes the data.
+
+**Weighted vs unweighted:** the survey deliberately interviews more of some groups. In the sample about 9% reported heart disease; after CDC's weights correct for who was interviewed, the US adult figure is about 6.5–6.9%. The app shows the weighted figure as the "survey average".
+
+**Key files:** `ml/preprocessing/download_brfss_data.py` (get the data), `inspect_brfss_variables.py` (check it), `ml/feature_definitions/brfss_candidate_variables.py` (which questions and which answer codes are unusable), `datasets/DATA_SOURCES.md` (the full story).
+
+---
+
 ## Sections to be added
 
-- Datasets and why BRFSS was chosen (Task 2)
 - Cleaning and recoding (Task 3)
 - Training, metrics and calibration (Tasks 4–5)
 - Prediction API, categories and factor explanations (Task 6)

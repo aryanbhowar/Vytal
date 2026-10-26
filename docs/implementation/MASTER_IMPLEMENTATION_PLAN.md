@@ -35,8 +35,18 @@ Ask the user only for decisions that materially affect privacy, security, cost, 
 | End-to-end tests | Playwright driving the already-installed Microsoft Edge (`channel: "msedge"`), so no browser download; replaces the earlier "no Playwright" decision | 11–12 |
 | Dependency hygiene | `pip-audit` and `npm audit` run and results recorded | 12 |
 
-### R1.4 Open question raised by Revision 1
-The update text says the heart model should use "common, verified risk-factor and health-history inputs across combined years if compatible". The recorded decision D-003 (user choice 1b) is heart model on **2023 only** so blood pressure and cholesterol can be used. D-003 stays in force until the user confirms. Task 2 inspects heart candidate variables in all three years, so evidence for both options is gathered either way. Tracked as D-022 in the decision log.
+### R1.4 Heart model training years (resolved by user, subject to verification)
+User decision (2026-10-26), superseding D-003: **pool BRFSS 2022, 2023 and 2024 for the heart model**, using only risk-factor and health-history features whose meaning, coding and availability are verified in all three years. Blood pressure and cholesterol are excluded only if the files show they are not consistently available; this is checked, not assumed. Before finalizing, Task 2 inspects target definitions, feature availability, answer coding, missing-value conventions and sample counts per year. If pooling shows incompatible definitions or serious data-quality problems, **stop and report the evidence** before changing approach. Reproducibility and proper evaluation outrank row count. Recorded as D-022. Consequence: both models now use the same three years, so one extraction step serves both.
+
+### R1.5 Interpretation, security, quality gates and deployment (user sections 7–13)
+- **Interpretation.** The UI and docs state for each model: the exact outcome (survey-reported condition status, not future onset), the population (US adults responding to BRFSS 2022–2024), and the difference between a *model score*, a *calibrated probability*, *survey prevalence* and *clinical risk* (which Vytal does not estimate). Categories are relative bands (D-010) with their rationale, limitations and validation (how often people in each band actually reported the condition in the test set) documented and shown. Suggestions never prescribe treatment or determine a condition.
+- **Security and privacy review items:** input validation and safe errors; CORS/allowed origins from environment; secrets via environment only (none currently needed); pinned dependencies and reproducible installs; logging that never contains health inputs; data minimization, no storage, consent wording; artifact integrity and load failures; liveness (`/api/health`) and readiness (`/api/health/ready`, true only when models load) checks; **rate limiting**: a small in-process limiter on the predict endpoint, configurable, plus documented reverse-proxy limits for public deployment; HTTPS and hosting configuration documented for any future public deployment; accessibility, browser compatibility and responsiveness. A local app running successfully is never described as production-secure.
+- **Quality gates per phase (run and report real results):** backend unit and API tests; data validation and preprocessing tests; model evaluation and feature-schema compatibility checks; frontend lint and production build; API/frontend integration tests; end-to-end workflow tests; error-path and invalid-input tests; model-loading and missing-model tests. Never weaken assertions to pass.
+- **"Deployable" requires** a fresh clone following the documented instructions and the essential workflow passing end to end (Task 13).
+- **Deployment deliverables (Tasks 12–13):** exact setup and run commands; environment-variable documentation; repeatable artifact generation; frontend build and backend production-run instructions; a deployment configuration for a free hosting target only when justified (no account creation, no public deploy without approval); health/readiness checks; deployment checklist, troubleshooting and **rollback** instructions (redeploy previous Git tag and model version); a clear list of what is still required before public or clinical use.
+- **Visual identity:** navy/charcoal foundation, controlled teal/cyan accents (violet only as a minor secondary), restrained glass, real backend values only, sample content labelled.
+- **Phase reports** must include: work and files changed, commands executed, actual test/build results, dataset/model status, known issues, Git commit/push status, exact next actions, decisions requiring approval.
+- **Execution:** proceed autonomously task to task after Task 2's data inspection; at the end of each phase give the user a short plain-language summary (what works, what was tested, what remains, what to do next).
 
 ---
 
@@ -60,7 +70,7 @@ The update text says the heart model should use "common, verified risk-factor an
 ## Requirements (agreed with user)
 | Topic | Decision |
 |---|---|
-| Heart model data | BRFSS **2023 only** (keeps blood pressure + cholesterol). **[R1]** Confirmation requested from the user (see R1.4, D-022) |
+| Heart model data | ~~BRFSS 2023 only~~ **[R1]** BRFSS **2022 + 2023 + 2024 pooled**, only features verified compatible across all three years (R1.4, D-022) |
 | Respiratory model data | BRFSS **2024 baseline + 2023 + 2022**, harmonized per year |
 | Model inputs | Risk factors and health history only (no general health, difficulty walking, physical/mental unhealthy days) |
 | Result display | Category + model estimate + survey average; probabilities shown only after calibration check |

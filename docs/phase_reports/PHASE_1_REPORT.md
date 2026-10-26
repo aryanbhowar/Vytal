@@ -2,269 +2,196 @@
 
 | | |
 |---|---|
-| **Project** | Vytal: Personalized Health Risk Assessment Model and Web Application |
+| **Project** | Vytal: personalized health-risk assessment web application |
 | **Phase** | 1 of 7 (Day 1) |
-| **Tasks in this phase** | Task 1 (foundation and runnable skeleton) and Task 2 (BRFSS data download and variable checks) |
-| **Phase status** | **In progress.** Task 1 is finished. Task 2 has not started. |
-| **Report last updated** | 26 October 2026 |
+| **Tasks** | Task 1 (foundation and runnable skeleton), Task 2 (BRFSS data download and variable checks) |
+| **Phase status** | **Complete** |
+| **Report last updated** | 27 October 2026 |
 
 ---
 
 ## Summary in plain words
 
-At the start of this phase the project folder `c:\vytal_ty` was completely empty. By the end of Task 1 it contains a small but real working application:
+Phase 1 had two jobs: get a working software skeleton in place, and find out exactly what the survey data can and cannot support before any model is built.
 
-- a **backend** (the Python program that will later run the machine-learning models) that answers a simple "are you alive?" question at `/api/health`;
-- a **frontend** (the website the user sees) that asks the backend that question and shows whether the connection works;
-- **automated tests** that prove the backend answers correctly;
-- **tracking documents** (status, changelog, decision log, viva notes, this report) so anyone can see what has been done and why;
-- a **Git repository** linked to GitHub, so every step of progress is saved.
+**Task 1** produced a small but real application: a Python backend that answers at `/api/health`, a React website that connects to it (you confirmed "API connected" in your browser), automated tests, tracking documents and a GitHub repository.
 
-Nothing to do with health predictions exists yet. That is deliberate: the first job is to prove the pieces can talk to each other before building features on top of them. Task 2 (next) will download the CDC survey data and check exactly which questions it contains, which decides what the models can use.
+**Task 2** downloaded the CDC BRFSS survey files for 2022, 2023 and 2024 (about 1.3 million interviews in total) and checked every question we were considering using. The main findings:
+
+- **Both models can be trained on all three years pooled together.** The heart disease question and the COPD question are worded and coded identically in all three years, and so are all the risk-factor questions we chose.
+- **Blood pressure and cholesterol cannot be used.** They were only asked in 2023. You had accepted this possibility when choosing to pool the years.
+- **The downloaded files are complete and genuine.** CDC's website blocks automated downloads from this computer, so the files came from the Internet Archive's saved copy of CDC's own download links. To be sure they are the real thing, the script compared them with CDC's published numbers: the number of interviews in each file and the number of people giving each answer to every question we checked match CDC's official codebook exactly.
+- About 1.09 million interviews are usable for the heart model and 1.13 million for the COPD model.
+
+Between the two tasks, the project direction changed to "production-ready software" (Revision 1 of the master plan), and you chose to pool 2022–2024 for the heart model.
 
 ---
 
 ## 1. Phase objective
 
-**Why this phase exists:** every later step depends on a working environment. If the backend and frontend can't start, or the data turns out to be missing key questions, everything after that is wasted effort. Phase 1 removes those risks first.
-
-**Goals:**
+Every later step depends on two things: software that starts and communicates, and data whose meaning is understood. If either is wrong, the work built on top of it is wasted. Phase 1 settles both before any feature work.
 
 | Task | Goal | Done? |
 |---|---|---|
-| Task 1 | Install the tools, create a backend and frontend that can communicate, set up tests, tracking files and Git | Yes |
-| Task 2 | Download BRFSS 2022, 2023 and 2024 survey files, check which questions each year contains, and fix the final list of model inputs | Not yet |
+| Task 1 | Tools installed; backend and frontend that communicate; tests; tracking files; Git | Yes |
+| Task 2 | Download BRFSS 2022–2024; verify the outcome and feature questions in each year; decide the final model inputs; document the data | Yes |
 
 ---
 
 ## 2. Work completed
 
-### Task 1: Foundation (complete)
+### Task 1: Foundation
 
-**Step 1: Saved the approved plan.**
-The full plan agreed in Plan Mode was saved to `docs/implementation/MASTER_IMPLEMENTATION_PLAN.md`. Every later task refers back to it, so the plan never has to be re-explained.
+1. **Saved the approved plan** to `docs/implementation/MASTER_IMPLEMENTATION_PLAN.md`.
+2. **Checked the tools:** Python 3.13.15, Node.js 26.12.1, npm 11.20.0, Git 2.56.0. Git's name and email were set for this project (`aryanbhowar`).
+3. **Created a Python virtual environment** (`.venv`): a private copy of Python for this project so its packages don't affect anything else. Package versions are pinned, because a saved model usually only loads with the same scikit-learn version that created it.
+4. **Built the backend skeleton:** FastAPI app with `GET /api/health`, which replies `{"status": "ok", "app": "Vytal", "version": "0.1.0"}`.
+5. **Built the frontend skeleton:** React + TypeScript (Vite), a page that shows whether the backend is reachable, and a *proxy* so the browser can reach the backend without security errors.
+6. **Proved the two halves talk:** requests to the backend directly and through the frontend proxy both returned success; you confirmed the page in your browser.
+7. **Created tracking files** (status, changelog, decision log, viva notes, this report) and **set up Git and GitHub**.
 
-**Step 2: Checked the computer's tools.**
+### Direction update (between the tasks)
 
-| Tool | What it is for | Version found | Minimum needed |
-|---|---|---|---|
-| Python | Runs the backend and machine learning | 3.13.15 | 3.10 |
-| Node.js | Runs the frontend build tools | 26.12.1 | 18 |
-| npm | Installs frontend packages | 11.20.0 | — |
-| Git | Saves project history | 2.56.0 | — |
+The goal changed from "educational prototype" to **production-ready software**: reliable, tested, secure, private and deployable, while still never claiming to be clinically validated. The plan gained a Revision 1 section listing the extra work (security protections, privacy rules, model file checks, fairness checks, model cards, a production build, automated tests on GitHub, real-browser tests). You also decided to **pool 2022–2024 for the heart model**, subject to the data checks below.
 
-Git did not have a name and email set, which it needs to record who made each change. You supplied them (`aryanbhowar`, `aryanbhowar45.sphs@gmail.com`) and they are now set for this project.
+### Task 2: Getting and checking the data
 
-**Step 3: Created a Python "virtual environment".**
-A virtual environment (`.venv` folder) is a private copy of Python just for this project. Packages installed into it don't affect anything else on the computer, and anyone can recreate it from the list in `backend/requirements.txt`.
+**Step 1: Tried CDC directly.** Every automated request to cdc.gov, even for plain web pages, was refused with "HTTP 403 Access Denied" (CDC's content network blocks it). This is a block on automated access from this computer, not a problem with the files.
 
-Packages installed, and why:
+**Step 2: Used the Internet Archive's copy of CDC's own links.** The Internet Archive (web.archive.org) stores copies of public web pages and files. It holds copies of the exact CDC download links for all three years. The download script asks for the *original bytes* of those copies. 2023 failed once on a dropped connection, so the script was given automatic retries; it then succeeded.
 
-| Package | Version | Why it is needed |
+| Year | Zip size | Unzipped `.XPT` file |
 |---|---|---|
-| fastapi | 0.162.0 | The web framework for the backend: turns Python functions into web addresses |
-| uvicorn | 0.54.0 | The server program that actually runs FastAPI |
-| pydantic | 2.14.1 | Checks that incoming data has the right fields and types |
-| scikit-learn | 1.9.1 | The machine-learning library (used from Task 4) |
-| pandas | 3.1.0 | Works with tables of data (used from Task 2) |
-| numpy | 2.5.4 | Fast number calculations, used by pandas and scikit-learn |
-| joblib | 1.6.0 | Saves and loads trained models to and from files |
-| pytest | 9.1.1 | Runs the automated tests |
-| httpx | 0.28.1 | Lets the tests send requests to the backend |
+| 2022 | 84.6 MB | 1.16 GB |
+| 2023 | 93.2 MB | 1.21 GB |
+| 2024 | 83.0 MB | 1.09 GB |
 
-The machine-learning packages were installed now, not later, so their versions are fixed from the start. This matters because a saved scikit-learn model can usually only be loaded by the same scikit-learn version that saved it.
+**Step 3: Downloaded the official codebooks.** A *codebook* is CDC's dictionary for the survey: for every question it gives the exact wording, what each answer number means (for example 1 = yes, 2 = no, 7 = don't know, 9 = refused), and how many people gave each answer. These came the same way.
 
-**Step 4: Built the backend skeleton.**
-The backend has one endpoint so far:
+**Step 4: Proved the files are complete and genuine.** The inspection script:
 
-```
-GET /api/health   →   {"status": "ok", "app": "Vytal", "version": "0.1.0"}
-```
+- counted the interviews in each file: 445,132 (2022), 433,323 (2023), 457,670 (2024), **exactly** the numbers on CDC's pages;
+- for every question we checked, counted how many people gave each answer and compared that with the codebook: **every count matched exactly** in all three years.
 
-An *endpoint* is a web address the server responds to. This one just confirms the server is running. Later tasks add `/api/models/status` and `/api/assessment/predict` in the same style.
+A file that had been altered or cut short would not match on hundreds of separate counts. Each verified file's SHA-256 fingerprint is now recorded, so a future download can be compared with it.
 
-**Step 5: Built the frontend skeleton.**
-The frontend was created with Vite's official starter template (React 19 + TypeScript). The template's demo pictures and styles were deleted because Vytal doesn't use them. In their place:
+**Step 5: Checked every candidate question across the three years.** For 25 variables (the two outcomes, their parts, 18 possible features and 3 survey-design variables) the script checked:
 
-- a page that calls `/api/health` and shows **"API connected"**, **"Checking API connection…"** or an error message;
-- one file (`apiClient.ts`) that handles all communication with the backend;
-- a *proxy* setting so the website can reach the backend without browser security errors (explained in section 4);
-- a simple Vytal "V" logo for the browser tab.
+- Is it in all three years?
+- Is the question worded the same way?
+- Do the answer codes mean the same thing?
 
-**Step 6: Proved the two halves talk to each other.**
-Both servers were started and requests were sent to them. Both requests returned success (HTTP 200), and the backend's own log showed it received them. Details are in section 6.
+Comparing wording needed care. The codebooks print the same text with different punctuation each year (curly versus straight apostrophes, different dashes) and the "Go to Section 08.01" skip instructions are renumbered every year. The comparison ignores those differences but still catches real changes in meaning. A unit test proves it catches one real change: in 2024 the e-cigarette question reworded answer 4.
 
-**Step 7: Created the tracking and support files.** These are listed in section 3.
+**Step 6: Counted usable interviews and checked for bias from exclusions.** When someone answered "don't know" or refused a question the model needs, that interview can't be used (we never treat "don't know" as "no"). The script counted how many are left and whether the removed people differ:
 
-**Step 8: Set up Git and GitHub.**
-The folder became a Git repository on branch `main`, linked to `https://github.com/aryanbhowar/Vytal.git`. The link was tested and GitHub responded (the repository was empty, as expected). Before committing, the list of files was checked to make sure nothing private or huge was included. The commit and push results are in section 9.
+| Model | Usable interviews (all 3 years) | Reported the condition | US adult estimate (weighted) |
+|---|---|---|---|
+| Heart (CHD or heart attack) | 1,093,195 | about 9% of usable interviews | 6.5–6.9% |
+| Respiratory (COPD, emphysema, chronic bronchitis) | 1,127,855 | about 8% | 6.2–6.8% |
 
-### Direction update after Task 1 (Revision 1)
+People removed for missing answers reported the condition slightly *less* often than people kept (difference under 1 percentage point), so the exclusions make little difference. The "weighted" figure is lower than the sample figure because the survey deliberately interviews more of some groups (such as older adults); CDC's weights correct for that.
 
-After Task 1, the project goal changed. Vytal is no longer described as an "educational prototype". It is now meant to become **production-ready software**: reliable, tested, secure, private and deployable. It is still **not** a medical device and must never be described as clinically validated.
+**Step 7: Decided the final model inputs** (decisions D-022 to D-028, in plain words in section 4).
 
-What changed as a result:
-
-- The master plan gained a "Revision 1" section. It adds work to later tasks: security protections on the API, privacy rules (no names collected, nothing stored), checking that model files haven't been tampered with, fairness checks across age and sex groups, model cards, a one-command production build, automated tests on GitHub (CI) and real-browser tests.
-- Five new decisions were recorded (D-017 to D-021). One question is open for you (D-022, about which survey years the heart model uses).
-- The wording on the page, in the API description and in the README now says "personalized health-risk assessment" and "not a diagnosis, not clinically validated".
-- Before changing anything, the tests and the frontend build were run again on the current files. They still pass, so the Task 1 results in this report still hold.
-
-### Task 2: Dataset download and checks (not started)
-
-This begins next. See section 10.
+**Step 8: Wrote the data documentation**, `datasets/DATA_SOURCES.md` and `datasets/README.md`, and added tests.
 
 ---
 
-## 3. Important files created
+## 3. Important files created or modified
 
-### Backend (the Python server)
+### Task 1 (summary; details in the Task 1 commit)
+
+| Area | Files |
+|---|---|
+| Backend | `backend/app/main.py`, `backend/app/core/config.py`, `backend/app/api/health_routes.py`, `backend/requirements.txt` |
+| Frontend | `frontend/src/App.tsx`, `frontend/src/services/apiClient.ts`, `frontend/vite.config.ts`, `frontend/index.html` |
+| Tests and tools | `tests/integration/test_health_api.py`, `pytest.ini`, `requirements-dev.txt`, `scripts/check_environment.ps1` |
+| Settings | `.gitignore`, `.gitattributes`, `.env.example` |
+| Tracking | `README.md`, `PROJECT_STATUS.md`, `CHANGELOG.md`, `docs/decisions/DECISION_LOG.md`, `docs/VIVA_NOTES.md`, `docs/phase_reports/` |
+
+### Task 2
 
 | File | What it does |
 |---|---|
-| `backend/app/main.py` | Creates the FastAPI application, allows the frontend's address to call it, and plugs in the endpoints |
-| `backend/app/core/config.py` | Stores settings (app name, version, allowed website addresses) in one place |
-| `backend/app/api/health_routes.py` | Defines `GET /api/health` |
-| `backend/requirements.txt` | Exact list of Python packages the backend needs |
-| `backend/README.md` | How to run the backend and what each file does |
-
-### Frontend (the website)
-
-| File | What it does |
-|---|---|
-| `frontend/src/App.tsx` | The connection-status page (replaced by the real landing page in Task 8) |
-| `frontend/src/services/apiClient.ts` | The only file that sends requests to the backend; turns failures into readable messages |
-| `frontend/src/index.css` | Temporary dark styling (replaced by the full design system in Task 8) |
-| `frontend/vite.config.ts` | Development server on port 5173; forwards `/api` requests to the backend |
-| `frontend/index.html` | The HTML page shell, titled "Vytal" |
-| `frontend/public/favicon.svg` | The browser-tab icon |
-| `frontend/package.json` | Lists frontend packages and commands (`dev`, `build`, `lint`) |
-| `frontend/README.md` | Frontend commands and structure |
-
-### Tests and tools
-
-| File | What it does |
-|---|---|
-| `tests/integration/test_health_api.py` | Two automated tests for the backend (section 6) |
-| `pytest.ini` | Tells pytest where the code and tests are |
-| `requirements-dev.txt` | Test-only packages (pytest, httpx) |
-| `scripts/check_environment.ps1` | Checks the computer has the right tool versions |
-| `tests/README.md` | How to run tests and what each test folder is for |
-
-### Project settings
-
-| File | What it does |
-|---|---|
-| `.gitignore` | Tells Git which files must **never** be uploaded: the virtual environment, `node_modules`, build output, `.env` secrets files and all survey data files |
-| `.gitattributes` | Makes line endings consistent, so files look identical on every computer |
-| `.env.example` | Documents the one optional setting (`VYTAL_ALLOWED_ORIGINS`). Vytal needs no passwords or API keys |
-
-### Tracking and documentation
-
-| File | What it does |
-|---|---|
-| `README.md` | Front page of the project: what it is, how to install, run and test it |
-| `PROJECT_STATUS.md` | The single place showing current progress, blockers and next steps |
-| `CHANGELOG.md` | A dated list of every meaningful change |
-| `docs/decisions/DECISION_LOG.md` | Every important decision with its reason (16 so far) |
-| `docs/VIVA_NOTES.md` | Beginner-friendly explanations for the viva |
-| `docs/implementation/MASTER_IMPLEMENTATION_PLAN.md` | The approved plan for all 13 tasks |
-| `docs/phase_reports/README.md` | The standard every phase report follows |
-| `docs/phase_reports/PHASE_1_REPORT.md` | This report |
+| `ml/requirements.txt` | Data packages: `pyreadstat` (reads SAS files), `pyarrow` (fast table storage, used from Task 3), `matplotlib` (charts for evaluation) |
+| `ml/preprocessing/brfss_sources.py` | Facts about each survey year: CDC's published record counts, download addresses, verified file fingerprints, codebook locations |
+| `ml/preprocessing/download_brfss_data.py` | Downloads the data and codebooks (CDC first, then the Internet Archive copy), retries dropped connections, checks the zip, unzips, prints manual instructions if everything fails |
+| `ml/preprocessing/brfss_codebook.py` | Reads CDC's HTML codebooks into Python: question text, answer codes, counts and derivation notes |
+| `ml/feature_definitions/brfss_candidate_variables.py` | The list of variables considered, their name in each year, which answer codes are unusable, and the chosen features for each model |
+| `ml/preprocessing/inspect_brfss_variables.py` | The checker: completeness, cross-year consistency, counts against the codebook, usable sample sizes, exclusion bias; writes the report and summary |
+| `docs/datasets/brfss_variable_availability.md` | Generated report with every table and count |
+| `datasets/processed/brfss_variable_inspection_summary.json` | The same results as data (totals only, no individual answers); committed so tests can use it |
+| `datasets/DATA_SOURCES.md` | Where the data comes from, terms of use, exact outcome definitions, features, exclusions, limitations |
+| `datasets/README.md` | Folder layout and the commands to recreate the data |
+| `tests/unit/test_brfss_codebook_parsing.py` | Tests the codebook reader and the wording comparison using a small made-up codebook |
+| `tests/data/test_brfss_variable_inspection.py` | Tests that the real data still supports the decisions (targets identical in all years, features compatible, blood pressure only in 2023, enough positive cases) |
 
 ---
 
 ## 4. Technical decisions and reasons
 
-Each decision is also recorded in `docs/decisions/DECISION_LOG.md` with an ID.
+| ID | Decision | Reason in simple terms |
+|---|---|---|
+| D-017 | Vytal is production-oriented software, never described as clinically validated | Your direction update. Software quality can be built; clinical approval needs trials and regulators |
+| D-018 to D-021 | Production build serves the website from the backend; real-browser tests use the installed Edge; model files are fingerprint-checked before loading; show the weighted US prevalence | Production-readiness additions (details in the decision log) |
+| D-022 | Pool 2022–2024 for the heart model (replaces D-003, "2023 only") | Your choice. The checks found no reason to stop: the heart outcome is defined identically in all three years |
+| D-023 | Heart inputs: age group, sex, BMI, smoking, exercise, heavy drinking, diabetes, stroke, kidney disease | Every one is asked the same way in all three years, is a risk factor or history, and is easy to ask in a form |
+| D-024 | COPD inputs: age group, sex, BMI, smoking, e-cigarettes, exercise, diabetes, asthma status | Same checks. Asthma is an *input* only; it is never mixed into the COPD outcome |
+| D-025 | No blood pressure or cholesterol | Only asked in 2023, so they can't be used across the three years |
+| D-026 | Use the Internet Archive copy of CDC's files, only after checking it against CDC's numbers | CDC blocks automated downloads here; the checks show the files are identical to CDC's |
+| D-027 | Use CDC's calculated e-cigarette and heavy-drinking variables | CDC renamed them in 2024 but kept the same definition; the calculated version is unaffected by a 2024 wording change |
+| D-028 | Remove interviews with "don't know"/refused answers; keep all four diabetes answers | Never guess that "don't know" means "no". The removed group barely differs. Every diabetes group is big enough |
 
-**Decisions about data and models (made during planning, recorded now)**
-
-| Decision | Reason in simple terms |
-|---|---|
-| Use the raw CDC BRFSS survey files for both models (D-001) | It is official US government data with published codebooks explaining every answer code. Both conditions (heart disease and COPD) are in the same files |
-| Reject the "cleaned" Zenodo dataset (D-002) | It is 2020 data, its own description contradicts itself about what the target column means, its changes can't be checked, and it has no COPD column |
-| Heart model uses 2023 data only (D-003) | The blood pressure and cholesterol questions are believed to be asked only in odd years. This is checked against the real file in Task 2 |
-| Respiratory model uses 2022 + 2023 + 2024 (D-004) | More data, and each year surveys different people. Only questions asked the same way in all three years are used |
-| Inputs are risk factors and history only (D-005) | Questions like "How is your general health?" partly measure the disease itself, which would make the model look better than it really is |
-| No race, income or education inputs (D-006) | Fairness concerns, and they aren't needed for lifestyle awareness |
-| Logistic Regression is the deployed model (D-008) | Its explanations are exact and can be explained step by step in the viva |
-
-**Decisions about the software (made in Task 1)**
-
-| Decision | Reason in simple terms |
-|---|---|
-| One shared `.venv` for backend and ML, run as `.venv\Scripts\python.exe` (D-014) | One install for everything. Calling Python directly avoids a Windows security setting that blocks the usual "activate" script |
-| Fix exact package versions (D-015) | Saved models may not load with a different scikit-learn version |
-| Use a Vite proxy (D-016) | Browsers block a page on one address (port 5173) from calling a server on another (port 8000) unless the server allows it ("CORS"). The proxy makes the browser think everything comes from one address, so this problem doesn't arise. CORS is still allowed as a backup |
-| Keep the template's `oxlint` code checker | It came with the template and works; adding ESLint would add many extra packages for no benefit |
-| No `.env` loader | There are no secrets to configure, so loading a settings file would be unnecessary code |
-| Add `.gitattributes` | Git warned about Windows vs Linux line endings on every file. This setting stops that and keeps files consistent |
-| Git name and email set for **this project only**, not globally | Keeps your settings for other projects unchanged |
+Other choices: SAS files are read with the Latin-1 text encoding and codebooks with Windows-1252, because that is how SAS on Windows writes them (the default UTF-8 crashed on an accented character). CDC's printed *variable* counts were not used as a completeness test because they are clearly copied template text (2024's page says 345 variables, but its own codebook lists 297; all three pages give the same zip size).
 
 ---
 
 ## 5. Commands executed
 
-Commands run during Task 1, in order, with what each one does.
+Task 1 commands are unchanged from the earlier version of this report (environment check, `python -m venv .venv`, package installs, `pytest`, `npm create vite`, `npm install/build/lint`, starting both servers, Git setup).
+
+Task 2:
 
 ```powershell
-# Check tool versions and Git identity
-python --version; node --version; npm --version; git --version
-git config --global user.name; git config --global user.email     # both were empty
+# Test whether CDC allows scripted downloads (all returned 403 Access Denied)
+Invoke-WebRequest -Method Head https://www.cdc.gov/brfss/annual_data/2023/files/LLCP2023XPT.zip
+curl.exe -r 0-1023 -A "<browser user agent>" https://www.cdc.gov/brfss/annual_data/2023/files/LLCP2023XPT.zip
 
-# Create the Python environment and install packages
-python -m venv .venv
-.venv\Scripts\python.exe -m pip install --upgrade pip
-.venv\Scripts\python.exe -m pip install fastapi "uvicorn[standard]" pydantic scikit-learn pandas numpy joblib pytest httpx
+# Ask the Internet Archive whether it holds the official files (it does, for all three years)
+curl.exe "https://archive.org/wayback/available?url=www.cdc.gov/brfss/annual_data/2023/files/LLCP2023XPT.zip"
 
-# Run backend tests
+# Install the data packages
+.venv\Scripts\python.exe -m pip install pyreadstat pyarrow matplotlib
+
+# Download data and codebooks (2023 retried after a dropped connection)
+.venv\Scripts\python.exe -m ml.preprocessing.download_brfss_data
+.venv\Scripts\python.exe -m ml.preprocessing.download_brfss_data --years 2023
+
+# Inspect and verify every candidate variable; writes the report and summary
+.venv\Scripts\python.exe -m ml.preprocessing.inspect_brfss_variables
+
+# Run all tests
 .venv\Scripts\python.exe -m pytest
-
-# Create and build the frontend
-npm create vite@latest frontend --yes -- --template react-ts --no-interactive
-cd frontend; npm install; npm run build; npm run lint
-
-# Start both servers and test the connection
-.venv\Scripts\python.exe -m uvicorn app.main:app --app-dir backend --host 127.0.0.1 --port 8000
-cd frontend; npm run dev
-Invoke-WebRequest http://127.0.0.1:8000/api/health     # backend directly
-Invoke-WebRequest http://localhost:5173/api/health     # through the frontend proxy
-
-# Check the environment script works
-powershell -ExecutionPolicy Bypass -File scripts\check_environment.ps1
-
-# Set up Git
-git init
-git branch -M main
-git remote add origin https://github.com/aryanbhowar/Vytal.git
-git ls-remote origin                                   # confirms GitHub is reachable
-git config user.name "aryanbhowar"
-git config user.email "aryanbhowar45.sphs@gmail.com"
-git add -A; git status --short                         # check exactly what will be committed
-git commit -m "chore: initialize Vytal project structure"
-git push -u origin main
 ```
 
 ---
 
 ## 6. Actual tests and outcomes
 
-Every result below was actually observed. Nothing is assumed.
+| Check | Result |
+|---|---|
+| Interviews per file equal CDC's published count | **Pass**, all 3 years, exact |
+| Answer counts equal the official codebook for all 25 inspected variables | **Pass**, all 3 years, exact |
+| Heart outcome `_MICHD` identical across years (wording, codes, derivation) | **Pass** |
+| COPD outcome `CHCCOPD3` identical across years | **Pass** |
+| All 9 heart and 8 COPD features identical across years | **Pass** |
+| Blood pressure and cholesterol available in all years | **Fail as expected**: 2023 only, so they are excluded |
+| `pytest` (whole suite) | **15 passed**: 2 health API, 4 codebook reader unit tests, 9 data tests |
+| Re-running the downloader with files present | Recognises them, re-checks fingerprints, exit code 0 |
+| Frontend build and lint | Pass (last run during the direction update; frontend unchanged since) |
 
-| What was tested | How | Result |
-|---|---|---|
-| Health endpoint replies correctly | Automated test `test_health_endpoint_reports_ok` | **Passed** |
-| Unknown addresses return "not found" without leaking internal error details | Automated test `test_unknown_route_returns_404_without_internal_details` | **Passed** |
-| Whole Python test suite | `pytest` | **2 passed**, run twice |
-| Frontend compiles with no type errors | `npm run build` | **Passed** (output 220.5 kB, 69.1 kB compressed) |
-| Frontend code style check | `npm run lint` | **Passed**, no problems found |
-| Backend answers directly | Request to `127.0.0.1:8000/api/health` | **HTTP 200**, `{"status":"ok","app":"Vytal","version":"0.1.0"}` |
-| Frontend proxy forwards to backend | Request to `localhost:5173/api/health` | **HTTP 200**, same reply; backend log shows it arrived |
-| Environment check script | `check_environment.ps1` | All tools OK |
-| "API connected" visible in a browser | User opened http://localhost:5173 with both servers running and shared a screenshot | **Confirmed by the user** on 2026-10-26: the page shows "Vytal", the tagline and a teal "API connected (Vytal v0.1.0)" badge |
-
-**What a pass means:** the backend starts, answers correctly, doesn't leak errors, and the frontend can reach it. It does **not** yet mean anything about predictions, which don't exist yet.
+**What a pass means:** the data is complete, genuine and consistent across the three years for every input we will use. It says nothing yet about how well a model will perform; that is Phase 2.
 
 ---
 
@@ -272,9 +199,12 @@ Every result below was actually observed. Nothing is assumed.
 
 | Item | Effect | Plan |
 |---|---|---|
-| Test warning: "Using `httpx` with `starlette.testclient` is deprecated" | None. Tests still pass. It warns that a future library version will want a different package | Watch for it; change only if it becomes an error |
-| Frontend package is named `frontend` (template default) | Cosmetic only | Rename when the frontend is built properly in Task 8 |
-| One shell command was interrupted during the work | No effect; it was re-run successfully | None |
+| cdc.gov blocks automated downloads from this computer | Data comes from the Internet Archive copy | Verified against CDC's figures; browser download from CDC also works with the script |
+| No blood pressure or cholesterol | Heart model misses two strong risk factors | Stated in the app and model card |
+| Survey answers are self-reported, "ever told" | Models learn associations with *reported* conditions, not future risk or diagnosis | Stated everywhere results appear |
+| 15–19% of interviews removed for unusable answers | Prevalence shifts by under 1 point | Documented in `DATA_SOURCES.md` |
+| US adults only; telephone survey; some states missing in 2023/2024 | Results may not apply elsewhere | Documented |
+| Test warning about Starlette and `httpx` | None; tests pass | Watch |
 
 ---
 
@@ -282,41 +212,35 @@ Every result below was actually observed. Nothing is assumed.
 
 | Item | Status |
 |---|---|
-| BRFSS 2022, 2023, 2024 files | Not downloaded yet (Task 2) |
-| Which questions each year contains | Not yet checked. In particular, whether 2023 has the blood pressure and cholesterol questions is **unconfirmed** |
-| Zenodo "cleaned" heart dataset | Rejected (reasons in section 4) |
-| Heart model | Not started |
-| Respiratory model | Not started |
-
-During planning, the CDC website blocked automatic page reading (HTTP 403 "Forbidden"). If it also blocks automatic downloads in Task 2, you may need to download three zip files in your browser. Exact links and steps will be given then.
+| BRFSS 2022, 2023, 2024 data and codebooks | Downloaded and verified (in `datasets/raw/`, not in Git) |
+| Variable inspection report | `docs/datasets/brfss_variable_availability.md` |
+| Final model inputs | Decided (D-023, D-024) |
+| Processed training tables | Not yet (Task 3) |
+| Heart model, COPD model | Not yet (Tasks 4 and 5) |
 
 ---
 
 ## 9. Git commit and push status
 
-| Item | Status |
-|---|---|
-| Repository | Created, branch `main` |
-| Remote | `origin` → `https://github.com/aryanbhowar/Vytal.git` (reachable) |
-| Files checked before commit | 39 project files. Confirmed **not** included: `.venv`, `node_modules`, `dist`, `.env`, any data files |
-| Commit | `e77e07f` "chore: initialize Vytal project structure" (39 files) |
-| Push | **Succeeded.** GitHub's `main` branch points at `e77e07f` (checked with `git ls-remote origin main`). Signing in to GitHub was completed in the browser |
-| Follow-up commit | Records this hash in the tracking files (`docs: record Task 1 commit and push status`) |
+| Commit | Content | Pushed |
+|---|---|---|
+| `e77e07f` | Task 1 foundation | Yes |
+| `a242a78`, `550b834` | Task 1 status records, browser confirmation | Yes |
+| `5369140` | Revision 1 direction update | Yes |
+| Task 2 commit | Data acquisition, inspection, documentation | Recorded in `PROJECT_STATUS.md` after the push (a file cannot contain its own commit ID) |
+
+Checked before committing: no data files, `.venv`, `node_modules`, build output or `.env` included. The committed summary JSON contains only totals.
 
 ---
 
-## 10. Exact next steps
+## 10. Exact next steps (Phase 2)
 
-**Task 2: BRFSS download and variable checks**
+1. **Task 3:** extract the chosen columns into compact files, convert CDC's answer codes to readable names (for example `smoking_status = former`), remove unusable rows, split each dataset into training (70%), validation (15%) and test (15%) groups, and write summary counts.
+2. **Task 4:** train and evaluate the heart model; write its evaluation report and model card.
+3. **Task 5:** the same for the COPD model.
 
-1. Add `ml/requirements.txt` with the data-reading packages (`pyreadstat`, `pyarrow`, `matplotlib`) and install them.
-2. Write `ml/preprocessing/download_brfss_data.py` to download the 2022, 2023 and 2024 survey zip files into `datasets/raw/`, check their size and unzip them. If CDC blocks it, print step-by-step manual download instructions.
-3. Write `ml/preprocessing/inspect_brfss_variables.py` to read only the list of columns and the answer counts for the candidate questions, without loading the whole 1 GB file into memory.
-4. Produce `docs/datasets/brfss_variable_availability.md`: a table showing which question exists in which year, and what each answer code means.
-5. **If 2023 lacks blood pressure or cholesterol, stop and ask you** what to do.
-6. Fix the final list of inputs for each model in the decision log.
-7. Write `datasets/DATA_SOURCES.md` and `datasets/README.md`.
-8. Add a test that checks both target columns exist in the years that need them.
-9. Finish this report (Task 2 sections), update status files, commit and push.
+You don't need to do anything for these.
 
-**What you may need to do in Task 2:** possibly download three files in your browser, and possibly make one decision about the heart model's data.
+## 11. Decisions requiring your approval
+
+None.

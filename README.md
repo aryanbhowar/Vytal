@@ -87,4 +87,12 @@ Planned folders (`ml/`, `datasets/`, `models/`) are created when the tasks that 
 
 ## Data
 
-BRFSS survey files are public US government data, but they are large (about 1 GB each) and are **not** stored in this repository. Download and preparation steps will be documented in `datasets/README.md` (Task 2).
+Vytal uses CDC BRFSS 2022, 2023 and 2024 (public domain; source: CDC). The files are large (about 1.1 GB each unzipped) and are **not** stored in this repository. To recreate them:
+
+```powershell
+.venv\Scripts\python.exe -m pip install -r ml\requirements.txt
+.venv\Scripts\python.exe -m ml.preprocessing.download_brfss_data
+.venv\Scripts\python.exe -m ml.preprocessing.inspect_brfss_variables
+```
+
+Details, terms of use and limitations: [`datasets/DATA_SOURCES.md`](datasets/DATA_SOURCES.md) and [`datasets/README.md`](datasets/README.md). Vytal's use of BRFSS data does not imply endorsement by CDC, HHS or the U.S. Government.
