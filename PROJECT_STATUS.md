@@ -49,7 +49,7 @@ cd frontend; npm run build
 
 ## Latest known-good commit
 
-See the Git section below (filled in after the push attempt).
+`e77e07f` (chore: initialize Vytal project structure), pushed to GitHub.
 
 ## Next three actions
 
@@ -94,4 +94,4 @@ None right now. Task 2 may need one (if 2023 lacks blood pressure or cholesterol
 
 | Commit | Message | Pushed |
 |---|---|---|
-| _pending_ | chore: initialize Vytal project structure | _pending_ |
+| `e77e07f` | chore: initialize Vytal project structure | Yes, to `origin/main` on 2026-10-26 (verified with `git ls-remote`) |

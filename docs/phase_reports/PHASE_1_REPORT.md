@@ -289,7 +289,9 @@ During planning, the CDC website blocked automatic page reading (HTTP 403 "Forbi
 | Repository | Created, branch `main` |
 | Remote | `origin` → `https://github.com/aryanbhowar/Vytal.git` (reachable) |
 | Files checked before commit | 39 project files. Confirmed **not** included: `.venv`, `node_modules`, `dist`, `.env`, any data files |
-| Commit and push | Recorded in `PROJECT_STATUS.md` after the push attempt (a report can't contain the ID of the commit it is part of) |
+| Commit | `e77e07f` "chore: initialize Vytal project structure" (39 files) |
+| Push | **Succeeded.** GitHub's `main` branch points at `e77e07f` (checked with `git ls-remote origin main`). Signing in to GitHub was completed in the browser |
+| Follow-up commit | Records this hash in the tracking files (`docs: record Task 1 commit and push status`) |
 
 ---
 
