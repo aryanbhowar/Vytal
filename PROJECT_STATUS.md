@@ -67,7 +67,7 @@ None right now. Task 2 may need one (if 2023 lacks blood pressure or cholesterol
 |---|---|---|
 | 1 | Frontend runs locally | Done (skeleton) |
 | 2 | Backend runs locally | Done (skeleton) |
-| 3 | Frontend can communicate with backend | Done: `/api/health` via proxy returned 200 |
+| 3 | Frontend can communicate with backend | Done: `/api/health` via proxy returned 200; user confirmed "API connected" in the browser |
 | 4 | Questionnaire validates inputs | Not started |
 | 5 | BMI calculated correctly where possible | Not started |
 | 6 | Dataset provenance documented | Not started (rejection of Zenodo recorded in decision log) |

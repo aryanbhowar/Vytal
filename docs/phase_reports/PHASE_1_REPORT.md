@@ -251,7 +251,7 @@ Every result below was actually observed. Nothing is assumed.
 | Backend answers directly | Request to `127.0.0.1:8000/api/health` | **HTTP 200**, `{"status":"ok","app":"Vytal","version":"0.1.0"}` |
 | Frontend proxy forwards to backend | Request to `localhost:5173/api/health` | **HTTP 200**, same reply; backend log shows it arrived |
 | Environment check script | `check_environment.ps1` | All tools OK |
-| "API connected" visible in a browser | Looking at the page | **Not checked by the agent** (no browser available to it). The connection it relies on was proven above. Please confirm by opening http://localhost:5173 |
+| "API connected" visible in a browser | User opened http://localhost:5173 with both servers running and shared a screenshot | **Confirmed by the user** on 2026-10-26: the page shows "Vytal", the tagline and a teal "API connected (Vytal v0.1.0)" badge |
 
 **What a pass means:** the backend starts, answers correctly, doesn't leak errors, and the frontend can reach it. It does **not** yet mean anything about predictions, which don't exist yet.
 
@@ -263,7 +263,6 @@ Every result below was actually observed. Nothing is assumed.
 |---|---|---|
 | Test warning: "Using `httpx` with `starlette.testclient` is deprecated" | None. Tests still pass. It warns that a future library version will want a different package | Watch for it; change only if it becomes an error |
 | Frontend package is named `frontend` (template default) | Cosmetic only | Rename when the frontend is built properly in Task 8 |
-| "API connected" not seen in a real browser by the agent | Small risk the page renders wrongly even though the data path works | You confirm visually |
 | One shell command was interrupted during the work | No effect; it was re-run successfully | None |
 
 ---
