@@ -1,3 +1,5 @@
 # Development and test tools (not needed to run the app).
 pytest==9.1.1
 httpx==0.28.1
+# Dependency vulnerability audit: python -m pip_audit -r backend/requirements.txt -r ml/requirements.txt
+pip-audit==2.10.1

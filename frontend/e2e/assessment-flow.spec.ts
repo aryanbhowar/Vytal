@@ -91,8 +91,8 @@ test('keyboard-only: the first step can be completed without a mouse', async ({ 
   await expect(page.getByRole('heading', { name: 'Height and weight' })).toBeVisible()
 })
 
-test('methodology page shows live evaluation figures from the server', async ({ page, request }) => {
-  const status = await (await request.get('http://127.0.0.1:8000/api/models/status')).json()
+test('methodology page shows live evaluation figures from the server', async ({ page }) => {
+  const status = await (await page.request.get('/api/models/status')).json()
   await page.goto('/methodology')
   for (const model of status.models) {
     await expect(page.getByText(model.evaluation.roc_auc.toFixed(3))).toBeVisible()
